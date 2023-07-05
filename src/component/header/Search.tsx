@@ -1,23 +1,31 @@
 import styled from 'styled-components';
 import { FiSearch } from 'react-icons/fi';
 
-export default function Search() {
+interface SearchProps {
+  theme: string;
+}
+
+export default function Search({ theme }: SearchProps) {
   return (
     <SearchBox>
-      <SearchInput type="search" name="search" placeholder="검색어를 입력해 주세요" />
+      <SearchInput type="search" name="search" placeholder="검색어를 입력해 주세요" theme={theme} />
       <SearchButton>
         <FiSearch />
       </SearchButton>
     </SearchBox>
   );
 }
-const SearchBox = styled.div``;
-const SearchInput = styled.input`
+
+const SearchBox = styled.div`
+  display: flex;
+`;
+
+const SearchInput = styled.input<SearchProps>`
   border: none;
   width: 330px;
   height: 40px;
   background-color: transparent;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid ${props => (props.theme === 'dark' ? '#fff' : '#000')};
 `;
 
 const SearchButton = styled.button`
