@@ -16,7 +16,7 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
   };
 
   const goToNext = () => {
-    const isFirstSlide = slider === 0;
+    const isFirstSlide = slider === SliderItems.length - 1;
     const newIndex = isFirstSlide ? 0 : slider + 1;
     setSlider(newIndex);
   };
