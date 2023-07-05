@@ -1,11 +1,17 @@
-export const lightTheme = {
-  bgColor: '#fff',
-  textColor: '#242424 ',
+import { DefaultTheme } from 'styled-components';
+
+export const lightTheme: DefaultTheme = {
+  bgColor: '#ffffff',
+  textColor: '#242424',
+  toggleBorder: '#FFF',
+  gradient: 'linear-gradient(#39598A, #79D7ED)',
 };
 
-export const darkTheme = {
-  bgColor: '#282c35',
-  textColor: '#fff',
+export const darkTheme: DefaultTheme = {
+  bgColor: '#060606',
+  textColor: '#FFFFFF',
+  toggleBorder: '#6B8096',
+  gradient: 'linear-gradient(#091236, #1E215D)',
 };
 
 export const theme = {
