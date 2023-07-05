@@ -38,7 +38,7 @@ const Gnb = styled.div`
   align-items: center;
   justify-content: space-between;
   max-width: 1280px;
-  margin: 0 auto; /* background-color: red; */
+  margin: 0 auto;
   height: 60px;
 `;
 
@@ -60,8 +60,6 @@ const LogoImg = styled.img`
 const Nav = styled.ul`
   display: flex;
   align-items: center;
-
-  /* background-color: yellow; */
 `;
 
 const NavItem = styled.li`
