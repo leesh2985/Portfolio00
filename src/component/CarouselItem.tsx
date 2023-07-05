@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from 'react-icons/md';
 
@@ -7,6 +7,7 @@ interface CarouselItemProps {
 }
 
 export default function CarouselItem({ SliderItems }: CarouselItemProps) {
+  const timerRef = useRef<number | undefined>(undefined);
   const [slider, setSlider] = useState(0);
 
   const goToPrevious = () => {
@@ -15,15 +16,31 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
     setSlider(newIndex);
   };
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     const isFirstSlide = slider === SliderItems.length - 1;
     const newIndex = isFirstSlide ? 0 : slider + 1;
     setSlider(newIndex);
-  };
+  }, [slider, SliderItems]);
 
   const goToSlide = (SliderItemIndex: number) => {
     setSlider(SliderItemIndex);
   };
+
+  useEffect(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
+      goToNext();
+    }, 2000);
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [goToNext]);
 
   return (
     <CarouselItemContainer>
