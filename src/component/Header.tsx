@@ -72,7 +72,7 @@ const NavItemLink = styled.a`
   cursor: pointer;
   display: block;
   position: relative;
-  padding: 17px 10px 7px;
+  padding: 7px 10px;
   font-size: 17px;
   font-weight: bold;
   line-height: 24px;
