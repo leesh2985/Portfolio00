@@ -33,7 +33,7 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
 
     timerRef.current = setInterval(() => {
       goToNext();
-    }, 2000);
+    }, 3000);
 
     return () => {
       if (timerRef.current) {
@@ -53,7 +53,7 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
       <CarouselImg imageUrl={SliderItems[slider].src}></CarouselImg>
       <DotsContainer>
         {SliderItems.map((SliderItem, SliderItemIndex) => (
-          <Dot key={SliderItemIndex} onClick={() => goToSlide(SliderItemIndex)}>
+          <Dot key={SliderItemIndex} onClick={() => goToSlide(SliderItemIndex)} active={SliderItemIndex === slider}>
             ●
           </Dot>
         ))}
@@ -102,10 +102,16 @@ const RightArrow = styled.div`
 const DotsContainer = styled.div`
   display: flex;
   justify-content: center;
+  /* 캐러셀안에 dot넣기 */
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
 `;
 
-const Dot = styled.div`
+const Dot = styled.div<{ active: boolean }>`
   margin: 0 3px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
+  color: ${props => (props.active ? 'rgba(0, 0, 0, 1)' : 'rgba(136, 136, 136, 0.5)')};
 `;

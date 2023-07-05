@@ -1,5 +1,5 @@
 import './App.css';
-import Carousel from './component/Carousel';
+import Carousel from './component/carousel/Carousel';
 import Header from './component/Header';
 
 function App() {
