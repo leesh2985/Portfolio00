@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 import Search from './Search';
+import ModeBtn from './ModeBtn';
 
-export default function Header() {
+interface HeaderProps {
+  toggleTheme: () => void;
+  theme: string;
+}
+
+export default function Header({ toggleTheme, theme }: HeaderProps) {
   return (
     <Gnb>
       <Logo>
@@ -27,14 +33,14 @@ export default function Header() {
           <NavItemLink>이벤트</NavItemLink>
         </NavItem>
       </Nav>
-      <Search />
+      <Search theme={theme} />
+      <ModeBtn toggleTheme={toggleTheme} />
     </Gnb>
   );
 }
 
 const Gnb = styled.div`
   display: flex;
-
   align-items: center;
   justify-content: space-between;
   max-width: 1280px;
