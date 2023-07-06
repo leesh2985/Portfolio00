@@ -107,6 +107,10 @@ const PlusBtn = styled.button`
   display: flex;
   font-size: 30px;
   color: #808080;
+
+  &:hover {
+    color: #41b6e6;
+  }
 `;
 
 // 정보
