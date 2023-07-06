@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
-import Carousel from './component/carousel/Carousel';
-import Header from './component/header/Header';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/GlobalStyle';
 import { darkTheme, lightTheme } from './style/theme';
+import Carousel from './component/carousel/Carousel';
+import Header from './component/header/Header';
+import Container from './body/Container';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -23,6 +24,7 @@ function App() {
         <GlobalStyle theme={theme === 'light' ? lightTheme : darkTheme} />
         <Header toggleTheme={toggleTheme} theme={theme} />
         <Carousel />
+        <Container />
       </ThemeProvider>
     </React.Fragment>
   );
