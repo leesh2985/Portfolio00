@@ -6,6 +6,7 @@ import { darkTheme, lightTheme } from './style/theme';
 import Carousel from './component/carousel/Carousel';
 import Header from './component/header/Header';
 import Container from './body/Container';
+import Footer from './Footer';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -25,6 +26,7 @@ function App() {
         <Header toggleTheme={toggleTheme} theme={theme} />
         <Carousel />
         <Container />
+        <Footer />
       </ThemeProvider>
     </React.Fragment>
   );
