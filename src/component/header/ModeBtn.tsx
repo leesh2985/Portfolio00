@@ -26,7 +26,7 @@ export default function ModeBtn({ toggleTheme }: ModeBtnProps) {
 
 const Btn = styled.button`
   font-size: 20px;
-  position: fixed;
+  /* position: fixed; */
   top: 30px;
   right: 30px;
 `;
