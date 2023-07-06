@@ -50,7 +50,7 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
       <RightArrow onClick={goToNext}>
         <MdOutlineArrowForwardIos />
       </RightArrow>
-      <CarouselImg imageUrl={SliderItems[slider].src}></CarouselImg>
+      <CarouselImg imageurl={SliderItems[slider].src}></CarouselImg>
       <DotsContainer>
         {SliderItems.map((SliderItem, SliderItemIndex) => (
           <Dot key={SliderItemIndex} onClick={() => goToSlide(SliderItemIndex)} active={SliderItemIndex === slider}>
@@ -67,12 +67,12 @@ const CarouselItemContainer = styled.div`
   position: relative;
 `;
 
-const CarouselImg = styled.div<{ imageUrl: string }>`
+const CarouselImg = styled.div<{ imageurl: string }>`
   width: 100%;
   height: 100%;
   background-position: center;
   background-size: cover;
-  background-image: url(${props => props.imageUrl});
+  background-image: url(${props => props.imageurl});
 `;
 
 // 화살표
