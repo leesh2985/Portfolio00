@@ -1,4 +1,5 @@
 import styled, { StyleSheetManager } from 'styled-components';
+import Tabs from './Tabs';
 
 interface RightSectionProps {
   darkMode: boolean;
@@ -18,6 +19,7 @@ export default function Right() {
           <JoinLink>회원가입하기</JoinLink>
         </LoginInfo>
       </RightSection>
+      <Tabs />
     </StyleSheetManager>
   );
 }
@@ -25,6 +27,7 @@ export default function Right() {
 const RightSection = styled.section<RightSectionProps>`
   float: right;
   width: 435px;
+  height: 232px;
   border: 1px solid #d3d3d3;
   border-radius: 10px;
   padding: 21px 20px 18px;
