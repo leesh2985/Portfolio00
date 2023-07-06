@@ -53,7 +53,10 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
       <CarouselImg imageurl={SliderItems[slider].src}></CarouselImg>
       <DotsContainer>
         {SliderItems.map((SliderItem, SliderItemIndex) => (
-          <Dot key={SliderItemIndex} onClick={() => goToSlide(SliderItemIndex)} active={SliderItemIndex === slider}>
+          <Dot
+            key={SliderItemIndex}
+            onClick={() => goToSlide(SliderItemIndex)}
+            active={SliderItemIndex === slider ? 'true' : 'false'}>
             ●
           </Dot>
         ))}
@@ -109,7 +112,7 @@ const DotsContainer = styled.div`
   right: 0;
 `;
 
-const Dot = styled.div<{ active: boolean }>`
+const Dot = styled.div<{ active: string }>`
   margin: 0 3px;
   cursor: pointer;
   font-size: 15px;
