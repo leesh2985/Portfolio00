@@ -50,14 +50,11 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
       <RightArrow onClick={goToNext}>
         <MdOutlineArrowForwardIos />
       </RightArrow>
-      <CarouselImg imageurl={SliderItems[slider].src}></CarouselImg>
+      <CarouselImg src={SliderItems[slider].src} />
       <DotsContainer>
         {SliderItems.map((SliderItem, SliderItemIndex) => (
-          <Dot
-            key={SliderItemIndex}
-            onClick={() => goToSlide(SliderItemIndex)}
-            active={SliderItemIndex === slider ? 'true' : 'false'}>
-            ●
+          <Dot key={SliderItemIndex} onClick={() => goToSlide(SliderItemIndex)}>
+            {SliderItemIndex === slider ? '●' : '○'}
           </Dot>
         ))}
       </DotsContainer>
@@ -70,12 +67,10 @@ const CarouselItemContainer = styled.div`
   position: relative;
 `;
 
-const CarouselImg = styled.div<{ imageurl: string }>`
+const CarouselImg = styled.img`
   width: 100%;
   height: 100%;
-  background-position: center;
-  background-size: cover;
-  background-image: url(${props => props.imageurl});
+  object-fit: cover;
 `;
 
 // 화살표
@@ -112,9 +107,9 @@ const DotsContainer = styled.div`
   right: 0;
 `;
 
-const Dot = styled.div<{ active: string }>`
+const Dot = styled.div`
   margin: 0 3px;
   cursor: pointer;
   font-size: 15px;
-  color: ${props => (props.active ? 'rgba(0, 0, 0, 1)' : 'rgba(136, 136, 136, 0.5)')};
+  color: rgba(136, 136, 136, 0.8);
 `;
