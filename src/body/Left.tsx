@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CiCirclePlus } from 'react-icons/ci';
+import Record from './Record';
 
 export default function Left() {
   return (
@@ -47,6 +48,7 @@ export default function Left() {
           </TextItem>
         </TextUl>
       </TextContent>
+      <Record />
     </LeftSection>
   );
 }
@@ -55,6 +57,10 @@ const LeftSection = styled.section`
   float: left;
   width: 530px;
   height: 260px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  padding: 21px 20px 0px;
+  border-radius: 10px;
 `;
 
 const LeftTitle = styled.h3`
