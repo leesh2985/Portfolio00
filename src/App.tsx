@@ -5,7 +5,7 @@ import GlobalStyle from './style/GlobalStyle';
 import { darkTheme, lightTheme } from './style/theme';
 import Carousel from './component/carousel/Carousel';
 import Header from './component/header/Header';
-import Container from './body/Container';
+import Container from './component/body/Container';
 import Footer from './Footer';
 
 function App() {
