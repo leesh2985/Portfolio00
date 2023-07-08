@@ -1,5 +1,4 @@
 import styled, { StyleSheetManager } from 'styled-components';
-import Tabs from './Tabs';
 
 interface RightSectionProps {
   darkMode: boolean;
@@ -19,7 +18,6 @@ export default function Right() {
           <JoinLink>회원가입하기</JoinLink>
         </LoginInfo>
       </RightSection>
-      <Tabs />
     </StyleSheetManager>
   );
 }
