@@ -25,7 +25,7 @@ export default function Right() {
 const RightSection = styled.section<RightSectionProps>`
   float: right;
   width: 435px;
-  height: 232px;
+  height: 190px;
   border: 1px solid #d3d3d3;
   border-radius: 10px;
   padding: 21px 20px 18px;
