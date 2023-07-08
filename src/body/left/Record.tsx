@@ -70,11 +70,13 @@ const ShowUl = styled.ul`
 
 const ShowPhoto = styled.li``;
 const Photo = styled.img`
+  cursor: pointer;
   width: 150px;
   border-radius: 10px;
 `;
 
 const PlusBtn = styled.a`
+  cursor: pointer;
   padding-top: 15px;
   display: flex;
   font-size: 30px;
