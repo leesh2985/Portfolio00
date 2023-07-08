@@ -26,7 +26,7 @@ export default function Record() {
   );
 }
 
-const ShowContainer = styled.div`
+const ShowContainer = styled.section`
   display: flex;
   float: left;
   width: 700px;
