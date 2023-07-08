@@ -35,7 +35,7 @@ const ShowContainer = styled.section`
   background-color: #41b6e6;
   padding: 20px 25px 0px;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 50px;
 `;
 
 const ShowText = styled.div`
