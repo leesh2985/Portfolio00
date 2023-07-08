@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { CiCirclePlus } from 'react-icons/ci';
-import Record from './Record';
 
 export default function Left() {
   return (
@@ -48,7 +47,6 @@ export default function Left() {
           </TextItem>
         </TextUl>
       </TextContent>
-      <Record />
     </LeftSection>
   );
 }
