@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
-import Left from './Left';
-import Right from './Right';
+import Left from './left/Left';
+import Right from './right/Right';
 
 export default function Container() {
   return (
