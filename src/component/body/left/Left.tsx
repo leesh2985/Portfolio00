@@ -52,7 +52,6 @@ export default function Left() {
 }
 
 const LeftSection = styled.section`
-  float: left;
   width: 530px;
   height: 230px;
   border: 1px solid #fff;

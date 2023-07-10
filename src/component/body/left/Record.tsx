@@ -28,7 +28,7 @@ export default function Record() {
 
 const ShowContainer = styled.section`
   display: flex;
-  float: left;
+
   width: 700px;
   height: 400px;
   border: 1px solid #fff;
