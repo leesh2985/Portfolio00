@@ -52,16 +52,15 @@ export default function Left() {
 }
 
 const LeftSection = styled.section`
-  width: 530px;
+  width: 550px;
   height: 230px;
   border: 1px solid #fff;
   background-color: #fff;
-  padding: 21px 20px 0px;
   border-radius: 10px;
 `;
 
 const LeftTitle = styled.h3`
-  float: left;
+  display: inline-block;
   font-size: 2.1875rem;
   font-weight: bold;
 `;
