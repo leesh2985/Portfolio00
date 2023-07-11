@@ -1,24 +1,33 @@
 import styled from 'styled-components';
 import { CiCirclePlus } from 'react-icons/ci';
+import { useState } from 'react';
+
+interface Menu {
+  name: string;
+}
 
 export default function News() {
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const menuArr: Menu[] = [{ name: '대회' }, { name: '일상' }, { name: '공구' }, { name: '이벤트' }];
+
+  const selectMenuHandler = (index: number) => {
+    setCurrentTab(index);
+  };
+
   return (
     <NewsSection>
       <Title>
         <NewsTitle>HDRC 소식</NewsTitle>
         <Newstabs>
-          <Newstab>
-            <NewsBtn>대회</NewsBtn>
-          </Newstab>
-          <Newstab>
-            <NewsBtn>일상</NewsBtn>
-          </Newstab>
-          <Newstab>
-            <NewsBtn>공구</NewsBtn>
-          </Newstab>
-          <Newstab>
-            <NewsBtn>이벤트</NewsBtn>
-          </Newstab>
+          {menuArr.map((el, index) => (
+            <Newstab
+              key={index}
+              className={index === currentTab ? 'active' : ''}
+              onClick={() => selectMenuHandler(index)}>
+              <NewsBtn>{el.name}</NewsBtn>
+            </Newstab>
+          ))}
           <PlusBtn>
             <CiCirclePlus />
           </PlusBtn>
@@ -26,27 +35,109 @@ export default function News() {
       </Title>
       <TextContent>
         <TextUl>
-          <TextItem>
-            <TextItemLink>
-              <TextEm>대회</TextEm>
-              <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
-              <TextTime>2023.06.28</TextTime>
-            </TextItemLink>
-          </TextItem>
-          <TextItem>
-            <TextItemLink>
-              <TextEm>대회</TextEm>
-              <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
-              <TextTime>2023.06.28</TextTime>
-            </TextItemLink>
-          </TextItem>
-          <TextItem>
-            <TextItemLink>
-              <TextEm>대회</TextEm>
-              <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
-              <TextTime>2023.06.28</TextTime>
-            </TextItemLink>
-          </TextItem>
+          {currentTab === 0 && (
+            <>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>대회</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>대회</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>대회</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+            </>
+          )}
+
+          {currentTab === 1 && (
+            <>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>일상</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>일상</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>일상</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+            </>
+          )}
+
+          {currentTab === 2 && (
+            <>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>공구</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>공구</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>공구</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+            </>
+          )}
+
+          {currentTab === 3 && (
+            <>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>이벤트</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>이벤트</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>이벤트</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+            </>
+          )}
         </TextUl>
       </TextContent>
     </NewsSection>
@@ -85,7 +176,7 @@ const Newstab = styled.li`
   }
 `;
 
-const NewsBtn = styled.a`
+const NewsBtn = styled.button`
   cursor: pointer;
   padding: 5px 10px;
   font-size: 17px;
@@ -95,12 +186,12 @@ const NewsBtn = styled.a`
   text-decoration: none;
   display: flex;
 
-  &:hover {
+  &:active {
     color: #41b6e6;
     position: relative;
   }
 
-  &:hover::after {
+  &:active::after {
     content: '';
     position: absolute;
     bottom: -2px;
@@ -166,10 +257,12 @@ const TextUl = styled.ul`
   align-items: center;
   justify-content: space-between;
 `;
+
 const TextItem = styled.li`
   margin-bottom: 2px;
   line-height: 54px;
 `;
+
 const TextItemLink = styled.a`
   cursor: pointer;
   display: flex;
