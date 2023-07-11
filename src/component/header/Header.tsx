@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Search from './Search';
 import ModeBtn from './ModeBtn';
@@ -7,7 +8,17 @@ interface HeaderProps {
   theme: string;
 }
 
+interface NavItemLinkProps {
+  isActive: boolean;
+}
+
 export default function Header({ toggleTheme, theme }: HeaderProps) {
+  const [activeTab, setActiveTab] = useState('home');
+
+  const handleTabClick = (tabName: string) => {
+    setActiveTab(tabName);
+  };
+
   return (
     <Gnb>
       <Logo>
@@ -15,22 +26,34 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       </Logo>
       <Nav>
         <NavItem>
-          <NavItemLink>홈</NavItemLink>
+          <NavItemLink onClick={() => handleTabClick('home')} isActive={activeTab === 'home'}>
+            홈
+          </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink>대회</NavItemLink>
+          <NavItemLink onClick={() => handleTabClick('contest')} isActive={activeTab === 'contest'}>
+            대회
+          </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink>일상</NavItemLink>
+          <NavItemLink onClick={() => handleTabClick('daily')} isActive={activeTab === 'daily'}>
+            일상
+          </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink>기록공유</NavItemLink>
+          <NavItemLink onClick={() => handleTabClick('record')} isActive={activeTab === 'record'}>
+            기록공유
+          </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink>공구</NavItemLink>
+          <NavItemLink onClick={() => handleTabClick('tools')} isActive={activeTab === 'tools'}>
+            공구
+          </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink>이벤트</NavItemLink>
+          <NavItemLink onClick={() => handleTabClick('event')} isActive={activeTab === 'event'}>
+            이벤트
+          </NavItemLink>
         </NavItem>
       </Nav>
       <Search theme={theme} />
@@ -72,7 +95,7 @@ const NavItem = styled.li`
   margin: 0 12px;
 `;
 
-const NavItemLink = styled.a`
+const NavItemLink = styled.a<NavItemLinkProps>`
   cursor: pointer;
   display: block;
   position: relative;
@@ -85,6 +108,7 @@ const NavItemLink = styled.a`
     color: inherit;
     text-decoration: none;
   }
+
   &::after {
     content: '';
     position: absolute;
@@ -97,7 +121,13 @@ const NavItemLink = styled.a`
     transition: transform 0.2s ease-in-out;
   }
 
-  &:hover::after {
-    transform: scaleX(1);
-  }
+  ${props =>
+    props.isActive &&
+    `
+    color: #41b6e6;
+    
+    &::after {
+      transform: scaleX(1);
+    }
+  `}
 `;
