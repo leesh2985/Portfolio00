@@ -241,6 +241,9 @@ const TextSpan = styled.span`
   overflow: hidden;
   font-size: 18px;
   font-weight: 300;
+  width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const TextTime = styled.time`
