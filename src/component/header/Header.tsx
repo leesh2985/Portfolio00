@@ -43,7 +43,7 @@ const Gnb = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1280px;
+  max-width: 1380px;
   margin: 0 auto;
   height: 60px;
 `;

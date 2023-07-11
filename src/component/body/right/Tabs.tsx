@@ -49,7 +49,7 @@ export default function Tabs() {
 
 const TabsContainer = styled.section`
   margin-top: 50px;
-  width: 435px;
+  width: 477px;
 `;
 
 const TabMenu = styled.div`

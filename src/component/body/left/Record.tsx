@@ -54,10 +54,11 @@ const ShowTitle = styled.p`
 `;
 
 const ShowSpan = styled.p`
-  padding-top: 25px;
+  padding-top: 15px;
   padding-right: 30px;
   font-size: 15px;
   color: #fff;
+  font-weight: 500;
   text-align: left;
 `;
 

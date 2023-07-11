@@ -18,7 +18,7 @@ export default function Container() {
 const Body = styled.div`
   display: flex;
   position: relative;
-  max-width: 1280px;
+  max-width: 1380px;
   height: 700px;
   margin: 0 auto;
   padding-top: 50px;

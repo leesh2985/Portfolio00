@@ -54,7 +54,7 @@ export default function News() {
 }
 
 const NewsSection = styled.section`
-  width: 550px;
+  width: 752px;
   height: 230px;
   border: 1px solid #fff;
   background-color: #fff;
@@ -85,9 +85,8 @@ const Newstab = styled.li`
   }
 `;
 
-const NewsBtn = styled.button`
+const NewsBtn = styled.a`
   cursor: pointer;
-  display: block;
   padding: 5px 10px;
   font-size: 17px;
   font-weight: bold;
@@ -112,7 +111,7 @@ const NewsBtn = styled.button`
   }
 `;
 
-const PlusBtn = styled.button`
+const PlusBtn = styled.a`
   display: flex;
   font-size: 30px;
   color: #808080;
@@ -125,7 +124,7 @@ const PlusBtn = styled.button`
 // 정보
 const TextContent = styled.div`
   display: flex;
-  margin-top: 29px;
+  margin-top: 30px;
 `;
 
 const TextEm = styled.em`
@@ -147,16 +146,10 @@ const TextEm = styled.em`
 
 const TextSpan = styled.span`
   display: inline-block;
-  vertical-align: middle;
-  margin-left: 40px;
+  margin-left: 30px;
   overflow: hidden;
   font-size: 18px;
   font-weight: 300;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
 `;
 
 const TextTime = styled.time`
@@ -165,7 +158,6 @@ const TextTime = styled.time`
   font-size: 13px;
   text-indent: 20px;
   line-height: 24px;
-  margin-left: 60px;
 `;
 
 const TextUl = styled.ul`
