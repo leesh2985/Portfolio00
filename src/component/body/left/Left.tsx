@@ -4,24 +4,26 @@ import { CiCirclePlus } from 'react-icons/ci';
 export default function Left() {
   return (
     <LeftSection>
-      <LeftTitle>HDRC 소식</LeftTitle>
-      <Newstabs>
-        <Newstab>
-          <Newslink>대회</Newslink>
-        </Newstab>
-        <Newstab>
-          <Newslink>일상</Newslink>
-        </Newstab>
-        <Newstab>
-          <Newslink>공구</Newslink>
-        </Newstab>
-        <Newstab>
-          <Newslink>이벤트</Newslink>
-        </Newstab>
-        <PlusBtn>
-          <CiCirclePlus />
-        </PlusBtn>
-      </Newstabs>
+      <Title>
+        <LeftTitle>HDRC 소식</LeftTitle>
+        <Newstabs>
+          <Newstab>
+            <NewsBtn>대회</NewsBtn>
+          </Newstab>
+          <Newstab>
+            <NewsBtn>일상</NewsBtn>
+          </Newstab>
+          <Newstab>
+            <NewsBtn>공구</NewsBtn>
+          </Newstab>
+          <Newstab>
+            <NewsBtn>이벤트</NewsBtn>
+          </Newstab>
+          <PlusBtn>
+            <CiCirclePlus />
+          </PlusBtn>
+        </Newstabs>
+      </Title>
       <TextContent>
         <TextUl>
           <TextItem>
@@ -59,6 +61,11 @@ const LeftSection = styled.section`
   border-radius: 10px;
 `;
 
+const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const LeftTitle = styled.h3`
   display: inline-block;
   font-size: 2.1875rem;
@@ -78,7 +85,7 @@ const Newstab = styled.li`
   }
 `;
 
-const Newslink = styled.a`
+const NewsBtn = styled.button`
   cursor: pointer;
   display: block;
   padding: 5px 10px;
