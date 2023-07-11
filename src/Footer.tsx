@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <FooterContainer>
       <FooterLogo>
-        <LogoImg src="/img/logo.png" alt="로고" />
+        <LogoImg src="/img/footerlogo.png" alt="로고" />
       </FooterLogo>
       <InfoTab>
         <InfoItems>이메일 문의</InfoItems>
@@ -24,12 +24,13 @@ export default function Footer() {
 }
 
 const FooterContainer = styled.div`
+  width: 100%;
   background-color: #f5f6f7;
   height: 180px;
 `;
 const FooterLogo = styled.div`
   padding-top: 40px;
-  max-width: 1280px;
+  max-width: 1380px;
   margin: 0 auto;
   cursor: pointer;
 `;
@@ -39,7 +40,7 @@ const LogoImg = styled.img`
 `;
 
 const InfoTab = styled.ul`
-  max-width: 1280px;
+  max-width: 1380px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -65,7 +66,7 @@ const InfoItems = styled.li`
 `;
 
 const MiniText = styled.ul`
-  max-width: 1280px;
+  max-width: 1380px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
