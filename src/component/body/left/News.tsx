@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { CiCirclePlus } from 'react-icons/ci';
 
-export default function Left() {
+export default function News() {
   return (
-    <LeftSection>
+    <NewsSection>
       <Title>
-        <LeftTitle>HDRC 소식</LeftTitle>
+        <NewsTitle>HDRC 소식</NewsTitle>
         <Newstabs>
           <Newstab>
             <NewsBtn>대회</NewsBtn>
@@ -49,11 +49,11 @@ export default function Left() {
           </TextItem>
         </TextUl>
       </TextContent>
-    </LeftSection>
+    </NewsSection>
   );
 }
 
-const LeftSection = styled.section`
+const NewsSection = styled.section`
   width: 550px;
   height: 230px;
   border: 1px solid #fff;
@@ -66,7 +66,7 @@ const Title = styled.div`
   justify-content: space-between;
 `;
 
-const LeftTitle = styled.h3`
+const NewsTitle = styled.h3`
   display: inline-block;
   font-size: 2.1875rem;
   font-weight: bold;

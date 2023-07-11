@@ -34,11 +34,11 @@ export default function Tabs() {
         {tabs.map(tab => (
           <div key={tab.id}>
             {currentTab === tab.id && (
-              <>
-                <p>
-                  <TabLink>{tab.title}</TabLink>
-                </p>
-              </>
+              <div>
+                <TabLink>{tab.title}</TabLink>
+                <span> / </span>
+                <TabLink>{tab.title}</TabLink>
+              </div>
             )}
           </div>
         ))}

@@ -1,14 +1,14 @@
 import { styled } from 'styled-components';
-import Left from './left/Left';
-import Right from './right/Right';
+import News from './left/News';
+import Login from './right/Login';
 import Record from './left/Record';
 import Tabs from './right/Tabs';
 
 export default function Container() {
   return (
     <Body>
-      <Left />
-      <Right />
+      <News />
+      <Login />
       <Record />
       <Tabs />
     </Body>

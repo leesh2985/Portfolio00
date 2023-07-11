@@ -1,15 +1,15 @@
 import styled, { StyleSheetManager } from 'styled-components';
 
-interface RightSectionProps {
+interface LoginSectionProps {
   darkMode: boolean;
 }
 
-export default function Right() {
+export default function Login() {
   const isDarkMode = true;
 
   return (
     <StyleSheetManager shouldForwardProp={prop => prop !== 'darkMode'}>
-      <RightSection darkMode={isDarkMode}>
+      <LoginSection darkMode={isDarkMode}>
         <LoginLink>로그인</LoginLink>
         <SocialLink>Goolgle로 시작하기</SocialLink>
         <LoginInfo>
@@ -17,12 +17,12 @@ export default function Right() {
           <PwsLink>비밀번호 찾기</PwsLink>
           <JoinLink>회원가입하기</JoinLink>
         </LoginInfo>
-      </RightSection>
+      </LoginSection>
     </StyleSheetManager>
   );
 }
 
-const RightSection = styled.section<RightSectionProps>`
+const LoginSection = styled.section<LoginSectionProps>`
   width: 435px;
   height: 190px;
   border: 1px solid #d3d3d3;
