@@ -12,7 +12,7 @@ export default function Login() {
     <StyleSheetManager shouldForwardProp={prop => prop !== 'darkMode'}>
       <LoginSection darkMode={isDarkMode}>
         <LoginLink>로그인</LoginLink>
-        <SocialLink>Goolgle로 시작하기</SocialLink>
+        <SocialLink to="/google-signin">Goolgle로 시작하기</SocialLink>
         <LoginInfo>
           <IdLink>아이디 찾기</IdLink>
           <PwsLink>비밀번호 찾기</PwsLink>
@@ -53,7 +53,7 @@ const LoginLink = styled.a`
   }
 `;
 
-const SocialLink = styled.a`
+const SocialLink = styled(Link)`
   cursor: pointer;
   margin: 0 auto;
   width: 80%;
@@ -62,6 +62,7 @@ const SocialLink = styled.a`
   border: 1px solid;
   display: block;
   color: #fff;
+  text-decoration: none;
   font-size: 18px;
   border-radius: 4px;
   background-color: #a9a9a9;
