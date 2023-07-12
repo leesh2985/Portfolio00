@@ -133,4 +133,13 @@ const JoinLink = styled(Link)`
 const Logout = styled.button`
   cursor: pointer;
   font-size: 13px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    background-color: #a9a9a9;
+    margin: 4px 12px 0;
+  }
 `;
