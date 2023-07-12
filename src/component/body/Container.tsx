@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import News from './left/News';
-import Login from './right/Login';
+import Login from './right/loginfolder/Login';
 import Record from './left/Record';
 import Tabs from './right/Tabs';
 
