@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { StyleSheetManager } from 'styled-components';
 
 interface LoginSectionProps {
@@ -15,7 +16,7 @@ export default function Login() {
         <LoginInfo>
           <IdLink>아이디 찾기</IdLink>
           <PwsLink>비밀번호 찾기</PwsLink>
-          <JoinLink>회원가입하기</JoinLink>
+          <JoinLink to="/join-login">회원가입하기</JoinLink>
         </LoginInfo>
       </LoginSection>
     </StyleSheetManager>
@@ -89,9 +90,12 @@ const PwsLink = styled.a`
     margin: 4px 12px 0;
   }
 `;
-const JoinLink = styled.a`
+
+const JoinLink = styled(Link)`
   cursor: pointer;
   font-size: 13px;
+  color: #242424;
+  text-decoration: none;
 
   &::before {
     content: '';
