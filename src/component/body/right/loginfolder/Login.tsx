@@ -24,6 +24,11 @@ export default function Login() {
     setValue(localStorage.getItem('email') || '');
   }, []);
 
+  const logout = () => {
+    localStorage.clear();
+    window.location.reload;
+  };
+
   return (
     <StyleSheetManager shouldForwardProp={prop => prop !== 'darkMode'}>
       <LoginSection darkMode={isDarkMode}>
@@ -33,6 +38,7 @@ export default function Login() {
           <IdLink>아이디 찾기</IdLink>
           <PwsLink>비밀번호 찾기</PwsLink>
           <JoinLink to="/join-login">회원가입하기</JoinLink>
+          <Logout onClick={logout}>Logout</Logout>
         </LoginInfo>
       </LoginSection>
     </StyleSheetManager>
@@ -93,6 +99,7 @@ const IdLink = styled.a`
   cursor: pointer;
   font-size: 13px;
 `;
+
 const PwsLink = styled.a`
   cursor: pointer;
   font-size: 13px;
@@ -121,4 +128,9 @@ const JoinLink = styled(Link)`
     background-color: #a9a9a9;
     margin: 4px 12px 0;
   }
+`;
+
+const Logout = styled.button`
+  cursor: pointer;
+  font-size: 13px;
 `;
