@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { auth } from './FireBase';
 import { GoogleAuthProvider, User, signInWithPopup } from 'firebase/auth';
 import { Link } from 'react-router-dom';
