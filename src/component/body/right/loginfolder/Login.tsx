@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { auth } from './FireBase';
-import { GoogleAuthProvider, User, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import styled, { StyleSheetManager } from 'styled-components';
 // import Home from '../../../Home';
@@ -25,9 +25,16 @@ export default function Login() {
 
   const isDarkMode = true;
 
-  const logout = () => {
-    localStorage.clear();
-    window.location.reload;
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setValue(null); // 사용자 정보 초기화
+        // console.log('로그아웃 성공');
+      })
+      .catch(error => {
+        console.log('로그아웃 실패');
+        console.log(error);
+      });
   };
 
   return (
@@ -38,7 +45,7 @@ export default function Login() {
         {value ? (
           <>
             {value.displayName}
-            <Logout onClick={logout}>Logout</Logout>
+            <Logout onClick={handleLogout}>Logout</Logout>
           </>
         ) : null}
         <LoginInfo>
@@ -139,6 +146,7 @@ const JoinLink = styled(Link)`
 const Logout = styled.button`
   cursor: pointer;
   font-size: 13px;
+  border: none;
 
   &::before {
     content: '';
