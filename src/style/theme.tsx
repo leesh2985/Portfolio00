@@ -12,7 +12,7 @@ export const darkTheme: DefaultTheme = {
   bgColor: '#060606',
   textColor: '#FFFFFF',
   toggleBorder: '#6B8096',
-  BorderColor: '1px solid #fff',
+  borderColor: '1px solid #fff',
   gradient: 'linear-gradient(#091236, #1E215D)',
 };
 

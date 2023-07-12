@@ -61,7 +61,6 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       <MyPageLink>
         <BsPerson />
       </MyPageLink>
-
       <ModeBtn toggleTheme={toggleTheme} />
     </Gnb>
   );

@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 interface ThemeProps {
   bgColor: string;
   textColor: string;
-  BorderColor: string;
+  borderColor: string;
 }
 
 export const GlobalStyle = createGlobalStyle<{ theme: ThemeProps }>`
@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeProps }>`
         outline: none;
         color: ${({ theme }) => theme.textColor};
         background-color: ${({ theme }) => theme.bgColor};
-        border:  ${({ theme }) => theme.BorderColor};
+        border:  ${({ theme }) => theme.borderColor};
     }
 `;
 
