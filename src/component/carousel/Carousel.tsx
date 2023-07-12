@@ -15,7 +15,7 @@ export default function Carousel() {
 }
 
 const CarouselContainer = styled.div`
-  width: 1920px;
+  max-width: 1920px;
   height: 560px;
   margin: 0 auto;
 `;
