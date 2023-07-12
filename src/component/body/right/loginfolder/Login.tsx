@@ -1,18 +1,34 @@
+import { useEffect, useState } from 'react';
+import { auth, provider } from './FireBase';
+import { signInWithPopup } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import styled, { StyleSheetManager } from 'styled-components';
+import Home from '../../../Home';
 
 interface LoginSectionProps {
   darkMode: boolean;
 }
 
 export default function Login() {
+  const [value, setValue] = useState<string>('');
+  const handleClick = () => {
+    signInWithPopup(auth, provider).then(data => {
+      setValue(data.user.email || ''); // Ensure email is not null
+      localStorage.setItem('email', data.user.email || '');
+    });
+  };
+
   const isDarkMode = true;
+
+  useEffect(() => {
+    setValue(localStorage.getItem('email') || '');
+  }, []);
 
   return (
     <StyleSheetManager shouldForwardProp={prop => prop !== 'darkMode'}>
       <LoginSection darkMode={isDarkMode}>
         <LoginLink>로그인</LoginLink>
-        <SocialLink to="/google-signin">Goolgle로 시작하기</SocialLink>
+        {value ? <Home /> : <SocialLink onClick={handleClick}>Goolgle로 시작하기</SocialLink>}
         <LoginInfo>
           <IdLink>아이디 찾기</IdLink>
           <PwsLink>비밀번호 찾기</PwsLink>
@@ -53,7 +69,7 @@ const LoginLink = styled.a`
   }
 `;
 
-const SocialLink = styled(Link)`
+const SocialLink = styled.button`
   cursor: pointer;
   margin: 0 auto;
   width: 80%;
@@ -62,7 +78,6 @@ const SocialLink = styled(Link)`
   border: 1px solid;
   display: block;
   color: #fff;
-  text-decoration: none;
   font-size: 18px;
   border-radius: 4px;
   background-color: #a9a9a9;
