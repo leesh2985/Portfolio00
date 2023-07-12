@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { CiCirclePlus } from 'react-icons/ci';
 import { useState } from 'react';
 
@@ -21,11 +21,8 @@ export default function News() {
         <NewsTitle>HDRC 소식</NewsTitle>
         <Newstabs>
           {menuArr.map((el, index) => (
-            <Newstab
-              key={index}
-              className={index === currentTab ? 'active' : ''}
-              onClick={() => selectMenuHandler(index)}>
-              <NewsBtn>{el.name}</NewsBtn>
+            <Newstab key={el.name} onClick={() => selectMenuHandler(index)}>
+              <NewsBtn isActive={index === currentTab}>{el.name}</NewsBtn>
             </Newstab>
           ))}
           <PlusBtn>
@@ -176,7 +173,7 @@ const Newstab = styled.li`
   }
 `;
 
-const NewsBtn = styled.button`
+const NewsBtn = styled.button<{ isActive: boolean }>`
   cursor: pointer;
   padding: 5px 10px;
   font-size: 17px;
@@ -187,20 +184,22 @@ const NewsBtn = styled.button`
   display: flex;
   border: none;
 
-  &:active {
-    color: #41b6e6;
-    position: relative;
-  }
+  ${props =>
+    props.isActive &&
+    css`
+      color: #41b6e6;
+      position: relative;
 
-  &:active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #41b6e6;
-  }
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #41b6e6;
+      }
+    `}
 `;
 
 const PlusBtn = styled.a`
