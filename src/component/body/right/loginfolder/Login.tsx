@@ -25,10 +25,6 @@ export default function Login() {
 
   const isDarkMode = true;
 
-  // useEffect(() => {
-  //   setValue(JSON.parse(localStorage.getItem('email') || 'null'));
-  // }, []);
-
   const logout = () => {
     localStorage.clear();
     window.location.reload;
@@ -39,12 +35,16 @@ export default function Login() {
       <LoginSection darkMode={isDarkMode}>
         <LoginLink>로그인</LoginLink>
         <SocialLink onClick={handleClick}>Goolgle로 시작하기</SocialLink>
-        {value ? value.displayName : null}
+        {value ? (
+          <>
+            {value.displayName}
+            <Logout onClick={logout}>Logout</Logout>
+          </>
+        ) : null}
         <LoginInfo>
           <IdLink>아이디 찾기</IdLink>
           <PwsLink>비밀번호 찾기</PwsLink>
           <JoinLink to="/join-login">회원가입하기</JoinLink>
-          <Logout onClick={logout}>Logout</Logout>
         </LoginInfo>
       </LoginSection>
     </StyleSheetManager>
