@@ -109,7 +109,7 @@ const NavItemLink = styled.a<NavItemLinkProps>`
   line-height: 24px;
 
   &:hover {
-    color: inherit;
+    color: #41b6e6;
     text-decoration: none;
   }
 
