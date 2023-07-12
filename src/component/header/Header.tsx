@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Search from './Search';
 import ModeBtn from './ModeBtn';
+import { BsPerson } from 'react-icons/bs';
 
 interface HeaderProps {
   toggleTheme: () => void;
@@ -57,6 +58,10 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
         </NavItem>
       </Nav>
       <Search theme={theme} />
+      <MyPageLink>
+        <BsPerson />
+      </MyPageLink>
+
       <ModeBtn toggleTheme={toggleTheme} />
     </Gnb>
   );
@@ -130,4 +135,9 @@ const NavItemLink = styled.a<NavItemLinkProps>`
       transform: scaleX(1);
     }
   `}
+`;
+
+const MyPageLink = styled.a`
+  font-size: 25px;
+  cursor: pointer;
 `;
