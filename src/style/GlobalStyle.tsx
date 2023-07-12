@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 interface ThemeProps {
   bgColor: string;
   textColor: string;
+  BorderColor: string;
 }
 
 export const GlobalStyle = createGlobalStyle<{ theme: ThemeProps }>`
@@ -26,10 +27,11 @@ export const GlobalStyle = createGlobalStyle<{ theme: ThemeProps }>`
     }
     button { 
         cursor: pointer;
-        border: none;
+  
         outline: none;
         color: ${({ theme }) => theme.textColor};
         background-color: ${({ theme }) => theme.bgColor};
+        border:  ${({ theme }) => theme.BorderColor};
     }
 `;
 
