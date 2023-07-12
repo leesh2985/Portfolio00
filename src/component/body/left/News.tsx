@@ -55,11 +55,53 @@ export default function News() {
                   <TextTime>2023.06.28</TextTime>
                 </TextItemLink>
               </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>대회</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>대회</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>대회</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
             </>
           )}
 
           {currentTab === 1 && (
             <>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>일상</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>일상</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>일상</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
               <TextItem>
                 <TextItemLink>
                   <TextEm>일상</TextEm>
@@ -107,11 +149,53 @@ export default function News() {
                   <TextTime>2023.06.28</TextTime>
                 </TextItemLink>
               </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>공구</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>공구</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>공구</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
             </>
           )}
 
           {currentTab === 3 && (
             <>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>이벤트</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>이벤트</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
+              <TextItem>
+                <TextItemLink>
+                  <TextEm>이벤트</TextEm>
+                  <TextSpan>6월 28일(수) 임시점검 패치 안내</TextSpan>
+                  <TextTime>2023.06.28</TextTime>
+                </TextItemLink>
+              </TextItem>
               <TextItem>
                 <TextItemLink>
                   <TextEm>이벤트</TextEm>
@@ -214,7 +298,6 @@ const PlusBtn = styled.a`
 
 // 정보
 const TextContent = styled.div`
-  display: flex;
   margin-top: 30px;
 `;
 
@@ -241,7 +324,7 @@ const TextSpan = styled.span`
   overflow: hidden;
   font-size: 18px;
   font-weight: 300;
-  width: 150px;
+  width: 200px;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
@@ -255,14 +338,16 @@ const TextTime = styled.time`
 `;
 
 const TextUl = styled.ul`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, minmax(20px, auto));
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
 `;
 
 const TextItem = styled.li`
-  margin-bottom: 2px;
   line-height: 54px;
 `;
 
