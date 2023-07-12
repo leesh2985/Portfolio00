@@ -185,6 +185,7 @@ const NewsBtn = styled.button`
   color: #808080;
   text-decoration: none;
   display: flex;
+  border: none;
 
   &:active {
     color: #41b6e6;
