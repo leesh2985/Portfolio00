@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/my-lonin" element={<MyLonin />} />
         <Route path="/join-login" element={<JoinLonin />} />
       </Routes>
