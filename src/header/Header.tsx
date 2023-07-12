@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Search from './Search';
 import ModeBtn from './ModeBtn';
 import { BsPerson } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   toggleTheme: () => void;
@@ -22,7 +23,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
 
   return (
     <Gnb>
-      <Logo>
+      <Logo to="/home">
         <LogoImg src="/img/logo.png" alt="로고" />
       </Logo>
       <Nav>
@@ -75,7 +76,7 @@ const Gnb = styled.div`
   height: 60px;
 `;
 
-const Logo = styled.a`
+const Logo = styled(Link)`
   cursor: pointer;
   width: 200px;
 
