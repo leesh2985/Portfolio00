@@ -4,7 +4,7 @@ export const lightTheme: DefaultTheme = {
   bgColor: '#ffffff',
   textColor: '#242424',
   toggleBorder: '#FFF',
-  BorderColor: '1px solid #242424',
+  borderColor: '1px solid #242424',
   gradient: 'linear-gradient(#39598A, #79D7ED)',
 };
 
