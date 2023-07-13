@@ -22,7 +22,7 @@ export default function News() {
         <Newstabs>
           {menuArr.map((el, index) => (
             <Newstab key={el.name} onClick={() => selectMenuHandler(index)}>
-              <NewsBtn isActive={index === currentTab}>{el.name}</NewsBtn>
+              <NewsBtn $isActive={index === currentTab}>{el.name}</NewsBtn>
             </Newstab>
           ))}
           <PlusBtn>
@@ -257,7 +257,7 @@ const Newstab = styled.li`
   }
 `;
 
-const NewsBtn = styled.button<{ isActive: boolean }>`
+const NewsBtn = styled.button<{ $isActive: boolean }>`
   cursor: pointer;
   padding: 5px 10px;
   font-size: 17px;
@@ -269,7 +269,7 @@ const NewsBtn = styled.button<{ isActive: boolean }>`
   border: none;
 
   ${props =>
-    props.isActive &&
+    props.$isActive &&
     css`
       color: #41b6e6;
       position: relative;
