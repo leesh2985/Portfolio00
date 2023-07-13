@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 
 interface NavItemLinkProps {
-  isActive: boolean;
+  $isActive: boolean;
 }
 
 export default function Header({ toggleTheme, theme }: HeaderProps) {
@@ -28,32 +28,32 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       </Logo>
       <Nav>
         <NavItem>
-          <NavItemLink onClick={() => handleTabClick('home')} isActive={activeTab === 'home'}>
+          <NavItemLink onClick={() => handleTabClick('home')} $isActive={activeTab === 'home'}>
             홈
           </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink onClick={() => handleTabClick('contest')} isActive={activeTab === 'contest'}>
+          <NavItemLink onClick={() => handleTabClick('contest')} $isActive={activeTab === 'contest'}>
             대회
           </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink onClick={() => handleTabClick('daily')} isActive={activeTab === 'daily'}>
+          <NavItemLink onClick={() => handleTabClick('daily')} $isActive={activeTab === 'daily'}>
             일상
           </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink onClick={() => handleTabClick('record')} isActive={activeTab === 'record'}>
+          <NavItemLink onClick={() => handleTabClick('record')} $isActive={activeTab === 'record'}>
             기록공유
           </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink onClick={() => handleTabClick('tools')} isActive={activeTab === 'tools'}>
+          <NavItemLink onClick={() => handleTabClick('tools')} $isActive={activeTab === 'tools'}>
             공구
           </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink onClick={() => handleTabClick('event')} isActive={activeTab === 'event'}>
+          <NavItemLink onClick={() => handleTabClick('event')} $isActive={activeTab === 'event'}>
             이벤트
           </NavItemLink>
         </NavItem>
@@ -127,7 +127,7 @@ const NavItemLink = styled.a<NavItemLinkProps>`
   }
 
   ${props =>
-    props.isActive &&
+    props.$isActive &&
     `
     color: #41b6e6;
     
