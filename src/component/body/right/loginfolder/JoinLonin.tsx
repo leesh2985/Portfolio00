@@ -8,7 +8,6 @@ export default function JoinLonin() {
         <Logo to="/home">
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
-        <LogoText>회원가입</LogoText>
       </LogoArea>
 
       <Form>
@@ -31,22 +30,18 @@ const LogoArea = styled.div`
   justify-content: space-between;
   max-width: 700px;
   margin: 0 auto;
-  height: 60px;
+  height: auto;
 `;
 
 const Logo = styled(Link)`
   cursor: pointer;
-  width: 200px;
-`;
-
-const LogoText = styled.h1`
-  font-size: 30px;
-  font-weight: bold;
+  width: 300px;
 `;
 
 const LogoImg = styled.img`
-  width: 100px;
-  padding: 25px 115px 25px 0px;
+  width: 200px;
+  margin-top: 50px;
+  padding: 0px 115px 25px 0px;
 `;
 
 const buttonStyles = css`
