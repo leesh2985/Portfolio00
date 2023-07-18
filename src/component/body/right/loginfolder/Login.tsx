@@ -12,11 +12,11 @@ export default function Login() {
   const [value, setValue] = useState<User | null>(null);
   const handleClick = () => {
     const provider = new GoogleAuthProvider(); // provider를 구글로 설정
-    signInWithPopup(auth, provider) // popup을 이용한 signup
+    signInWithPopup(auth, provider)
       .then(data => {
-        setValue(data.user); // user data 설정
-        localStorage.setItem('email', data.user?.email || '');
-        console.log(data); // console로 들어온 데이터 표시
+        setValue(data.user);
+        localStorage.setItem('email', JSON.stringify(data.user)); // JSON 형식으로 저장
+        console.log(data);
       })
       .catch(err => {
         console.log(err);
@@ -41,8 +41,13 @@ export default function Login() {
   useEffect(() => {
     const emailData = localStorage.getItem('email');
     if (emailData) {
-      const userObj: User = JSON.parse(emailData);
-      setValue(userObj);
+      try {
+        const userObj: User = JSON.parse(emailData);
+        setValue(userObj);
+      } catch (error) {
+        console.error('JSON parsing error:', error);
+        // JSON 파싱에 실패한 경우, 로컬 스토리지의 값을 삭제하거나 다른 처리를 수행할 수 있음
+      }
     }
   }, []);
 
