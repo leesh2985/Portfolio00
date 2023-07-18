@@ -4,6 +4,7 @@ import './App.css';
 import Home from './component/Home';
 import JoinLonin from './component/body/right/loginfolder/JoinLonin';
 import MyLonin from './component/body/right/loginfolder/MyLonin';
+import LoginPage from './component/body/right/loginfolder/LoginPage';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/my-lonin" element={<MyLonin />} />
+        <Route path="/lonin-page" element={<LoginPage />} />
         <Route path="/join-login" element={<JoinLonin />} />
       </Routes>
     </BrowserRouter>
