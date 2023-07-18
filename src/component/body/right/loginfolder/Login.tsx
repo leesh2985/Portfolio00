@@ -39,7 +39,11 @@ export default function Login() {
   };
 
   useEffect(() => {
-    setValue(localStorage.getItem('email'));
+    const emailData = localStorage.getItem('email');
+    if (emailData) {
+      const userObj: User = JSON.parse(emailData);
+      setValue(userObj);
+    }
   }, []);
 
   return (
@@ -58,6 +62,13 @@ export default function Login() {
               <Logout onClick={handleLogout}>Logout</Logout>
               <RunningRecord>평균기록 07.35</RunningRecord>
             </TextArea>
+            <Marathon>
+              <MarathonText>마라톤 참여</MarathonText>
+              <ImgBox>
+                <MarathonImg src="/post/post1.jpg" alt="기록"></MarathonImg>
+                <MarathonImg src="/post/post2.jpg" alt="기록"></MarathonImg>
+              </ImgBox>
+            </Marathon>
           </NameArea>
         )}
         {!value && (
@@ -160,7 +171,9 @@ const JoinLink = styled(Link)`
 
 const NameArea = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 8px;
 `;
 
 const TextArea = styled.div`
@@ -176,7 +189,6 @@ const Photo = styled.div`
   height: 80px;
   background-color: #d3d3d3;
   border-radius: 100%;
-  margin-right: 15px;
 `;
 
 const DisplayName = styled.span`
@@ -199,4 +211,23 @@ const Logout = styled.button`
 const RunningRecord = styled.span`
   font-size: 15px;
   justify-self: start;
+`;
+
+const Marathon = styled.div``;
+const ImgBox = styled.div`
+  display: flex;
+  margin-top: 5px;
+`;
+const MarathonText = styled.p`
+  text-align: left;
+  font-weight: bold;
+  font-size: 18px;
+`;
+const MarathonImg = styled.img`
+  width: 70px;
+  height: auto;
+  margin-right: 8px;
+  &:last-child {
+    margin-right: 0px;
+  }
 `;
