@@ -1,7 +1,52 @@
-import { Link } from 'react-router-dom';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { auth } from './FireBase';
 
 export default function JoinLonin() {
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    name: '',
+    // date: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setValues(prev => ({ ...prev, [name]: value }));
+  };
+
+  const [erroerMsg, setErrorMsg] = useState('');
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+  const handleSubmission = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!values.name || !values.email || !values.password || !values.passwordConfirm) {
+      setErrorMsg('모든 항목을 입력해주세요.');
+      return;
+    }
+    setErrorMsg('');
+
+    setSubmitButtonDisabled(true);
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then(async res => {
+        setSubmitButtonDisabled(false);
+        const user = res.user;
+        await updateProfile(user, {
+          displayName: values.name,
+        });
+        navigate('/');
+        console.log('가입 성공:', user);
+      })
+      .catch(err => {
+        setSubmitButtonDisabled(false);
+        setErrorMsg('오류가 발생했습니다: ' + err.message);
+      });
+  };
+
   return (
     <JoinLoninContainer>
       <LogoArea>
@@ -9,20 +54,25 @@ export default function JoinLonin() {
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
       </LogoArea>
-      <JoinLoninArea>
-        <JoinLoninInput type="text" name="text" placeholder="이름(실명)" />
-        <JoinLoninInput type="date" name="date" placeholder="생년월일 8자리" />
-        <JoinLoninInput type="email" name="email" placeholder="아이디" />
-        <JoinLoninInput type="password" name="password" placeholder="비밀번호" />
-        <JoinLoninInput type="password" name="password" placeholder="비밀번호확인" />
-        <LoginButtonArea>
-          <LoginButton>가입하기</LoginButton>
-          <JoinLink to="/lonin-page">회원가입하기</JoinLink>
-        </LoginButtonArea>
-      </JoinLoninArea>
+      <form onSubmit={handleSubmission}>
+        <JoinLoninArea>
+          <JoinLoninInput type="name" name="name" placeholder="이름(실명)" onChange={handleChange} />
+          {/* <JoinLoninInput type="date" name="date" placeholder="생년월일 8자리" /> */}
+          <JoinLoninInput type="email" name="email" placeholder="아이디" onChange={handleChange} />
+          <JoinLoninInput type="password" name="password" placeholder="비밀번호" onChange={handleChange} />
+          <JoinLoninInput type="password" name="passwordConfirm" placeholder="비밀번호확인" onChange={handleChange} />
+          <LoginButtonArea>
+            <Error>{erroerMsg}</Error>
+            <LoginButton type="submit" disabled={submitButtonDisabled}>
+              가입하기
+            </LoginButton>
+          </LoginButtonArea>
+        </JoinLoninArea>
+      </form>
     </JoinLoninContainer>
   );
 }
+
 const JoinLoninContainer = styled.div`
   height: 100%;
   min-height: 100vh;
@@ -92,7 +142,15 @@ const LoginButtonArea = styled.div`
   margin-top: 30px;
 `;
 
+const Error = styled.b`
+  font-weight: bold;
+  font-size: 14px;
+  color: red;
+  margin-bottom: 30px;
+`;
+
 const LoginButton = styled.button`
+  cursor: pointer;
   outline: none;
   background-color: #1e8ec7;
   color: #fff;
@@ -108,81 +166,17 @@ const LoginButton = styled.button`
     background-color: #41b6e6;
     border: 1px solid #41b6e6;
   }
+
+  &:disabled {
+    background-color: gray !important;
+    border: 1px solid gray !important;
+  }
 `;
 
-const JoinLink = styled(Link)`
-  cursor: pointer;
-  font-size: 13px;
-  color: #242424;
-  font-weight: 700;
-  margin-top: 15px;
-`;
-
-// const Form = styled.form`
-//   max-width: 700px;
-//   margin: 0 auto;
-// `;
-
-// const inputStyles = css`
-//   width: 100%;
-//   height: 30px;
-//   padding: 10px 15px;
-//   border: 1px solid;
-//   display: block;
-//   color: #000000;
-//   font-size: 18px;
-//   border-radius: 4px;
-//   margin-top: 5px;
-//   background-color: #fff;
-//   border: 1px solid #d3d3d3;
-
-//   &:focus {
-//     border-color: #808080;
-//   }
-// `;
-
-// const NameInput = styled.input`
-//   ${inputStyles}
-//   margin-top: 50px;
-// `;
-
-// const HbdInput = styled.input`
-//   ${inputStyles}
-// `;
-
-// const IdInput = styled.input`
-//   ${inputStyles}
-//   margin-top: 70px;
-
-//   &::placeholder {
-//     content: '@';
-//   }
-// `;
-
-// const PWInput = styled.input`
-//   ${inputStyles}
-// `;
-
-// const PWInputCheck = styled.input`
-//   ${inputStyles}
-// `;
-
-// const Join = styled.div`
-//   display: flex;
-
-//   margin: 0 auto;
-//   max-width: 732px;
-// `;
-
-// const JoinHdrc = styled.button`
-//   ${buttonStyles}
-//   margin-top: 100px;
-//   background-color: #1e8ec7;
-//   border: 1px solid #1e8ec7;
-//   transition: 100ms;
-
-//   &:hover {
-//     background-color: #41b6e6;
-//     border: 1px solid #41b6e6;
-//   }
+// const JoinLink = styled(Link)`
+//   cursor: pointer;
+//   font-size: 13px;
+//   color: #242424;
+//   font-weight: 700;
+//   margin-top: 15px;
 // `;
