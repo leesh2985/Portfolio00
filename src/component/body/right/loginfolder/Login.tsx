@@ -29,6 +29,7 @@ export default function Login() {
     signOut(auth)
       .then(() => {
         setValue(null); // 사용자 정보 초기화
+        localStorage.clear();
         // console.log('로그아웃 성공');
       })
       .catch(error => {
