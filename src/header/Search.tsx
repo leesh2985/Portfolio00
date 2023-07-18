@@ -26,6 +26,7 @@ const SearchInput = styled.input<SearchProps>`
   height: 40px;
   background-color: transparent;
   border-bottom: 1px solid ${props => (props.theme === 'dark' ? '#fff' : '#000')};
+  outline: none;
 `;
 
 const SearchButton = styled.button`

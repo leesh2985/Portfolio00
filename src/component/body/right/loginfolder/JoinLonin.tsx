@@ -64,7 +64,7 @@ const Form = styled.form`
 const inputStyles = css`
   width: 100%;
   height: 30px;
-  padding: 10px 0;
+  padding: 10px;
   border: 1px solid;
   display: block;
   color: #000000;
@@ -74,9 +74,6 @@ const inputStyles = css`
   background-color: #fff;
   border: 1px solid #808080;
 
-  &::placeholder {
-    padding-left: 15px;
-  }
 `;
 
 const NameInput = styled.input`
