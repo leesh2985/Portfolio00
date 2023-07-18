@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { auth } from './FireBase';
-import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, User, signInWithPopup } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import styled, { StyleSheetManager } from 'styled-components';
+import MyLonin from './MyLonin';
 
 interface LoginSectionProps {
   darkMode: boolean;
@@ -24,19 +25,6 @@ export default function Login() {
   };
 
   const isDarkMode = true;
-
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        setValue(null); // 사용자 정보 초기화
-        localStorage.clear();
-        // console.log('로그아웃 성공');
-      })
-      .catch(error => {
-        console.log('로그아웃 실패');
-        console.log(error);
-      });
-  };
 
   useEffect(() => {
     const emailData = localStorage.getItem('email');
@@ -60,21 +48,7 @@ export default function Login() {
             <SocialLink onClick={handleClick}>Google로 시작하기</SocialLink>
           </>
         ) : (
-          <NameArea>
-            <Photo></Photo>
-            <TextArea>
-              <DisplayName>{value.displayName}님</DisplayName>
-              <Logout onClick={handleLogout}>Logout</Logout>
-              <RunningRecord>평균기록 07.35</RunningRecord>
-            </TextArea>
-            <Marathon>
-              <MarathonText>마라톤 참여</MarathonText>
-              <ImgBox>
-                <MarathonImg src="/post/post1.jpg" alt="기록"></MarathonImg>
-                <MarathonImg src="/post/post2.jpg" alt="기록"></MarathonImg>
-              </ImgBox>
-            </Marathon>
-          </NameArea>
+          <MyLonin />
         )}
         {!value && (
           <LoginInfo>
@@ -171,68 +145,5 @@ const JoinLink = styled(Link)`
     height: 12px;
     background-color: #a9a9a9;
     margin: 4px 12px 0;
-  }
-`;
-
-const NameArea = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-`;
-
-const TextArea = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  align-items: center;
-  row-gap: 10px;
-`;
-
-const Photo = styled.div`
-  width: 80px;
-  height: 80px;
-  background-color: #d3d3d3;
-  border-radius: 100%;
-`;
-
-const DisplayName = styled.span`
-  font-size: 20px;
-  font-weight: bold;
-  justify-self: start;
-`;
-
-const Logout = styled.button`
-  cursor: pointer;
-  font-size: 10px;
-  color: #808080;
-  border: none;
-  border: 1px solid #808080;
-  border-radius: 30px;
-  padding: 8px;
-  justify-self: end;
-`;
-
-const RunningRecord = styled.span`
-  font-size: 15px;
-  justify-self: start;
-`;
-
-const Marathon = styled.div``;
-const ImgBox = styled.div`
-  display: flex;
-  margin-top: 5px;
-`;
-const MarathonText = styled.p`
-  text-align: left;
-  font-weight: bold;
-  font-size: 18px;
-`;
-const MarathonImg = styled.img`
-  width: 70px;
-  height: auto;
-  margin-right: 8px;
-  &:last-child {
-    margin-right: 0px;
   }
 `;
