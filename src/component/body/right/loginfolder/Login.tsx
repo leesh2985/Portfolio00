@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { auth } from './FireBase';
 import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,7 @@ export default function Login() {
     signInWithPopup(auth, provider) // popup을 이용한 signup
       .then(data => {
         setValue(data.user); // user data 설정
+        localStorage.setItem('email', data.user?.email || '');
         console.log(data); // console로 들어온 데이터 표시
       })
       .catch(err => {
@@ -35,6 +36,10 @@ export default function Login() {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    setValue(localStorage.getItem('email'));
+  }, []);
 
   return (
     <StyleSheetManager shouldForwardProp={prop => prop !== 'darkMode'}>
