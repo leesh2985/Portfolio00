@@ -1,8 +1,48 @@
-import { Link } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { auth } from './FireBase';
 
 // interface LoginPageProps {}
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setValues(prev => ({ ...prev, [name]: value }));
+  };
+
+  const [errorMsg, setErrorMsg] = useState('');
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+  const handleSubmission = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!values.email || !values.password) {
+      setErrorMsg('모든 항목을 입력해주세요.');
+      return;
+    }
+    setErrorMsg('');
+
+    setSubmitButtonDisabled(true);
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then(async res => {
+        setSubmitButtonDisabled(false);
+
+        navigate('/');
+        console.log('가입 성공:', res.user);
+      })
+
+      .catch(err => {
+        setSubmitButtonDisabled(false);
+        setErrorMsg('오류가 발생했습니다: ' + err.message);
+      });
+  };
+
   return (
     <LoginPageContainer>
       <LogoArea>
@@ -10,14 +50,19 @@ export default function LoginPage() {
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
       </LogoArea>
-      {/* {LoginPageProps.label && <LoginLabel>{LoginPageProps.label}</LoginLabel>} */}
       <LoginArea>
-        <LoginInput type="email" placeholder="아이디" />
-        <LoginInput type="password" placeholder="비밀번호" />
-        <LoginButtonArea>
-          <LoginButton>로그인</LoginButton>
-          <JoinLink to="/join-login">회원가입하기</JoinLink>
-        </LoginButtonArea>
+        <form onSubmit={handleSubmission}>
+          {/* 이 부분을 form 태그로 감싸고 onSubmit으로 이벤트를 처리합니다. */}
+          <LoginInput type="email" name="email" placeholder="아이디" onChange={handleChange} />
+          <LoginInput type="password" name="password" placeholder="비밀번호" onChange={handleChange} />
+          <LoginButtonArea>
+            <Error>{errorMsg}</Error>
+            <LoginButton type="submit" disabled={submitButtonDisabled}>
+              로그인
+            </LoginButton>
+            <JoinLink to="/join-login">회원가입하기</JoinLink>
+          </LoginButtonArea>
+        </form>
       </LoginArea>
     </LoginPageContainer>
   );
@@ -52,10 +97,6 @@ const LogoImg = styled.img`
   margin-top: 50px;
   padding: 0px 0px 25px 0px;
 `;
-
-// const LoginLabel = styled.label`
-//   font-weight: 500;
-// `;
 
 const LoginArea = styled.div`
   border: 1px solid #a9a9a9;
@@ -94,6 +135,13 @@ const LoginButtonArea = styled.div`
   margin-top: 30px;
 `;
 
+const Error = styled.b`
+  font-weight: bold;
+  font-size: 14px;
+  color: red;
+  margin-bottom: 30px;
+`;
+
 const LoginButton = styled.button`
   cursor: pointer;
   outline: none;
@@ -110,6 +158,10 @@ const LoginButton = styled.button`
   &:hover {
     background-color: #41b6e6;
     border: 1px solid #41b6e6;
+  }
+  &:disabled {
+    background-color: gray !important;
+    border: 1px solid gray !important;
   }
 `;
 
