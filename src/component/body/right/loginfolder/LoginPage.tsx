@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-interface LoginPageProps {}
-export default function LoginPage(LoginPageProps) {
+// interface LoginPageProps {}
+export default function LoginPage() {
   return (
     <LoginPageContainer>
       <LogoArea>
@@ -10,8 +10,15 @@ export default function LoginPage(LoginPageProps) {
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
       </LogoArea>
-      {LoginPageProps.label && <label>{LoginPageProps.label}</label>}
-      <LoginInput type="text" {...LoginPageProps} />
+      {/* {LoginPageProps.label && <LoginLabel>{LoginPageProps.label}</LoginLabel>} */}
+      <LoginArea>
+        <LoginInput type="email" placeholder="아이디" />
+        <LoginInput type="password" placeholder="비밀번호" />
+        <LoginButtonArea>
+          <LoginButton>로그인</LoginButton>
+          <JoinLink to="/join-login">회원가입하기</JoinLink>
+        </LoginButtonArea>
+      </LoginArea>
     </LoginPageContainer>
   );
 }
@@ -23,7 +30,6 @@ const LoginPageContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 8px;
   max-width: 1380px;
   margin: 0 auto;
 `;
@@ -47,16 +53,69 @@ const LogoImg = styled.img`
   padding: 0px 0px 25px 0px;
 `;
 
+// const LoginLabel = styled.label`
+//   font-weight: 500;
+// `;
+
+const LoginArea = styled.div`
+  border: 1px solid #a9a9a9;
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 4px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: 0 auto;
+`;
+
 const LoginInput = styled.input`
-  min-width: 400px;
+  min-width: 480px;
   height: fit-content;
   width: fit-content;
   background-color: #fff;
   margin: 0 auto;
-  // box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  border-radius: 10px;
-  border-radius: 5px;
-  border: 1px solid #808080;
+  padding: 20px 15px;
+  font-size: 18px;
+  border-radius: 4px;
+  border: 1px solid #d3d3d3;
   outline: none;
+
+  &:focus {
+    border-color: #808080;
+  }
+`;
+
+const LoginButtonArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+`;
+
+const LoginButton = styled.button`
+  outline: none;
+  background-color: #1e8ec7;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px 15px;
+  min-width: 512px;
+  border-radius: 4px;
+  border: 1px solid #1e8ec7;
+  transition: 100ms;
+
+  &:hover {
+    background-color: #41b6e6;
+    border: 1px solid #41b6e6;
+  }
+`;
+
+const JoinLink = styled(Link)`
+  cursor: pointer;
+  font-size: 13px;
+  color: #242424;
+  font-weight: 700;
+  margin-top: 15px;
 `;
