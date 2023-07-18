@@ -72,7 +72,11 @@ const inputStyles = css`
   border-radius: 4px;
   margin-top: 5px;
   background-color: #fff;
-  border: 1px solid #808080;
+  border: 1px solid #d3d3d3;
+
+  &:focus {
+    border-color: #808080;
+  }
 `;
 
 const NameInput = styled.input`
