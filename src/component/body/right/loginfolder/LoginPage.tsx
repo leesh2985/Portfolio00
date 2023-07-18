@@ -95,6 +95,7 @@ const LoginButtonArea = styled.div`
 `;
 
 const LoginButton = styled.button`
+  cursor: pointer;
   outline: none;
   background-color: #1e8ec7;
   color: #fff;
