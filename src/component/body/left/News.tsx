@@ -9,7 +9,7 @@ interface Menu {
 export default function News() {
   const [currentTab, setCurrentTab] = useState(0);
 
-  const menuArr: Menu[] = [{ name: '대회' }, { name: '일상' }, { name: '공구' }, { name: '이벤트' }];
+  const menuArr: Menu[] = [{ name: '대회' }, { name: '일상' }, { name: '공구' }];
 
   const selectMenuHandler = (index: number) => {
     setCurrentTab(index);
@@ -173,7 +173,7 @@ export default function News() {
             </>
           )}
 
-          {currentTab === 3 && (
+          {/* {currentTab === 3 && (
             <>
               <TextItem>
                 <TextItemLink>
@@ -218,7 +218,7 @@ export default function News() {
                 </TextItemLink>
               </TextItem>
             </>
-          )}
+          )} */}
         </TextUl>
       </TextContent>
     </NewsSection>
