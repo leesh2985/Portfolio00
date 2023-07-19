@@ -101,7 +101,7 @@ const ContestContainer = styled.div`
 const Container = styled.div`
   position: absolute;
   max-width: 1380px;
-  top: 80%;
+  top: 65%;
   left: 50%;
   max-height: 600px;
   overflow-y: scroll;
