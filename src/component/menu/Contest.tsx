@@ -61,8 +61,8 @@ export default function Contest() {
       />
       <ContestContainer>
         <Container>
-          <table {...getTableProps()}>
-            <thead>
+          <ContestTable {...getTableProps()}>
+            <ContestThead>
               {headerGroups.map(headerGroup => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map(column => (
@@ -70,8 +70,8 @@ export default function Contest() {
                   ))}
                 </tr>
               ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
+            </ContestThead>
+            <ContestTbody {...getTableBodyProps()}>
               {rows.map(row => {
                 prepareRow(row);
                 return (
@@ -82,8 +82,8 @@ export default function Contest() {
                   </tr>
                 );
               })}
-            </tbody>
-          </table>
+            </ContestTbody>
+          </ContestTable>
         </Container>
       </ContestContainer>
       <Footer />
@@ -92,14 +92,16 @@ export default function Contest() {
 }
 
 const ContestContainer = styled.div`
-  max-width: 1920px;
+  max-width: 1380px;
   height: 560px;
   margin: 0 auto;
+  position: relative;
 `;
 
 const Container = styled.div`
   position: absolute;
-  top: 50%;
+  max-width: 1380px;
+  top: 80%;
   left: 50%;
   max-height: 600px;
   overflow-y: scroll;
@@ -107,38 +109,41 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-/*table {
-  width: 800px;
+const ContestTable = styled.table`
+  width: 100%;
   height: 800px;
   border-collapse: collapse;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-th,
-td {
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-th {
-  text-align: left;
-}
-thead th {
-  background-color: #55608f;
-}
-tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-tbody td {
-  position: relative;
-}
-tbody td:hover:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -9999px;
-  bottom: -9999px;
-  background-color: rgba(255, 255, 255, 0.2);
-  z-index: -1;
-}*/
+`;
+
+const ContestThead = styled.thead`
+  th {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    text-align: left;
+    background-color: #55608f;
+  }
+`;
+const ContestTbody = styled.tbody`
+  tr:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  td {
+    position: relative;
+    color: #242424;
+  }
+
+  td:hover:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -9999px;
+    bottom: -9999px;
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: -1;
+  }
+`;
