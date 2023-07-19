@@ -1,5 +1,14 @@
-import React from 'react';
+import Header from '../../header/Header';
+import Footer from '../../Footer';
 
 export default function Contest() {
-  return <div>Contest</div>;
+  return (
+    <>
+      <Header
+       
+      />
+      
+      <Footer />
+    </>
+  );
 }
