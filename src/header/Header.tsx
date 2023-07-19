@@ -22,59 +22,67 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
   };
 
   return (
-    <Gnb>
-      <Logo to="/home">
-        <LogoImg src="/img/logo.png" alt="로고" />
-      </Logo>
-      <Nav>
-        <NavItem>
-          <NavItemLink to="/" onClick={() => handleTabClick('home')} $isActive={activeTab === 'home'}>
-            홈
-          </NavItemLink>
-        </NavItem>
-        <NavItem>
-          <NavItemLink to="/contest" onClick={() => handleTabClick('contest')} $isActive={activeTab === 'contest'}>
-            대회
-          </NavItemLink>
-        </NavItem>
-        <NavItem>
-          <NavItemLink to="/" onClick={() => handleTabClick('daily')} $isActive={activeTab === 'daily'}>
-            일상
-          </NavItemLink>
-        </NavItem>
-        <NavItem>
-          <NavItemLink to="/" onClick={() => handleTabClick('record')} $isActive={activeTab === 'record'}>
-            기록공유
-          </NavItemLink>
-        </NavItem>
-        <NavItem>
-          <NavItemLink to="/" onClick={() => handleTabClick('tools')} $isActive={activeTab === 'tools'}>
-            공구
-          </NavItemLink>
-        </NavItem>
-        <NavItem>
-          <NavItemLink to="/" onClick={() => handleTabClick('event')} $isActive={activeTab === 'event'}>
-            이벤트
-          </NavItemLink>
-        </NavItem>
-      </Nav>
-      <Search theme={theme} />
-      <MyPageLink>
-        <BsPerson />
-      </MyPageLink>
-      <ModeBtn toggleTheme={toggleTheme} />
-    </Gnb>
+    <GnbContainer>
+      <Gnb>
+        <Logo to="/home">
+          <LogoImg src="/img/logo.png" alt="로고" />
+        </Logo>
+        <Nav>
+          <NavItem>
+            <NavItemLink to="/" onClick={() => handleTabClick('home')} $isActive={activeTab === 'home'}>
+              홈
+            </NavItemLink>
+          </NavItem>
+          <NavItem>
+            <NavItemLink to="/contest" onClick={() => handleTabClick('contest')} $isActive={activeTab === 'contest'}>
+              대회
+            </NavItemLink>
+          </NavItem>
+          <NavItem>
+            <NavItemLink to="/" onClick={() => handleTabClick('daily')} $isActive={activeTab === 'daily'}>
+              일상
+            </NavItemLink>
+          </NavItem>
+          <NavItem>
+            <NavItemLink to="/" onClick={() => handleTabClick('record')} $isActive={activeTab === 'record'}>
+              기록공유
+            </NavItemLink>
+          </NavItem>
+          <NavItem>
+            <NavItemLink to="/" onClick={() => handleTabClick('tools')} $isActive={activeTab === 'tools'}>
+              공구
+            </NavItemLink>
+          </NavItem>
+          <NavItem>
+            <NavItemLink to="/" onClick={() => handleTabClick('event')} $isActive={activeTab === 'event'}>
+              이벤트
+            </NavItemLink>
+          </NavItem>
+        </Nav>
+        <Search theme={theme} />
+        <MyPageLink>
+          <BsPerson />
+        </MyPageLink>
+        <ModeBtn toggleTheme={toggleTheme} />
+      </Gnb>
+    </GnbContainer>
   );
 }
 
+const GnbContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  height: 60px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+`;
 const Gnb = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1380px;
   margin: 0 auto;
-  height: 60px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 const Logo = styled(Link)`
