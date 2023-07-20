@@ -1,8 +1,6 @@
 import fakeData from './MOCK_DATA.json';
 import { Column, useTable } from 'react-table';
 import React from 'react';
-import Header from '../../header/Header';
-import Footer from '../../Footer';
 import { styled } from 'styled-components';
 
 type FakeData = {
@@ -53,6 +51,9 @@ export default function Contest() {
 
   return (
     <>
+      <TextContainer>
+        <TextArea>대회</TextArea>
+      </TextContainer>
       <ContestContainer>
         <Container>
           <ContestTable {...getTableProps()}>
@@ -84,16 +85,27 @@ export default function Contest() {
   );
 }
 
+const TextContainer = styled.div`
+  max-width: 1380px;
+  height: auto;
+  margin: 0 auto;
+`;
+
+const TextArea = styled.p`
+  font-size: 50px;
+  font-weight: bold;
+  color: #1e8ec7;
+  text-align: left;
+  margin: 50px 0px;
+`;
+
 const ContestContainer = styled.div`
   max-width: 1380px;
-  height: 560px;
+  height: auto;
   margin: 0 auto;
 `;
 
 const Container = styled.div`
-  max-width: 1380px;
-  top: 65%;
-  left: 50%;
   max-height: 600px;
   overflow-y: scroll;
 `;
@@ -110,7 +122,6 @@ const ContestThead = styled.thead`
   th {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
     text-align: left;
     background-color: #55608f;
   }
