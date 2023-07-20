@@ -85,7 +85,6 @@ const Gnb = styled.div`
 
 const Logo = styled(Link)`
   cursor: pointer;
-  width: 200px;
 
   &:hover {
     color: inherit;
@@ -93,8 +92,8 @@ const Logo = styled(Link)`
 `;
 
 const LogoImg = styled.img`
-  width: 150px;
-  margin-right: 20px;
+  width: 120px;
+  padding-right: 20px;
   height: auto;
 `;
 
