@@ -53,12 +53,6 @@ export default function Contest() {
 
   return (
     <>
-      <Header
-        toggleTheme={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        theme={''}
-      />
       <ContestContainer>
         <Container>
           <ContestTable {...getTableProps()}>
@@ -86,7 +80,6 @@ export default function Contest() {
           </ContestTable>
         </Container>
       </ContestContainer>
-      <Footer />
     </>
   );
 }
@@ -95,18 +88,14 @@ const ContestContainer = styled.div`
   max-width: 1380px;
   height: 560px;
   margin: 0 auto;
-  position: relative;
 `;
 
 const Container = styled.div`
-  position: absolute;
   max-width: 1380px;
   top: 65%;
   left: 50%;
   max-height: 600px;
   overflow-y: scroll;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 `;
 
 const ContestTable = styled.table`
