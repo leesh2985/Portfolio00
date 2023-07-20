@@ -71,9 +71,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
 
 const GnbContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 auto;
+
   height: 60px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
@@ -95,7 +93,7 @@ const Logo = styled(Link)`
 `;
 
 const LogoImg = styled.img`
-  width: 6.25rem;
+  width: 150px;
   margin-right: 20px;
   height: auto;
 `;
@@ -151,4 +149,5 @@ const NavItemLink = styled(Link)<NavItemLinkProps>`
 const MyPageLink = styled.a`
   font-size: 25px;
   cursor: pointer;
+  margin-right: 20px;
 `;
