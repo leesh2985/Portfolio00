@@ -71,10 +71,10 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
 
 const GnbContainer = styled.div`
   display: flex;
-
   height: 60px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
+
 const Gnb = styled.div`
   display: flex;
   align-items: center;
@@ -95,6 +95,7 @@ const LogoImg = styled.img`
   width: 120px;
   padding-right: 20px;
   height: auto;
+  margin-right: 40px;
 `;
 
 const Nav = styled.ul`

@@ -32,8 +32,8 @@ const FooterLogo = styled.div`
   padding-top: 40px;
   max-width: 1380px;
   margin: 0 auto;
-  cursor: pointer;
 `;
+
 const LogoImg = styled.img`
   width: 150px;
   height: auto;
