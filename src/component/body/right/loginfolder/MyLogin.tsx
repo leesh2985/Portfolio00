@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import { auth } from './FireBase';
 import { Link } from 'react-router-dom';
 
-export default function MyLonin() {
+export default function MyLogin() {
   const [value, setValue] = useState<User | null>(null);
 
   const handleLogout = () => {

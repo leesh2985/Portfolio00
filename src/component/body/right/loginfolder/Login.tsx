@@ -3,7 +3,7 @@ import { auth } from './FireBase';
 import { GoogleAuthProvider, User, signInWithPopup } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import styled, { StyleSheetManager } from 'styled-components';
-import MyLonin from './MyLonin';
+import MyLogin from './MyLogin';
 
 interface LoginSectionProps {
   darkMode: boolean;
@@ -11,6 +11,7 @@ interface LoginSectionProps {
 
 export default function Login() {
   const [value, setValue] = useState<User | null>(null);
+
   const handleClick = () => {
     const provider = new GoogleAuthProvider(); // provider를 구글로 설정
     signInWithPopup(auth, provider)
@@ -48,7 +49,7 @@ export default function Login() {
             <SocialLink onClick={handleClick}>Google로 시작하기</SocialLink>
           </>
         ) : (
-          <MyLonin />
+          <MyLogin />
         )}
         {!value && (
           <LoginInfo>

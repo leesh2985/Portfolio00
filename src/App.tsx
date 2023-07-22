@@ -3,7 +3,7 @@ import './App.css';
 
 import Home from './component/Home';
 import JoinLonin from './component/body/right/loginfolder/JoinLonin';
-// import MyLonin from './component/body/right/loginfolder/MyLonin';
+// import MyLogin from './component/body/right/loginfolder/MyLogin';
 import LoginPage from './component/body/right/loginfolder/LoginPage';
 // import Contest from './component/menu/Contest';
 import Header from './header/Header';
