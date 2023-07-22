@@ -5,13 +5,14 @@ import Home from './component/Home';
 import JoinLonin from './component/body/right/loginfolder/JoinLonin';
 // import MyLonin from './component/body/right/loginfolder/MyLonin';
 import LoginPage from './component/body/right/loginfolder/LoginPage';
-import Contest from './component/menu/Contest';
+// import Contest from './component/menu/Contest';
 import Header from './header/Header';
 import Footer from './Footer';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './style/GlobalStyle';
 import { useState } from 'react';
 import { darkTheme, lightTheme } from './style/theme';
+import MainPage from './component/menu/MainPage';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -34,7 +35,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/lonin-page" element={<LoginPage />} />
           <Route path="/join-login" element={<JoinLonin />} />
-          <Route path="/contest" element={<Contest />} />
+          <Route path="/contest" element={<MainPage />} />
         </Routes>
         <Footer />
       </ThemeProvider>
