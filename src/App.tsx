@@ -13,6 +13,7 @@ import GlobalStyle from './style/GlobalStyle';
 import { useState } from 'react';
 import { darkTheme, lightTheme } from './style/theme';
 import MainPage from './component/menu/MainPage';
+import MyPage from './component/MyPage';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -36,6 +37,7 @@ function App() {
           <Route path="/lonin-page" element={<LoginPage />} />
           <Route path="/join-login" element={<JoinLonin />} />
           <Route path="/contest" element={<MainPage />} />
+          <Route path="/my-page" element={<MyPage />} />
         </Routes>
         <Footer />
       </ThemeProvider>
