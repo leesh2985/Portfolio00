@@ -37,7 +37,7 @@ function App() {
           <Route path="/lonin-page" element={<LoginPage />} />
           <Route path="/join-login" element={<JoinLonin />} />
           <Route path="/contest" element={<MainPage />} />
-          <Route path="/my-page" element={<MyPage />} />
+          <Route path="home/my-page" element={<MyPage />} />
         </Routes>
         <Footer />
       </ThemeProvider>

@@ -60,7 +60,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
           </NavItem>
         </Nav>
         <Search theme={theme} />
-        <MyPageLink to="my-page">
+        <MyPageLink to="home/my-page">
           <BsPerson />
         </MyPageLink>
         <ModeBtn toggleTheme={toggleTheme} />
