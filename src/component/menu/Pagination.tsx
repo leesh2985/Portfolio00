@@ -14,12 +14,10 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
   return (
     <PaginationContainer>
       <nav>
-        <PageUl className="pagination">
+        <PageUl>
           {pageNumbers.map(number => (
-            <PageLi key={number} className="page-item">
-              <PageSpan onClick={() => paginate(number)} className="page-link">
-                {number}
-              </PageSpan>
+            <PageLi key={number}>
+              <PageSpan onClick={() => paginate(number)}>{number}</PageSpan>
             </PageLi>
           ))}
         </PageUl>
@@ -30,17 +28,17 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
 
 const PaginationContainer = styled.div`
   margin: 0 auto;
+  max-width: 1380px;
+  display: flex;
+  justify-content: center;
 `;
+
 const PageUl = styled.ul`
   float: left;
   list-style: none;
   text-align: center;
-  border-radius: 3px;
-  color: white;
-  padding: 1px;
-  border-top: 3px solid #186ead;
-  border-bottom: 3px solid #186ead;
-  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  height: auto;
 `;
 
 const PageLi = styled.li`
@@ -48,16 +46,16 @@ const PageLi = styled.li`
   font-size: 17px;
   font-weight: 600;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 50%;
   width: 25px;
   &:hover {
     cursor: pointer;
-    color: white;
-    background-color: #263a6c;
+    color: #00cc99;
+    border: 1px solid #00cc99;
   }
   &:focus::after {
-    color: white;
-    background-color: #263a6c;
+    color: #00cc99;
+    border: 1px solid #00cc99;
   }
 `;
 
