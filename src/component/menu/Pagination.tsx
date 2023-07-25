@@ -12,7 +12,7 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
     pageNumbers.push(i);
   }
   return (
-    <div>
+    <PaginationContainer>
       <nav>
         <PageUl className="pagination">
           {pageNumbers.map(number => (
@@ -24,10 +24,13 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
           ))}
         </PageUl>
       </nav>
-    </div>
+    </PaginationContainer>
   );
 }
 
+const PaginationContainer = styled.div`
+  margin: 0 auto;
+`;
 const PageUl = styled.ul`
   float: left;
   list-style: none;
