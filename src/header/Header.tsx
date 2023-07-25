@@ -60,7 +60,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
           </NavItem>
         </Nav>
         <Search theme={theme} />
-        <MyPageLink>
+        <MyPageLink to="my-page">
           <BsPerson />
         </MyPageLink>
         <ModeBtn toggleTheme={toggleTheme} />
@@ -146,8 +146,9 @@ const NavItemLink = styled(Link)<NavItemLinkProps>`
   `}
 `;
 
-const MyPageLink = styled.a`
+const MyPageLink = styled(Link)`
   font-size: 25px;
   cursor: pointer;
   margin-right: 20px;
+  color: #242424;
 `;
