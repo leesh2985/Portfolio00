@@ -112,6 +112,7 @@ const LoginInfo = styled.div`
   margin-top: 16px;
   font-size: 1.3rem;
   margin-bottom: 13px;
+  text-align: center;
 `;
 
 const IdLink = styled.a`
