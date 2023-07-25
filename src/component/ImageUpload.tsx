@@ -32,8 +32,10 @@ export default function ImageUpload() {
 
   return (
     <ImgContainer>
-      {previewImage && <PreviewImage src={previewImage} alt="Preview" />} {/* 이미지 미리보기 */}
-      <MyImg type="file" name="file" onChange={handleImg} value="" />{' '}
+      <PreviewImageContainer>
+        <PreviewImage src={previewImage || '/default-image.png'} /> {/* 기본 이미지 또는 미리보기 이미지 표시 */}
+      </PreviewImageContainer>
+      <MyImg type="file" name="file" onChange={handleImg} value="" />
       {/* 이미지 업로드를 유지하기 위해 value를 빈 문자열로 설정 */}
       <button onClick={handleApi}>Submit</button>
     </ImgContainer>
@@ -48,12 +50,21 @@ const ImgContainer = styled.div`
 
 const MyImg = styled.input``;
 
-const PreviewImage = styled.img`
+const PreviewImageContainer = styled.div`
   width: 150px;
   height: 150px;
   border-radius: 50%;
   margin-top: 10px;
-  object-fit: cover;
-  object-position: center;
   border: 1px solid #000;
+  background-color: #a9a9a9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PreviewImage = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 `;
