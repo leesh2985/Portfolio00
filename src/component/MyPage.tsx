@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ImageUpload from './ImageUpload';
+import Home from './Home';
 
 interface MyPageProps {
   isLoggedIn: boolean;
@@ -8,6 +9,8 @@ interface MyPageProps {
 export default function MyPage({ isLoggedIn }: MyPageProps) {
   if (!isLoggedIn) {
     alert('로그인이 필요합니다.');
+    // 로그인되지 않았을 때에도 화면을 유지하기 위해, 아무것도 렌더링하지 않는 빈 컨테이너를 반환합니다.
+    return <Home />;
   }
 
   return (
@@ -36,6 +39,7 @@ export default function MyPage({ isLoggedIn }: MyPageProps) {
     </MyContainer>
   );
 }
+
 const MyContainer = styled.div`
   margin: 0 auto;
   max-width: 1380px;
