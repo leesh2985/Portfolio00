@@ -1,28 +1,41 @@
 import styled from 'styled-components';
 import ImageUpload from './ImageUpload';
 
-export default function MyPage() {
+interface MyPageProps {
+  isLoggedIn: boolean;
+}
+
+export default function MyPage({ isLoggedIn }: MyPageProps) {
+  if (!isLoggedIn) {
+    alert('로그인이 필요합니다.');
+  }
+
   return (
     <MyContainer>
-      <ProFile>
-        <ImageUpload />
-        <TextArea>
-          <DisplayName>님</DisplayName>
-          <RunningRecord>평균기록 07.35</RunningRecord>
-        </TextArea>
-      </ProFile>
-      <Marathon>
-        <MarathonText>마라톤 참여</MarathonText>
-        <ImgBox>
-          <MarathonImg src="/post/post1.jpg" alt="기록"></MarathonImg>
-          <MarathonImg src="/post/post2.jpg" alt="기록"></MarathonImg>
-        </ImgBox>
-      </Marathon>
-      <EditBtn>개인정보 수정</EditBtn>
+      {
+        isLoggedIn ? (
+          <>
+            <ProFile>
+              <ImageUpload />
+              <TextArea>
+                <DisplayName>님</DisplayName>
+                <RunningRecord>평균기록 07.35</RunningRecord>
+              </TextArea>
+            </ProFile>
+            <Marathon>
+              <MarathonText>마라톤 참여</MarathonText>
+              <ImgBox>
+                <MarathonImg src="/post/post1.jpg" alt="기록" />
+                <MarathonImg src="/post/post2.jpg" alt="기록" />
+              </ImgBox>
+            </Marathon>
+            <EditBtn>개인정보 수정</EditBtn>
+          </>
+        ) : null /* 로그인되지 않았을 때 나머지 컴포넌트는 렌더링하지 않습니다. */
+      }
     </MyContainer>
   );
 }
-
 const MyContainer = styled.div`
   margin: 0 auto;
   max-width: 1380px;
