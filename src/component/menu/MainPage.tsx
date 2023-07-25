@@ -8,7 +8,7 @@ export default function MainPage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useState(20);
 
   useEffect(() => {
     const fetchData = async () => {
