@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 
 interface PaginationProps {
   postsPerPage: number;
@@ -7,7 +8,7 @@ interface PaginationProps {
 }
 
 export default function Pagination({ postsPerPage, totalPosts, paginate }: PaginationProps) {
-  const pageNumbers = [];
+  const pageNumbers: number[] = [];
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
@@ -15,11 +16,24 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
     <PaginationContainer>
       <nav>
         <PageUl>
+          {/* 왼쪽 화살표 아이콘 */}
+          <PageLi onClick={() => paginate(Math.max(pageNumbers[0] - 1, 1))}>
+            <PageSpan>
+              {' '}
+              <AiFillCaretLeft />
+            </PageSpan>
+          </PageLi>
           {pageNumbers.map(number => (
-            <PageLi key={number}>
-              <PageSpan onClick={() => paginate(number)}>{number}</PageSpan>
+            <PageLi key={number} onClick={() => paginate(number)}>
+              <PageSpan>{number}</PageSpan>
             </PageLi>
           ))}
+          {/* 오른쪽 화살표 아이콘 */}
+          <PageLi onClick={() => paginate(Math.min(pageNumbers[pageNumbers.length - 1] + 1, pageNumbers.length))}>
+            <PageSpan>
+              <AiFillCaretRight />
+            </PageSpan>
+          </PageLi>
         </PageUl>
       </nav>
     </PaginationContainer>
@@ -34,8 +48,7 @@ const PaginationContainer = styled.div`
 `;
 
 const PageUl = styled.ul`
-  float: left;
-  list-style: none;
+  display: flex;
   text-align: center;
   padding: 10px;
   height: auto;
