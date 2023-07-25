@@ -45,7 +45,7 @@ const Title = styled.p`
   max-width: 1380px;
   text-align: left;
   font-weight: bold;
-  font-size: 50px;
+  font-size: 40px;
   color: #1e8ec7;
   margin-top: 50px;
 `;
