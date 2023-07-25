@@ -50,7 +50,7 @@ export default function MyLogin() {
     <NameArea>
       {value ? (
         <>
-          <Photo></Photo>
+          <Photo to="my-page"></Photo>
           <TextArea>
             <DisplayName>{value.displayName}님</DisplayName>
             <Logout onClick={handleLogout}>Logout</Logout>
@@ -86,7 +86,7 @@ const NameArea = styled.div`
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  justify-content: center;
+  row-gap: 15px;
 `;
 
 const TextArea = styled.div`
@@ -97,7 +97,7 @@ const TextArea = styled.div`
   row-gap: 10px;
 `;
 
-const Photo = styled.div`
+const Photo = styled(Link)`
   width: 80px;
   height: 80px;
   background-color: #d3d3d3;
