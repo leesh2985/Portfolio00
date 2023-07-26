@@ -87,6 +87,15 @@ const PageLi = styled.li<{ disabled?: boolean }>`
   width: 25px;
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   color: ${props => (props.disabled ? '#808080' : 'inherit')};
+  &:hover {
+    cursor: pointer;
+    color: #00cc99;
+    border: 1px solid #00cc99;
+  }
+  &:focus::after {
+    color: #00cc99;
+    border: 1px solid #00cc99;
+  }
 `;
 
 const PageSpan = styled.span<PageSpanProps>`
