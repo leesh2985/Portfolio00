@@ -10,7 +10,7 @@ export default function Posts({ posts, loading }: PostProps) {
     <>
       <TopLine>
         <TopUl>
-          <Topli>순서</Topli>
+          <Topli>NO.</Topli>
           <Topli>제목</Topli>
           <Topli>글쓴이</Topli>
         </TopUl>
@@ -32,8 +32,7 @@ export default function Posts({ posts, loading }: PostProps) {
 
 const TopLine = styled.div`
   border-bottom: 2px solid #1e8ec7;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
   margin-top: 20px;
 `;
 
@@ -41,18 +40,17 @@ const TopUl = styled.ul`
   display: flex;
   flex-wrap: nowrap;
   max-width: 1380px;
+  margin-top: 35px;
 `;
-const Topli = styled.li`
-  flex-basis: 500px;
 
-  &:nth-child(1) {
-    flex-shrink: 1;
-  }
+const Topli = styled.li`
+  font-weight: bold;
+  color: #808080;
+  font-size: 25px;
+  flex: 1; /* 변경된 부분: 모든 Topli의 크기를 같게 설정 */
+
   &:nth-child(2) {
-    flex-shrink: 3;
-  }
-  &:nth-child(3) {
-    flex-shrink: 1;
+    flex: 7; /* 변경된 부분: 두 번째 Topli를 다른 Topli들보다 크게 설정 */
   }
 `;
 
@@ -60,6 +58,7 @@ const PostsUl = styled.ul`
   display: flex;
   flex-direction: column;
 `;
+
 const PostLi = styled.li`
   border-bottom: 1px solid #1e8ec7;
   padding-top: 10px;
@@ -68,15 +67,5 @@ const PostLi = styled.li`
 
   &:hover {
     text-decoration: underline;
-  }
-
-  &:nth-child(1) {
-    flex-shrink: 1;
-  }
-  &:nth-child(2) {
-    flex-shrink: 3;
-  }
-  &:nth-child(3) {
-    flex-shrink: 1;
   }
 `;
