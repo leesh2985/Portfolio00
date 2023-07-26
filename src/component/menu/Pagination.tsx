@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface PaginationProps {
   postsPerPage: number;
@@ -65,7 +66,7 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
           </PageLi>
         </PageUl>
       </nav>
-      <WriteBtn>글쓰기</WriteBtn>
+      <WriteBtn to="/writing">글쓰기</WriteBtn>
     </PaginationContainer>
   );
 }
@@ -121,7 +122,7 @@ const PageSpan = styled.span<PageSpanProps>`
   `}
 `;
 
-const WriteBtn = styled.button`
+const WriteBtn = styled(Link)`
   background-color: #1e8ec7;
   border: 1px solid #1e8ec7;
   font-size: 15px;
@@ -131,6 +132,7 @@ const WriteBtn = styled.button`
   padding: 10px 15px;
   position: absolute;
   right: 0;
+  text-decoration: none;
 `;
 
 const PageArrow = styled.span<{ isDisabled: boolean }>`

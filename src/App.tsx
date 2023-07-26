@@ -7,6 +7,7 @@ import LoginPage from './component/body/right/loginfolder/LoginPage';
 import MyPage from './component/MyPage';
 import MainLayout from './MainLayout';
 import Contest from './component/menu/Contest';
+import Writing from './component/menu/Writing';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contest" element={<Contest />} />
           <Route path="home/my-page" element={<MyPage />} />
+          <Route path="/writing" element={<Writing />} />
         </Route>
         {/* Header,Footer을 안 보여주고 싶은 컴포넌트 */}
         <Route path="/lonin-page" element={<LoginPage />} />
