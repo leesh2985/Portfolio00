@@ -4,7 +4,7 @@ import Posts from './Posts';
 import Pagination from './Pagination';
 import { styled } from 'styled-components';
 
-export default function MainPage() {
+export default function Contest() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
