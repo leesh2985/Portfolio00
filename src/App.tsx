@@ -33,7 +33,6 @@ function App() {
         <Header toggleTheme={toggleTheme} theme={theme} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/lonin-page" element={<LoginPage />} />
           <Route path="/join-login" element={<JoinLonin />} />
           <Route path="/contest" element={<MainPage />} />

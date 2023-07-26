@@ -24,7 +24,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
   return (
     <GnbContainer>
       <Gnb>
-        <Logo to="/home">
+        <Logo to="/">
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
         <Nav>

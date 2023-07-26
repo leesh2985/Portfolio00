@@ -46,7 +46,7 @@ export default function LoginPage() {
   return (
     <LoginPageContainer>
       <LogoArea>
-        <Logo to="/home">
+        <Logo to="/">
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
       </LogoArea>

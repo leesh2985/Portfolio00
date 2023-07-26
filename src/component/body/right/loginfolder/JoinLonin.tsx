@@ -50,7 +50,7 @@ export default function JoinLonin() {
   return (
     <JoinLoninContainer>
       <LogoArea>
-        <Logo to="/home">
+        <Logo to="/">
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
       </LogoArea>
