@@ -46,7 +46,7 @@ const TopUl = styled.ul`
 const Topli = styled.li`
   font-weight: bold;
   color: #808080;
-  font-size: 25px;
+  font-size: 23px;
   flex: 1; /* 변경된 부분: 모든 Topli의 크기를 같게 설정 */
 
   &:nth-child(2) {
