@@ -10,6 +10,7 @@ interface PaginationProps {
 
 interface PageSpanProps {
   isActive?: boolean;
+  disabled?: boolean;
 }
 
 export default function Pagination({ postsPerPage, totalPosts, paginate }: PaginationProps) {
@@ -54,12 +55,12 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
           </PageLi>
           {pageNumbers.map(number => (
             <PageLi key={number} onClick={() => handlePageClick(number)} disabled={currentPage === number}>
-              <PageSpan isActive={currentPage === number}>{number}</PageSpan>
+              <PageSpan disabled={currentPage === number}>{number}</PageSpan>
             </PageLi>
           ))}
           {/* 오른쪽 화살표 아이콘 */}
           <PageLi onClick={handleNextClick} disabled={currentPage === pageNumbers.length}>
-            <PageSpan isActive={currentPage === pageNumbers.length}>
+            <PageSpan isActive={currentPage === pageNumbers.length} disabled={currentPage === pageNumbers.length}>
               <AiFillCaretRight />
             </PageSpan>
           </PageLi>
@@ -76,6 +77,7 @@ const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const PageUl = styled.ul`
@@ -128,4 +130,6 @@ const WriteBtn = styled.button`
   color: #fff;
   height: auto;
   padding: 10px 15px;
+  position: absolute;
+  right: 0;
 `;
