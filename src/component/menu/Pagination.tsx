@@ -65,6 +65,7 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
           </PageLi>
         </PageUl>
       </nav>
+      <WriteBtn>글쓰기</WriteBtn>
     </PaginationContainer>
   );
 }
@@ -74,6 +75,7 @@ const PaginationContainer = styled.div`
   max-width: 1380px;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const PageUl = styled.ul`
@@ -116,4 +118,14 @@ const PageSpan = styled.span<PageSpanProps>`
     cursor: pointer;
     padding: 0px 10px 5px 10px;
   `}
+`;
+
+const WriteBtn = styled.button`
+  background-color: #1e8ec7;
+  border: 1px solid #1e8ec7;
+  font-size: 15px;
+  border-radius: 15px;
+  color: #fff;
+  height: auto;
+  padding: 10px 15px;
 `;
