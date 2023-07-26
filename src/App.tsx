@@ -6,42 +6,25 @@ import JoinLonin from './component/body/right/loginfolder/JoinLonin';
 // import MyLogin from './component/body/right/loginfolder/MyLogin';
 import LoginPage from './component/body/right/loginfolder/LoginPage';
 // import Contest from './component/menu/Contest';
-import Header from './header/Header';
-import Footer from './Footer';
-import { ThemeProvider } from 'styled-components';
-import GlobalStyle from './style/GlobalStyle';
-import { useState } from 'react';
-import { darkTheme, lightTheme } from './style/theme';
+
 import MainPage from './component/menu/MainPage';
 import MyPage from './component/MyPage';
+import MainLayout from './MainLayout';
 
-function App() {
-  const [theme, setTheme] = useState('light');
-
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  };
-
+export default function App() {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-        <GlobalStyle theme={theme === 'light' ? lightTheme : darkTheme} />
-        <Header toggleTheme={toggleTheme} theme={theme} />
-        <Routes>
+      <Routes>
+        {/* Header,Footer 보여주고 싶은 컴포넌트 */}
+        <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/lonin-page" element={<LoginPage />} />
-          <Route path="/join-login" element={<JoinLonin />} />
           <Route path="/contest" element={<MainPage />} />
           <Route path="home/my-page" element={<MyPage />} />
-        </Routes>
-        <Footer />
-      </ThemeProvider>
+        </Route>
+        {/* Header,Footer을 안 보여주고 싶은 컴포넌트 */}
+        <Route path="/lonin-page" element={<LoginPage />} />
+        <Route path="/join-login" element={<JoinLonin />} />
+      </Routes>
     </BrowserRouter>
   );
 }
-
-export default App;
