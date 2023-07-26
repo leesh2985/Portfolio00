@@ -47,22 +47,21 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
       <nav>
         <PageUl>
           {/* 왼쪽 화살표 아이콘 */}
-          <PageLi onClick={handlePrevClick} disabled={currentPage === 1}>
-            <PageSpan isActive={currentPage === 1}>
-              {' '}
+          <PageLi onClick={handlePrevClick}>
+            <PageArrow isDisabled={currentPage === 1}>
               <AiFillCaretLeft />
-            </PageSpan>
+            </PageArrow>
           </PageLi>
           {pageNumbers.map(number => (
             <PageLi key={number} onClick={() => handlePageClick(number)} disabled={currentPage === number}>
-              <PageSpan disabled={currentPage === number}>{number}</PageSpan>
+              <PageSpan isActive={currentPage === number}>{number}</PageSpan>
             </PageLi>
           ))}
           {/* 오른쪽 화살표 아이콘 */}
-          <PageLi onClick={handleNextClick} disabled={currentPage === pageNumbers.length}>
-            <PageSpan isActive={currentPage === pageNumbers.length} disabled={currentPage === pageNumbers.length}>
+          <PageLi onClick={handleNextClick}>
+            <PageArrow isDisabled={currentPage === pageNumbers.length}>
               <AiFillCaretRight />
-            </PageSpan>
+            </PageArrow>
           </PageLi>
         </PageUl>
       </nav>
@@ -132,4 +131,12 @@ const WriteBtn = styled.button`
   padding: 10px 15px;
   position: absolute;
   right: 0;
+`;
+
+const PageArrow = styled.span<{ isDisabled: boolean }>`
+  ${props =>
+    props.isDisabled &&
+    `
+    color: #808080;
+  `}
 `;
