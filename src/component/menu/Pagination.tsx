@@ -36,6 +36,11 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
     }
   };
 
+  const handlePageClick = (number: number) => {
+    setCurrentPage(number);
+    paginate(number);
+  };
+
   return (
     <PaginationContainer>
       <nav>
@@ -48,7 +53,7 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
             </PageSpan>
           </PageLi>
           {pageNumbers.map(number => (
-            <PageLi key={number} onClick={() => paginate(number)} disabled={currentPage === number}>
+            <PageLi key={number} onClick={() => handlePageClick(number)} disabled={currentPage === number}>
               <PageSpan isActive={currentPage === number}>{number}</PageSpan>
             </PageLi>
           ))}
@@ -87,15 +92,11 @@ const PageLi = styled.li<{ disabled?: boolean }>`
   width: 25px;
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   color: ${props => (props.disabled ? '#808080' : 'inherit')};
-  &:hover {
-    cursor: pointer;
+
+  /* &:focus::after {
     color: #00cc99;
     border: 1px solid #00cc99;
-  }
-  &:focus::after {
-    color: #00cc99;
-    border: 1px solid #00cc99;
-  }
+  } */
 `;
 
 const PageSpan = styled.span<PageSpanProps>`
@@ -113,7 +114,6 @@ const PageSpan = styled.span<PageSpanProps>`
     border: 1px solid #00cc99; 
     border-radius: 50%;
     cursor: pointer;
-    padding: 5px;
-    width: 25px;
+    padding: 0px 10px 5px 10px;
   `}
 `;
