@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FiSearch } from 'react-icons/fi';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react'; // useRef 추가
 import { BsArrowUpLeft } from 'react-icons/bs';
 
 interface SearchProps {
@@ -17,13 +17,9 @@ interface autoDatas {
 
 export default function Search({ theme }: SearchProps) {
   const [keyword, setKeyword] = useState<string>('');
-  const onChangeData = (e: React.FormEvent<HTMLInputElement>) => {
-    setKeyword(e.currentTarget.value);
-  };
-
   const [keyItems, setKeyItems] = useState<autoDatas[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null); // 검색창을 위한 ref 추가
 
-  // 기존 fetchData 함수를 async/await 문법을 사용해 리팩토링합니다.
   const fetchData = async () => {
     try {
       const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
@@ -38,7 +34,6 @@ export default function Search({ theme }: SearchProps) {
     }
   };
 
-  // ICity 인터페이스를 사용하는 대신 includes 함수를 직접 사용합니다.
   const updateData = async () => {
     const res = await fetchData();
     const filteredData = res.filter((item: autoDatas) => item.title.includes(keyword)).slice(0, 10);
@@ -54,6 +49,14 @@ export default function Search({ theme }: SearchProps) {
     };
   }, [keyword]);
 
+  // 검색창 클릭 시 자동완성 결과 보여주기
+  const handleSearchClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+      updateData();
+    }
+  };
+
   return (
     <SearchBox>
       <SearchInput
@@ -62,17 +65,17 @@ export default function Search({ theme }: SearchProps) {
         placeholder="검색어를 입력해 주세요"
         theme={theme}
         value={keyword}
-        onChange={onChangeData}
+        onChange={e => setKeyword(e.target.value)}
+        onClick={handleSearchClick} // 검색창 클릭 시 자동완성 결과 보여주기
+        ref={inputRef} // 검색창에 ref 연결
       />
       <SearchButton>
         <FiSearch />
       </SearchButton>
       <AutoSearchContainer>
         <AutoSearchWrap>
-          {/* keyItems를 순회하며 자동완성 데이터 렌더링 */}
           {keyItems.map(item => (
             <AutoSearchData key={item.id}>
-              {/* 실제 검색어를 보여줄 UI로 변경 */}
               <a href="#">{item.title}</a>
               <BsArrowUpLeft />
             </AutoSearchData>
