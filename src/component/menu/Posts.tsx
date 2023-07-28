@@ -19,11 +19,15 @@ export default function Posts({ posts, loading }: PostProps) {
       {loading && <div>loading...</div>}
       <PostsUl>
         {posts.map(post => (
-          <PostLi key={post.id}>
-            {post.id} {/* id 표시 */}
-            {post.title}
-            {post.userId} {/* userId 표시 */}
-          </PostLi>
+          <>
+            <PostLi>
+              {post.id} {/* id 표시 */}
+            </PostLi>
+            <PostLi>{post.title}</PostLi>
+            <PostLi>
+              {post.userId} {/* userId 표시 */}
+            </PostLi>
+          </>
         ))}
       </PostsUl>
     </>
