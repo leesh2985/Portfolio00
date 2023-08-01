@@ -37,7 +37,7 @@ export default function ImageUpload() {
       </PreviewImageContainer>
       <MyImg type="file" name="file" onChange={handleImg} value="" />
       {/* 이미지 업로드를 유지하기 위해 value를 빈 문자열로 설정 */}
-      <button onClick={handleApi}>Submit</button>
+      <SubBtn onClick={handleApi}>개인정보수정</SubBtn>
     </ImgContainer>
   );
 }
@@ -67,4 +67,16 @@ const PreviewImage = styled.img`
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+`;
+
+const SubBtn = styled.button`
+  font-weight: 600;
+  font-size: 18px;
+  padding: 5px 20px;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 15px;
+  border: 1px solid #41b6e6;
+  background-color: #41b6e6;
+  margin-top: 30px;
 `;
