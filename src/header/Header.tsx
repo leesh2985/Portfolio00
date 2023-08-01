@@ -6,7 +6,7 @@ import { BsPerson } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 interface HeaderProps {
-  toggleTheme: () => void;
+  // toggleTheme: () => void;
   theme: string;
 }
 
@@ -14,7 +14,7 @@ interface NavItemLinkProps {
   $isActive: boolean;
 }
 
-export default function Header({ toggleTheme, theme }: HeaderProps) {
+export default function Header({ theme }: HeaderProps) {
   const [activeTab, setActiveTab] = useState('home');
 
   const handleTabClick = (tabName: string) => {
@@ -63,7 +63,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
         <MyPageLink to="home/my-page">
           <BsPerson />
         </MyPageLink>
-        <ModeBtn toggleTheme={toggleTheme} />
+        {/* <ModeBtn toggleTheme={toggleTheme} /> */}
       </Gnb>
     </GnbContainer>
   );
