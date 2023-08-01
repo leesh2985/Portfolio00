@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Search from './Search';
-import ModeBtn from './ModeBtn';
+// import ModeBtn from './ModeBtn';
 import { BsPerson } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
