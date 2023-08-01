@@ -55,10 +55,16 @@ export default function Search({ theme }: SearchProps) {
     if (inputRef.current) {
       inputRef.current.focus();
       updateData();
+      setShowAutoSearch(true); // 검색창 클릭 시 AutoSearchWrap 표시
     }
   };
 
-  // 검색창 외부 클릭 시 AutoSearchContainer 숨기기
+  // 검색어 입력 시와 keyItems가 있을 때만 AutoSearchWrap 표시
+  useEffect(() => {
+    setShowAutoSearch(!!keyword && keyItems.length > 0);
+  }, [keyword, keyItems]);
+
+  // AutoSearchWrap 외부 클릭 시 AutoSearchContainer 닫기
   const handleOutsideClick = (event: MouseEvent) => {
     if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
       setShowAutoSearch(false);
@@ -87,7 +93,7 @@ export default function Search({ theme }: SearchProps) {
       <SearchButton>
         <FiSearch />
       </SearchButton>
-      {showAutoSearch && ( // showAutoSearch가 true일 때만 AutoSearchContainer 표시
+      {showAutoSearch && ( // showAutoSearch가 true일 때만 AutoSearchWrap 표시
         <AutoSearchContainer>
           <AutoSearchWrap>
             {keyItems.map(item => (
