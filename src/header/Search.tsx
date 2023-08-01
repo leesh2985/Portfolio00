@@ -141,7 +141,11 @@ const AutoSearchContainer = styled.div`
   padding: 15px;
 `;
 
-const AutoSearchWrap = styled.ul``;
+const AutoSearchWrap = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const AutoSearchData = styled.li`
   padding: 10px 8px;
@@ -154,10 +158,11 @@ const AutoSearchData = styled.li`
     background-color: #edf5f5;
     cursor: pointer;
   }
+
   position: relative;
   svg {
     position: absolute;
-    right: 5px;
+    right: 10px;
     width: 18px;
     top: 50%;
     transform: translateY(-50%);
