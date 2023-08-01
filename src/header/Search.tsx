@@ -76,7 +76,7 @@ export default function Search({ theme }: SearchProps) {
         <AutoSearchWrap>
           {keyItems.map(item => (
             <AutoSearchData key={item.id}>
-              <a href="#">{item.title}</a>
+              <AutoSearchLink>{item.title}</AutoSearchLink>
               <BsArrowUpLeft />
             </AutoSearchData>
           ))}
@@ -139,4 +139,15 @@ const AutoSearchData = styled.li`
     top: 50%;
     transform: translateY(-50%);
   }
+`;
+
+const AutoSearchLink = styled.a`
+  color: #242424;
+  font-weight: 100;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: left;
+  width: 300px;
 `;
