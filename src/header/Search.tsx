@@ -19,6 +19,7 @@ export default function Search({ theme }: SearchProps) {
   const [keyword, setKeyword] = useState<string>('');
   const [keyItems, setKeyItems] = useState<autoDatas[]>([]);
   const inputRef = useRef<HTMLInputElement>(null); // 검색창을 위한 ref 추가
+  const [showAutoSearch, setShowAutoSearch] = useState(false); // AutoSearchContainer 표시 여부를 위한 상태 변수
 
   const fetchData = async () => {
     try {
@@ -57,6 +58,20 @@ export default function Search({ theme }: SearchProps) {
     }
   };
 
+  // 검색창 외부 클릭 시 AutoSearchContainer 숨기기
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
+      setShowAutoSearch(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
   return (
     <SearchBox>
       <SearchInput
@@ -72,16 +87,18 @@ export default function Search({ theme }: SearchProps) {
       <SearchButton>
         <FiSearch />
       </SearchButton>
-      <AutoSearchContainer>
-        <AutoSearchWrap>
-          {keyItems.map(item => (
-            <AutoSearchData key={item.id}>
-              <AutoSearchLink>{item.title}</AutoSearchLink>
-              <BsArrowUpLeft />
-            </AutoSearchData>
-          ))}
-        </AutoSearchWrap>
-      </AutoSearchContainer>
+      {showAutoSearch && ( // showAutoSearch가 true일 때만 AutoSearchContainer 표시
+        <AutoSearchContainer>
+          <AutoSearchWrap>
+            {keyItems.map(item => (
+              <AutoSearchData key={item.id}>
+                <AutoSearchLink>{item.title}</AutoSearchLink>
+                <BsArrowUpLeft />
+              </AutoSearchData>
+            ))}
+          </AutoSearchWrap>
+        </AutoSearchContainer>
+      )}
     </SearchBox>
   );
 }
@@ -149,5 +166,5 @@ const AutoSearchLink = styled.a`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-align: left;
-  width: 300px;
+  width: 230px;
 `;
