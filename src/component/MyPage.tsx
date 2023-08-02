@@ -1,13 +1,44 @@
+import { auth } from './body/right/loginfolder/FireBase';
 import styled from 'styled-components';
 import ImageUpload from './ImageUpload';
+import { useEffect, useState } from 'react';
+import { User } from 'firebase/auth';
+import LoginPage from './body/right/loginfolder/LoginPage';
 
 export default function MyPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
+      // User 타입을 명시적으로 지정합니다.
+      if (user) {
+        setIsLoggedIn(true);
+        setUserObj(user); // 사용자 정보를 저장합니다.
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // 로그인하지 않은 경우, 로그인 페이지를 보여줍니다.
+  if (!isLoggedIn) {
+    return <LoginPage />;
+  }
+
+  // 사용자 정보가 로드되지 않았을 경우, 로딩 화면을 표시하거나 다른 처리를 할 수 있습니다.
+  if (!userObj) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <MyContainer>
       <ProFile>
         <ImageUpload />
         <TextArea>
-          <DisplayName>님</DisplayName>
+          <DisplayName>{userObj.displayName}님</DisplayName>
           <RunningRecord>평균기록 07.35</RunningRecord>
         </TextArea>
       </ProFile>
