@@ -1,21 +1,32 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
 import { styled } from 'styled-components';
+import { User } from 'firebase/auth';
+import { auth } from '../body/right/loginfolder/FireBase';
+import LoginPage from '../body/right/loginfolder/LoginPage';
 
 export default function Writing() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const editor = useRef(null);
   const [content, setContent] = useState('');
-  const isLoggedIn = true; // 여기서 true는 로그인 상태를 의미합니다.
 
-  // 로그인이 되어 있지 않으면 빈 div를 반환하는 함수
-  const renderEditorOrPlaceholder = () => {
-    if (isLoggedIn) {
-      return <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />;
-    } else {
-      window.alert('로그인 부탁드립니다.'); // 알림창 띄우기
-      window.history.back(); // 이전 화면으로 돌아가기
-    }
-  };
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
+      // User 타입을 명시적으로 지정합니다.
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // 로그인하지 않은 경우, 로그인 페이지를 보여줍니다.
+  if (!isLoggedIn) {
+    return <LoginPage />;
+  }
 
   const handleCheckBtnClick = () => {
     const currentContent = editor.current?.value; // 현재 에디터의 내용 가져오기
@@ -25,7 +36,7 @@ export default function Writing() {
 
   return (
     <WritingContainer>
-      {renderEditorOrPlaceholder()}
+      <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />;
       <CheckBtn onClick={handleCheckBtnClick}>확인</CheckBtn>
     </WritingContainer>
   );
