@@ -19,15 +19,15 @@ export default function Posts({ posts, loading }: PostProps) {
       {loading && <div>loading...</div>}
       <PostsUl>
         {posts.map(post => (
-          <>
-            <PostLi>
+          <PostLi>
+            <LiCol>
               {post.id} {/* id 표시 */}
-            </PostLi>
-            <PostLi>{post.title}</PostLi>
-            <PostLi>
+            </LiCol>
+            <LiCol>{post.title}</LiCol>
+            <LiCol>
               {post.userId} {/* userId 표시 */}
-            </PostLi>
-          </>
+            </LiCol>
+          </PostLi>
         ))}
       </PostsUl>
     </>
@@ -64,6 +64,7 @@ const PostsUl = styled.ul`
 `;
 
 const PostLi = styled.li`
+  display: flex;
   border-bottom: 1px solid #1e8ec7;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -71,5 +72,13 @@ const PostLi = styled.li`
 
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const LiCol = styled.div`
+  flex: 1;
+
+  &:nth-child(2) {
+    flex: 7; /* 변경된 부분: 두 번째 Topli를 다른 Topli들보다 크게 설정 */
   }
 `;
