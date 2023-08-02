@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Search from './Search';
 // import ModeBtn from './ModeBtn';
@@ -16,6 +16,22 @@ interface NavItemLinkProps {
 
 export default function Header({ theme }: HeaderProps) {
   const [activeTab, setActiveTab] = useState('home');
+  const tabsRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    // 클릭 이벤트 핸들러를 추가하여 탭 외부를 클릭하면 activeTab 상태를 초기화합니다.
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (tabsRef.current && !tabsRef.current.contains(event.target as Node)) {
+        setActiveTab('');
+      }
+    };
+
+    document.body.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.body.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
@@ -27,7 +43,7 @@ export default function Header({ theme }: HeaderProps) {
         <Logo to="/">
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
-        <Nav>
+        <Nav ref={tabsRef}>
           <NavItem>
             <NavItemLink to="/" onClick={() => handleTabClick('home')} $isActive={activeTab === 'home'}>
               홈
