@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import JoditEditor from 'jodit-react';
+import JoditEditor, { Jodit } from 'jodit-react'; // Import Jodit type
 import { styled } from 'styled-components';
 import { User } from 'firebase/auth';
 import { auth } from '../body/right/loginfolder/FireBase';
@@ -7,7 +7,7 @@ import LoginPage from '../body/right/loginfolder/LoginPage';
 
 export default function Writing() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const editor = useRef(null);
+  const editor = useRef<Jodit>(null); // Specify the type as Jodit
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
 
