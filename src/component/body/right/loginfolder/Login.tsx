@@ -45,7 +45,7 @@ export default function Login() {
       <LoginSection darkMode={isDarkMode}>
         {!value ? (
           <>
-            <LoginLink to="/lonin-page">로그인</LoginLink>
+            <LoginLink to="/login-page">로그인</LoginLink>
             <SocialLink onClick={handleClick}>Google로 시작하기</SocialLink>
           </>
         ) : (

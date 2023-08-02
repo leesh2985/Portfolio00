@@ -21,7 +21,7 @@ export default function App() {
           <Route path="/writing" element={<Writing />} />
         </Route>
         {/* Header,Footer을 안 보여주고 싶은 컴포넌트 */}
-        <Route path="/lonin-page" element={<LoginPage />} />
+        <Route path="/login-page" element={<LoginPage />} />
         <Route path="/join-login" element={<JoinLonin />} />
       </Routes>
     </BrowserRouter>
