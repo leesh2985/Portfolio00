@@ -50,7 +50,7 @@ export default function MyLogin() {
     <NameArea>
       {value ? (
         <>
-          <Photo to="my-page"></Photo>
+          {/* <Photo to="my-page"></Photo> */}
           <TextArea>
             <DisplayName>{value.displayName}님</DisplayName>
             <Logout onClick={handleLogout}>Logout</Logout>
@@ -84,8 +84,10 @@ export default function MyLogin() {
 const NameArea = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: stretch;
   gap: 8px;
+  row-gap: 15px;
+  flex-direction: column;
   row-gap: 15px;
 `;
 
@@ -97,12 +99,12 @@ const TextArea = styled.div`
   row-gap: 10px;
 `;
 
-const Photo = styled(Link)`
-  width: 80px;
-  height: 80px;
-  background-color: #d3d3d3;
-  border-radius: 100%;
-`;
+// const Photo = styled(Link)`
+//   width: 80px;
+//   height: 80px;
+//   background-color: #d3d3d3;
+//   border-radius: 100%;
+// `;
 
 const DisplayName = styled.span`
   font-size: 20px;

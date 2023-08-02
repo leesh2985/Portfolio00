@@ -1,13 +1,16 @@
 import { auth } from './body/right/loginfolder/FireBase';
 import styled from 'styled-components';
-import ImageUpload from './ImageUpload';
+// import ImageUpload from './ImageUpload';
 import { useEffect, useState } from 'react';
-import { User } from 'firebase/auth';
+import { User, signOut } from 'firebase/auth';
 import LoginPage from './body/right/loginfolder/LoginPage';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
+  const [value, setValue] = useState<User | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
@@ -33,10 +36,23 @@ export default function MyPage() {
     return <div>Loading...</div>;
   }
 
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setValue(null); // 사용자 정보 초기화
+        localStorage.clear();
+        navigate('/');
+      })
+      .catch(error => {
+        console.log('로그아웃 실패');
+        console.log(error);
+      });
+  };
+
   return (
     <MyContainer>
       <ProFile>
-        <ImageUpload />
+        {/* <ImageUpload /> */}
         <TextArea>
           <DisplayName>{userObj.displayName}님</DisplayName>
           <RunningRecord>평균기록 07.35</RunningRecord>
@@ -48,6 +64,8 @@ export default function MyPage() {
           <MarathonImg src="/post/post1.jpg" alt="기록"></MarathonImg>
           <MarathonImg src="/post/post2.jpg" alt="기록"></MarathonImg>
         </ImgBox>
+        <SubBtn>개인정보수정</SubBtn>
+        <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
       </Marathon>
     </MyContainer>
   );
@@ -73,7 +91,8 @@ const TextArea = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 30px;
-  margin-left: 50px;
+  align-items: flex-start;
+  /* margin-left: 50px; */
 `;
 
 const DisplayName = styled.span`
@@ -107,4 +126,27 @@ const MarathonImg = styled.img`
   &:last-child {
     margin-right: 0px;
   }
+`;
+const SubBtn = styled.button`
+  font-weight: 600;
+  font-size: 18px;
+  padding: 5px 20px;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 15px;
+  border: 1px solid #41b6e6;
+  background-color: #41b6e6;
+  margin-top: 30px;
+`;
+const LogoutBtn = styled.button`
+  font-weight: 600;
+  font-size: 18px;
+  padding: 5px 20px;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 15px;
+  border: 1px solid #d3d3d3;
+  background-color: #d3d3d3;
+  margin-top: 30px;
+  margin-left: 50px;
 `;
