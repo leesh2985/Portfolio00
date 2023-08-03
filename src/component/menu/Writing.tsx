@@ -6,7 +6,7 @@ import { auth, dbService } from '../body/right/loginfolder/FireBase';
 import LoginPage from '../body/right/loginfolder/LoginPage';
 import { collection, addDoc } from 'firebase/firestore';
 
-export default async function Writing() {
+export default function Writing() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const editor = useRef<Jodit>(null); // Specify the type as Jodit
   const [content, setContent] = useState('');
@@ -34,7 +34,7 @@ export default async function Writing() {
 
   const handleCheckBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await dbService.collection('messages').add({
+    await addDoc(collection(dbService, 'messages'), {
       id: 1,
       title: title,
       userId: userObj?.displayName,
