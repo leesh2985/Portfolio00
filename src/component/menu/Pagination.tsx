@@ -10,7 +10,7 @@ interface PaginationProps {
 }
 
 interface PageSpanProps {
-  isActive?: boolean;
+  $isActive?: boolean;
   disabled?: boolean;
 }
 
@@ -49,18 +49,18 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
         <PageUl>
           {/* 왼쪽 화살표 아이콘 */}
           <PageLi onClick={handlePrevClick}>
-            <PageArrow isDisabled={currentPage === 1}>
+            <PageArrow $isDisabled={currentPage === 1}>
               <AiFillCaretLeft />
             </PageArrow>
           </PageLi>
           {pageNumbers.map(number => (
             <PageLi key={number} onClick={() => handlePageClick(number)} disabled={currentPage === number}>
-              <PageSpan isActive={currentPage === number}>{number}</PageSpan>
+              <PageSpan $isActive={currentPage === number}>{number}</PageSpan>
             </PageLi>
           ))}
           {/* 오른쪽 화살표 아이콘 */}
           <PageLi onClick={handleNextClick}>
-            <PageArrow isDisabled={currentPage === pageNumbers.length}>
+            <PageArrow $isDisabled={currentPage === pageNumbers.length}>
               <AiFillCaretRight />
             </PageArrow>
           </PageLi>
@@ -112,7 +112,7 @@ const PageSpan = styled.span<PageSpanProps>`
   }
 
   ${props =>
-    props.isActive &&
+    props.$isActive &&
     `
     color: #00cc99;
     border: 1px solid #00cc99; 
@@ -135,9 +135,9 @@ const WriteBtn = styled(Link)`
   text-decoration: none;
 `;
 
-const PageArrow = styled.span<{ isDisabled: boolean }>`
+const PageArrow = styled.span<{ $isDisabled: boolean }>`
   ${props =>
-    props.isDisabled &&
+    props.$isDisabled &&
     `
     color: #808080;
   `}
