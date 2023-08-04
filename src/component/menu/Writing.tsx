@@ -12,7 +12,7 @@ export default function Writing() {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
-  // const [posts, setPosts] = useState<{ id: number; title: string; userId: number }[]>([]);
+  const [nextId, setNextId] = useState(1);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
@@ -36,11 +36,12 @@ export default function Writing() {
   const handleCheckBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     await addDoc(collection(dbService, 'Contest'), {
-      id: 1,
+      id: nextId,
       title: title,
       userId: userObj?.displayName,
       body: content,
     });
+    setNextId(prevId => prevId + 1); // 다음 게시물을 위해 id 값을 1 증가시킴
   };
 
   return (
