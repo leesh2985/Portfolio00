@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { dbService } from '../body/right/loginfolder/FireBase';
 
