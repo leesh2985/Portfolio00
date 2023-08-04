@@ -1,4 +1,7 @@
 import { styled } from 'styled-components';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { useEffect } from 'react';
+import { dbService } from '../body/right/loginfolder/FireBase';
 
 interface PostProps {
   posts: { id: number; title: string; userId: string }[]; // userId 추가
@@ -6,6 +9,17 @@ interface PostProps {
 }
 
 export default function Posts({ posts, loading }: PostProps) {
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(dbService, 'Contest'));
+      querySnapshot.forEach(doc => {
+        console.log(doc.id, doc.data());
+      });
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <TopLine>
