@@ -33,7 +33,7 @@ export default function Posts({ posts, loading }: PostProps) {
       {loading && <div>loading...</div>}
       <PostsUl>
         {posts.map(post => (
-          <PostLi>
+          <PostLi key={post.id}>
             <LiCol>
               {post.id} {/* id 표시 */}
             </LiCol>
