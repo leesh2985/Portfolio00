@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 interface PostProps {
-  posts: { id: number; title: string; userId: number }[]; // userId 추가
+  posts: { id: number; title: string; userId: string }[]; // userId 추가
   loading: boolean;
 }
 
