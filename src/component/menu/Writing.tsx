@@ -12,6 +12,7 @@ export default function Writing() {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
+  // const [posts, setPosts] = useState<{ id: number; title: string; userId: number }[]>([]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
@@ -34,10 +35,11 @@ export default function Writing() {
 
   const handleCheckBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await addDoc(collection(dbService, 'messages'), {
+    await addDoc(collection(dbService, 'Contest'), {
       id: 1,
       title: title,
       userId: userObj?.displayName,
+      body: content,
     });
   };
 
@@ -59,7 +61,9 @@ export default function Writing() {
         />
       </InputDiv>
       <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />;
-      <CheckBtn onClick={handleCheckBtnClick}>확인</CheckBtn>
+      <CheckBtn type="submit" onClick={handleCheckBtnClick}>
+        확인
+      </CheckBtn>
     </WritingContainer>
   );
 }
