@@ -1,20 +1,24 @@
 import { styled } from 'styled-components';
 import { collection, getDocs } from 'firebase/firestore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { dbService } from '../body/right/loginfolder/FireBase';
 
 interface PostProps {
-  posts: { id: number; title: string; userId: string }[]; // userId 추가
   loading: boolean;
 }
 
-export default function Posts({ posts, loading }: PostProps) {
+export default function Posts({ loading }: PostProps) {
+  const [posts, setPosts] = useState<{ id: number; title: string; userId: string }[]>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(dbService, 'Contest'));
-      querySnapshot.forEach(doc => {
-        console.log(doc.id, doc.data());
-      });
+      const data = querySnapshot.docs.map(doc => ({
+        id: doc.data().id,
+        title: doc.data().title,
+        userId: doc.data().userId,
+      }));
+      setPosts(data);
     };
 
     fetchData();
