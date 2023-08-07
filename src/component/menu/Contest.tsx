@@ -41,6 +41,7 @@ const Container = styled.div`
   height: auto;
   margin: 0 auto;
 `;
+
 const Title = styled.p`
   max-width: 1380px;
   text-align: left;
