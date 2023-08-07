@@ -5,10 +5,10 @@ import Pagination from './Pagination';
 import { styled } from 'styled-components';
 
 export default function Contest() {
-  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(20);
+  const [posts, setPosts] = useState<{ id: number; title: string; userId: string }[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,14 +23,14 @@ export default function Contest() {
   console.log(posts);
 
   /* 새로 추가한 부분 */
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirst, indexOfLast);
+  // const indexOfLast = currentPage * postsPerPage;
+  // const indexOfFirst = indexOfLast - postsPerPage;
+  // const currentPosts = posts.slice(indexOfFirst, indexOfLast);
 
   return (
     <Container>
       <Title>대회</Title>
-      <Posts posts={currentPosts} loading={loading}></Posts>
+      <Posts loading={loading}></Posts>
       <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={setCurrentPage}></Pagination>
     </Container>
   );
