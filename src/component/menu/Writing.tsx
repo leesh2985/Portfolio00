@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import { User } from 'firebase/auth';
 import { auth, dbService } from '../body/right/loginfolder/FireBase';
 import LoginPage from '../body/right/loginfolder/LoginPage';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, limit, orderBy, query } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 export default function Writing() {
@@ -13,7 +13,6 @@ export default function Writing() {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
-  // const [nextId, setNextId] = useState(1);
   const nextIdRef = useRef<number>(1);
   const navigate = useNavigate();
 
@@ -27,6 +26,20 @@ export default function Writing() {
         setIsLoggedIn(false);
       }
     });
+
+    // Firebase Firestore로부터 최대 id 값 가져오기
+    const getMaxId = async () => {
+      const q = query(collection(dbService, 'Contest'), orderBy('id', 'desc'), limit(1));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const maxId = querySnapshot.docs[0].data().id;
+        nextIdRef.current = maxId + 1;
+      } else {
+        nextIdRef.current = 1;
+      }
+    };
+
+    getMaxId();
 
     return () => unsubscribe();
   }, []);
