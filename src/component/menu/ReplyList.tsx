@@ -33,9 +33,15 @@ export default function ReplyList(props: ReplyListProps) {
     props.updateList(newList); // 업데이트된 리스트로 업데이트
   };
 
+  const deleteList = (k: number) => {
+    const newList = props.list.filter((v, i) => i !== k);
+    props.updateList(newList);
+  };
+
   const renderList = () =>
     props.list.map((v, k) => {
       const isUpdating = update === k;
+      const isCurrentUser = v.userid === props.user;
 
       return (
         <CommentRow key={k}>
@@ -50,6 +56,7 @@ export default function ReplyList(props: ReplyListProps) {
               <>
                 <span>{v.content}</span>
                 {v.userid === props.user && <EditButton onClick={handleEditClick(k)}>수정</EditButton>}
+                {isCurrentUser && <CommentDeleteBtn onClick={() => deleteList(k)}>삭제</CommentDeleteBtn>}
               </>
             )}
           </ConnentContent>
@@ -69,6 +76,7 @@ const CommentRow = styled.ul`
   display: flex;
   padding-bottom: 10px;
   border-bottom: 1px solid #0077b3;
+  align-items: center;
 
   &:nth-child(n + 2) {
     padding-top: 10px;
@@ -96,6 +104,11 @@ const UpdateButton = styled.button`
 `;
 
 const EditButton = styled.button`
+  margin-left: 10px;
+  border: 1px solid #cdcdcd;
+`;
+
+const CommentDeleteBtn = styled.button`
   margin-left: 10px;
   border: 1px solid #cdcdcd;
 `;
