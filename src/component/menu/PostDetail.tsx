@@ -3,6 +3,7 @@ import { getDocs, collection } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import Reply from './Reply';
 
 interface PostData {
   title: string;
@@ -12,7 +13,6 @@ interface PostData {
 
 export default function PostDetail() {
   const { postId } = useParams(); // 동적으로 바뀐 URL 매개변수를 받아옴
-  const [postData, setPostData] = useState<PostData | null>(null);
   const [like, setLike] = useState(0);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function PostDetail() {
     };
 
     fetchData();
-  }, [postId]);
+  }, []);
 
   const handleLike = () => {
     setLike(like + 1);
@@ -49,15 +49,7 @@ export default function PostDetail() {
             {like}
           </PostLike>
         </PostContents>
-        <ReplyContents>
-          <ReplyTitle>전체댓글 0개</ReplyTitle>
-          <ReplyInfo>
-            <ReplyItem>글쓴이</ReplyItem>
-            <ReplyItem>댓글</ReplyItem>
-            <ReplyItem>날짜</ReplyItem>
-          </ReplyInfo>
-          <ReplyInput>로그인 후 댓글을 작성할수 있습니다.</ReplyInput>
-        </ReplyContents>
+        <Reply />
       </PostContainer>
       <WriteBtn to="/writing">글쓰기</WriteBtn>
       <ListBtn to="/contest">목록</ListBtn>
@@ -145,38 +137,6 @@ const PostLike = styled.h3`
 `;
 
 const PostIcon = styled.span``;
-
-const ReplyContents = styled.div`
-  padding-top: 50px;
-`;
-const ReplyTitle = styled.p`
-  text-align: left;
-  padding-bottom: 10px;
-`;
-
-const ReplyInfo = styled.ul`
-  display: flex;
-  flex-flow: row nowrap;
-  border-top: 3px solid #0077b3;
-`;
-
-const ReplyItem = styled.li`
-  border-bottom: 1px solid #0077b3;
-  padding: 15px;
-  flex: 1;
-
-  &:nth-child(2) {
-    flex: 9;
-  }
-`;
-
-const ReplyInput = styled.div`
-  border: 1px solid #909090;
-  background-color: #909090;
-  margin-top: 15px;
-  margin-bottom: 20px;
-  padding: 15px;
-`;
 
 const WriteBtn = styled(Link)`
   background-color: #1e8ec7;
