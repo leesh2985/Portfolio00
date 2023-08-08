@@ -7,12 +7,16 @@ export default function Contest() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(15);
+  const [totalPosts, setTotalPosts] = useState(1);
+
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
 
   return (
     <Container>
       <Title>대회</Title>
-      <Posts loading={loading}></Posts>
-      <Pagination postsPerPage={postsPerPage} totalPosts={100} paginate={setCurrentPage}></Pagination>
+      <Posts loading={loading} startIndex={startIndex} endIndex={endIndex}></Posts>
+      <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={setCurrentPage}></Pagination>
     </Container>
   );
 }

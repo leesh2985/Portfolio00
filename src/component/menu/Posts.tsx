@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom';
 
 interface PostProps {
   loading: boolean;
+  startIndex: number;
+  endIndex: number;
 }
 
-export default function Posts({ loading }: PostProps) {
+export default function Posts({ loading, startIndex, endIndex }: PostProps) {
   const [posts, setPosts] = useState<{ id: number; title: string; userId: string }[]>([]);
 
   useEffect(() => {
@@ -38,19 +40,21 @@ export default function Posts({ loading }: PostProps) {
       {/* 상단 줄 */}
       {loading && <div>loading...</div>}
       <PostsUl>
-        {posts.map(post => (
-          <PostLi key={post.id}>
-            <LiCol>
-              {post.id} {/* id 표시 */}
-            </LiCol>
-            <LiCol>
-              <DetailLink to={`/postdetail/${post.id}`}>{post.title}</DetailLink>
-            </LiCol>
-            <LiCol>
-              {post.userId} {/* userId 표시 */}
-            </LiCol>
-          </PostLi>
-        ))}
+        {posts
+          .slice(startIndex, endIndex) // startIndex부터 endIndex 직전까지의 게시물을 선택
+          .map(post => (
+            <PostLi key={post.id}>
+              <LiCol>
+                {post.id} {/* id 표시 */}
+              </LiCol>
+              <LiCol>
+                <DetailLink to={`/postdetail/${post.id}`}>{post.title}</DetailLink>
+              </LiCol>
+              <LiCol>
+                {post.userId} {/* userId 표시 */}
+              </LiCol>
+            </PostLi>
+          ))}
       </PostsUl>
     </>
   );
