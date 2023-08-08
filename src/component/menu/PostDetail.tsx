@@ -19,14 +19,7 @@ export default function PostDetail() {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(dbService, 'Contest'));
       querySnapshot.forEach(doc => {
-        const data = doc.data();
-        if (data.id === postId) {
-          setPostData({
-            title: data.title,
-            userId: data.userId,
-            body: data.content,
-          });
-        }
+        console.log(doc.id, ' => ', doc.data());
       });
     };
 
@@ -52,7 +45,7 @@ export default function PostDetail() {
         <PostContents>
           <PostText>가나다</PostText>
           <PostLike>
-            <PostIcon onClick={handleLike}>❤️ </PostIcon>
+            <PostIcon onClick={handleLike}>👍 </PostIcon>
             {like}
           </PostLike>
         </PostContents>
