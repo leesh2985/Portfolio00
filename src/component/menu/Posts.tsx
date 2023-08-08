@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { dbService } from '../body/right/loginfolder/FireBase';
 
@@ -12,12 +12,13 @@ export default function Posts({ loading }: PostProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(dbService, 'Contest'));
+      const querySnapshot = await getDocs(query(collection(dbService, 'Contest'), orderBy('id', 'desc')));
       const data = querySnapshot.docs.map(doc => ({
         id: doc.data().id,
         title: doc.data().title,
         userId: doc.data().userId,
       }));
+
       setPosts(data);
     };
 
