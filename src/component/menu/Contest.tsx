@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Posts from './Posts';
 import Pagination from './Pagination';
 import { styled } from 'styled-components';
+import { dbService } from '../body/right/loginfolder/FireBase';
+import { getDocs, collection } from 'firebase/firestore';
 
 export default function Contest() {
   const [loading, setLoading] = useState(false);
@@ -11,6 +13,19 @@ export default function Contest() {
 
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
+
+  useEffect(() => {
+    const fetchTotalPosts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(dbService, 'Contest'));
+        setTotalPosts(querySnapshot.docs.length); // 파이어스토어의 데이터 개수로 설정
+      } catch (error) {
+        console.error('Error fetching totalPosts:', error);
+      }
+    };
+
+    fetchTotalPosts();
+  }, []);
 
   return (
     <Container>
