@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { dbService } from '../body/right/loginfolder/FireBase';
+import { Link } from 'react-router-dom';
 
 interface PostProps {
   loading: boolean;
@@ -42,7 +43,9 @@ export default function Posts({ loading }: PostProps) {
             <LiCol>
               {post.id} {/* id 표시 */}
             </LiCol>
-            <LiCol>{post.title}</LiCol>
+            <LiCol>
+              <DetailLink to={`/postdetail/`}>{post.title}</DetailLink>
+            </LiCol>
             <LiCol>
               {post.userId} {/* userId 표시 */}
             </LiCol>
@@ -100,4 +103,9 @@ const LiCol = styled.div`
   &:nth-child(2) {
     flex: 7; /* 변경된 부분: 두 번째 Topli를 다른 Topli들보다 크게 설정 */
   }
+`;
+
+const DetailLink = styled(Link)`
+  color: #242424;
+  text-decoration: none;
 `;
