@@ -44,7 +44,7 @@ export default function Posts({ loading }: PostProps) {
               {post.id} {/* id 표시 */}
             </LiCol>
             <LiCol>
-              <DetailLink to={`/postdetail/`}>{post.title}</DetailLink>
+              <DetailLink to={`/postdetail/${post.id}`}>{post.title}</DetailLink>
             </LiCol>
             <LiCol>
               {post.userId} {/* userId 표시 */}
