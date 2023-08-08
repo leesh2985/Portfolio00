@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { styled } from 'styled-components';
 import ReplyList from './ReplyList';
 import ReplyForm from './ReplyForm';
 import { auth } from '../body/right/loginfolder/FireBase';
@@ -7,6 +6,7 @@ import { User } from 'firebase/auth';
 
 interface ReplyListProps {
   list: { userid: string; content: string; date: string }[];
+  updateList: (updatedList: { userid: string; content: string; date: string }[]) => void;
 }
 
 export default function Reply() {
@@ -16,11 +16,11 @@ export default function Reply() {
     // ... 더 많은 댓글 데이터 추가
   ]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
+  const [userObj, setUserObj] = useState<User | null>(null);
 
   const addList = (content: string) => {
     const newItem = { userid: userObj?.displayName || 'Guest', content, date: getCurrentDate() };
-    setList([...list, newItem]);
+    setList(prevList => [...prevList, newItem]);
   };
 
   function getCurrentDate() {
@@ -33,10 +33,9 @@ export default function Reply() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
-      // User 타입을 명시적으로 지정합니다.
       if (user) {
         setIsLoggedIn(true);
-        setUserObj(user); // 사용자 정보를 저장합니다.
+        setUserObj(user);
       } else {
         setIsLoggedIn(false);
       }
@@ -45,10 +44,14 @@ export default function Reply() {
     return () => unsubscribe();
   }, []);
 
+  const updateList = (updatedList: ReplyListProps['list']) => {
+    setList(updatedList);
+  };
+
   return (
     <ul className="comment">
       <ReplyForm addList={addList} />
-      <ReplyList list={list} />
+      <ReplyList list={list} updateList={updateList} user={userObj?.displayName || 'Guest'} />
     </ul>
   );
 }
