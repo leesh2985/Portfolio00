@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/contest" element={<Contest />} />
           <Route path="home/my-page" element={<MyPage />} />
           <Route path="/writing" element={<Writing />} />
-          <Route path="/postdetail" element={<PostDetail />} />
+          <Route path="/postdetail/:postId" element={<PostDetail />} />
         </Route>
         {/* Header,Footer을 안 보여주고 싶은 컴포넌트 */}
         <Route path="/login-page" element={<LoginPage />} />
