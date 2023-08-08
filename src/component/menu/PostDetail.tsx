@@ -44,8 +44,8 @@ export default function PostDetail() {
         </PostInfo>
         <PostContents>
           <PostText>가나다</PostText>
-          <PostLike>
-            <PostIcon onClick={handleLike}>👍 </PostIcon>
+          <PostLike onClick={handleLike}>
+            <PostIcon>👍 </PostIcon>
             {like}
           </PostLike>
         </PostContents>
