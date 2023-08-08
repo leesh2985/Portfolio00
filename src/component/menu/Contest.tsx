@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Posts from './Posts';
 import Pagination from './Pagination';
 import { styled } from 'styled-components';
@@ -7,31 +6,13 @@ import { styled } from 'styled-components';
 export default function Contest() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(20);
-  const [posts, setPosts] = useState<{ id: number; title: string; userId: string }[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      setPosts(response.data);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  console.log(posts);
-
-  /* 새로 추가한 부분 */
-  // const indexOfLast = currentPage * postsPerPage;
-  // const indexOfFirst = indexOfLast - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirst, indexOfLast);
+  const [postsPerPage, setPostsPerPage] = useState(15);
 
   return (
     <Container>
       <Title>대회</Title>
       <Posts loading={loading}></Posts>
-      <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={setCurrentPage}></Pagination>
+      <Pagination postsPerPage={postsPerPage} totalPosts={100} paginate={setCurrentPage}></Pagination>
     </Container>
   );
 }
