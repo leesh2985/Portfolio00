@@ -11,7 +11,7 @@ interface PostData {
   title: string;
   userId: string;
   body: string;
-  postId: number; // postId 필드 추가
+  postId: number;
   createdAt: string;
 }
 
@@ -21,7 +21,7 @@ export default function PostDetail() {
   const [matchingData, setMatchingData] = useState<PostData[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState<User | null>(null);
-  const [isAuthor, setIsAuthor] = useState(false);
+  const [isAuthor, setIsAuthor] = useState(false); // 작성자 본인 확인
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
@@ -53,7 +53,13 @@ export default function PostDetail() {
       if (data.length > 0) {
         setMatchingData(data);
         if (isLoggedIn) {
-          setIsAuthor(true); // true수정해버림
+          // 현재 로그인한 사용자의 userId
+          const currentUserUid = userObj?.uid;
+
+          // 게시물의 userId와 현재 사용자의 userId 비교
+          if (currentUserUid === data[0].userId) {
+            setIsAuthor(true); // 작성자인 경우 true로 설정
+          }
         }
       }
     };
