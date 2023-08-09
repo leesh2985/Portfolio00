@@ -1,5 +1,5 @@
 import { dbService } from '../body/right/loginfolder/FireBase';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -16,28 +16,22 @@ interface PostData {
 export default function PostDetail() {
   const { postId } = useParams(); // 동적으로 바뀐 URL 매개변수를 받아옴
   const [like, setLike] = useState(0);
+  const [matchingData, setMatchingData] = useState<PostData[]>([]); // matchingData 상태 추가
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(dbService, 'Contest'));
-      const matchingData: PostData[] = []; // 타입을 명시적으로 지정합니다.
+      const querySnapshot = await getDocs(query(collection(dbService, 'Contest')));
+      const data: PostData[] = [];
 
       querySnapshot.forEach(doc => {
         const postData = doc.data() as PostData;
-        console.log(postData.id);
         if (postData.id === Number(postId)) {
-          // doc.id와 postData.postId를 비교
-          matchingData.push(postData);
+          data.push(postData);
         }
       });
 
-      if (matchingData.length > 0) {
-        const postData = matchingData[0]; // 첫 번째 데이터를 사용
-        console.log('Title:', postData.title);
-        console.log('User ID:', postData.userId);
-        console.log('Body:', postData.body);
-      } else {
-        console.log('No matching data found');
+      if (data.length > 0) {
+        setMatchingData(data); // matchingData 상태 업데이트
       }
     };
 
@@ -52,17 +46,17 @@ export default function PostDetail() {
     <Container>
       <Title>대회</Title>
       <PostContainer>
-        {post ? (
+        {matchingData.length > 0 ? (
           <>
-            <PostTitle>{post.title}</PostTitle>
+            <PostTitle>{matchingData[0].title}</PostTitle>
             <PostInfo>
               <PostItem>조회</PostItem>
               <PostItem>추천</PostItem>
-              <PostItem>{post.userId}</PostItem>
+              <PostItem>{matchingData[0].userId}</PostItem>
               <PostItem>날짜</PostItem>
             </PostInfo>
             <PostContents>
-              <PostText>{post.body}</PostText>
+              <PostText>{matchingData[0].body}</PostText>
               <PostLike onClick={handleLike}>
                 <PostIcon>👍 </PostIcon>
                 {like}
