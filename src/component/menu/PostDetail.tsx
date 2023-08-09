@@ -1,9 +1,10 @@
-import { dbService } from '../body/right/loginfolder/FireBase';
+import { auth, dbService } from '../body/right/loginfolder/FireBase';
 import { getDocs, collection, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Reply from './Reply';
+import { User } from 'firebase/auth';
 
 interface PostData {
   id: number;
@@ -18,6 +19,8 @@ export default function PostDetail() {
   const { postId } = useParams(); // 동적으로 바뀐 URL 매개변수를 받아옴
   const [like, setLike] = useState(0);
   const [matchingData, setMatchingData] = useState<PostData[]>([]); // matchingData 상태 추가
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +42,20 @@ export default function PostDetail() {
     fetchData();
   }, [postId]);
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
+      // User 타입을 명시적으로 지정합니다.
+      if (user) {
+        setIsLoggedIn(true);
+        setUserObj(user); // 사용자 정보를 저장합니다.
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const handleLike = () => {
     setLike(like + 1);
   };
@@ -52,8 +69,8 @@ export default function PostDetail() {
             <PostTitle>{matchingData[0].title}</PostTitle>
             <PostInfo>
               <PostItem>추천 {like}</PostItem>
-              <PostItem>{matchingData[0].createdAt}</PostItem>
               <PostItem>{matchingData[0].userId}</PostItem>
+              <PostItem>{matchingData[0].createdAt}</PostItem>
             </PostInfo>
             <PostContents>
               <PostText>{matchingData[0].body}</PostText>
@@ -125,16 +142,16 @@ const PostItem = styled.li`
     margin-left: auto;
   }
 
-  &:nth-child(n + 3) {
+  &:nth-child(n + 2) {
     order: -1;
   }
 
-  &:nth-child(3)::before {
+  &:nth-child(2)::before {
     padding-left: 5px;
     display: none;
   }
 
-  &:nth-child(2) {
+  &:nth-child(1) {
     padding-right: 7px;
   }
 `;
