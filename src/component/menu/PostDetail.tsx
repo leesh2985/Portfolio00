@@ -21,6 +21,22 @@ export default function PostDetail() {
   const [matchingData, setMatchingData] = useState<PostData[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState<User | null>(null);
+  const [isAuthor, setIsAuthor] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setUserObj(user);
+      } else {
+        setIsLoggedIn(false);
+        setUserObj(null); // 로그아웃 시 userObj를 초기화
+      }
+    });
+
+    // 컴포넌트가 언마운트될 때 구독 해제
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,25 +52,14 @@ export default function PostDetail() {
 
       if (data.length > 0) {
         setMatchingData(data);
+        if (isLoggedIn && userObj) {
+          setIsAuthor(userObj.uid === data[0].userId);
+        }
       }
     };
 
     fetchData();
-  }, [postId, userObj]);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
-      if (user) {
-        setIsLoggedIn(true);
-        setUserObj(user);
-      } else {
-        setIsLoggedIn(false);
-        setUserObj(null); // 로그아웃 상태에서는 userObj를 null로 설정
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
+  }, [postId, userObj, isLoggedIn]);
 
   const handleLike = () => {
     setLike(like + 1);
@@ -74,7 +79,7 @@ export default function PostDetail() {
             </PostInfo>
             <PostContents>
               {/* 작성자일 경우 수정 및 삭제 버튼 표시 */}
-              {isLoggedIn && userObj && matchingData[0].userId === userObj.uid && (
+              {isAuthor && isLoggedIn && (
                 <BtnDiv>
                   <DeleteButton>삭제</DeleteButton>
                   <EditButton>수정</EditButton>
