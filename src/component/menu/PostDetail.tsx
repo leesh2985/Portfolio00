@@ -32,7 +32,10 @@ export default function PostDetail() {
       });
 
       if (matchingData.length > 0) {
-        console.log('Matching data:', matchingData);
+        const postData = matchingData[0]; // 첫 번째 데이터를 사용
+        console.log('Title:', postData.title);
+        console.log('User ID:', postData.userId);
+        console.log('Body:', postData.body);
       } else {
         console.log('No matching data found');
       }
@@ -49,22 +52,27 @@ export default function PostDetail() {
     <Container>
       <Title>대회</Title>
       <PostContainer>
-        <PostTitle>title</PostTitle>
-        <PostInfo>
-          <PostItem>조회</PostItem>
-          <PostItem>추천</PostItem>
-
-          <PostItem>userId: doc.data().userId,</PostItem>
-          <PostItem>날짜</PostItem>
-        </PostInfo>
-        <PostContents>
-          <PostText>가나다</PostText>
-          <PostLike onClick={handleLike}>
-            <PostIcon>👍 </PostIcon>
-            {like}
-          </PostLike>
-        </PostContents>
-        <Reply />
+        {post ? (
+          <>
+            <PostTitle>{post.title}</PostTitle>
+            <PostInfo>
+              <PostItem>조회</PostItem>
+              <PostItem>추천</PostItem>
+              <PostItem>{post.userId}</PostItem>
+              <PostItem>날짜</PostItem>
+            </PostInfo>
+            <PostContents>
+              <PostText>{post.body}</PostText>
+              <PostLike onClick={handleLike}>
+                <PostIcon>👍 </PostIcon>
+                {like}
+              </PostLike>
+            </PostContents>
+            <Reply />
+          </>
+        ) : (
+          <p>Loading...</p>
+        )}
       </PostContainer>
       <WriteBtn to="/writing">글쓰기</WriteBtn>
       <ListBtn to="/contest">목록</ListBtn>
