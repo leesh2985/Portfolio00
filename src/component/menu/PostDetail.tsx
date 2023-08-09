@@ -52,8 +52,8 @@ export default function PostDetail() {
 
       if (data.length > 0) {
         setMatchingData(data);
-        if (isLoggedIn && userObj) {
-          setIsAuthor(userObj.uid === data[0].userId);
+        if (isLoggedIn) {
+          setIsAuthor(true); // true수정해버림
         }
       }
     };
