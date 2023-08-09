@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { FiSearch } from 'react-icons/fi';
 import { useEffect, useState, useRef } from 'react'; // useRef 추가
 import { BsArrowUpLeft } from 'react-icons/bs';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { dbService } from '../component/body/right/loginfolder/FireBase';
+import { Link } from 'react-router-dom';
 
 interface SearchProps {
   theme: string;
@@ -20,24 +23,32 @@ export default function Search({ theme }: SearchProps) {
   const [keyItems, setKeyItems] = useState<autoDatas[]>([]);
   const inputRef = useRef<HTMLInputElement>(null); // 검색창을 위한 ref 추가
   const [showAutoSearch, setShowAutoSearch] = useState(false); // AutoSearchContainer 표시 여부를 위한 상태 변수
+  const [posts, setPosts] = useState<autoDatas[]>([]);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      return data.slice(0, 100);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      return [];
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(query(collection(dbService, 'Contest'), orderBy('id', 'desc')));
+      const data: autoDatas[] = querySnapshot.docs.map(doc => ({
+        userId: doc.data().userId,
+        id: doc.data().id,
+        title: doc.data().title,
+        body: doc.data().body,
+      }));
+      setPosts(data);
+    };
+
+    fetchData();
+  }, []);
 
   const updateData = async () => {
-    const res = await fetchData();
-    const filteredData = res.filter((item: autoDatas) => item.title.includes(keyword)).slice(0, 10);
+    const querySnapshot = await getDocs(query(collection(dbService, 'Contest'), orderBy('id', 'desc')));
+    const data: autoDatas[] = querySnapshot.docs.map(doc => ({
+      userId: doc.data().userId,
+      id: doc.data().id,
+      title: doc.data().title,
+      body: doc.data().body,
+    }));
+    const filteredData = data.filter((item: autoDatas) => item.title.includes(keyword)).slice(0, 10);
     setKeyItems(filteredData);
   };
 
@@ -96,9 +107,9 @@ export default function Search({ theme }: SearchProps) {
       {showAutoSearch && ( // showAutoSearch가 true일 때만 AutoSearchWrap 표시
         <AutoSearchContainer>
           <AutoSearchWrap>
-            {keyItems.map(item => (
-              <AutoSearchData key={item.id}>
-                <AutoSearchLink>{item.title}</AutoSearchLink>
+            {keyItems.map(post => (
+              <AutoSearchData key={post.id}>
+                <AutoSearchLink to="/post">{post.title}</AutoSearchLink>
                 <BsArrowUpLeft />
               </AutoSearchData>
             ))}
@@ -169,7 +180,7 @@ const AutoSearchData = styled.li`
   }
 `;
 
-const AutoSearchLink = styled.a`
+const AutoSearchLink = styled(Link)`
   color: #242424;
   font-weight: 100;
   display: -webkit-box;
