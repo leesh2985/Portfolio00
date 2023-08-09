@@ -53,13 +53,14 @@ export default function Writing() {
     e.preventDefault();
 
     const currentDate = new Date(); // 현재 날짜와 시간 생성
+    const formattedDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
 
     await addDoc(collection(dbService, 'Contest'), {
       id: nextIdRef.current,
       title: title,
       userId: userObj?.displayName,
       body: content,
-      createdAt: currentDate.toISOString(), // 현재 날짜와 시간을 ISO 형식으로 저장
+      createdAt: formattedDate, // "년-월-일" 형식으로 저장
     });
     nextIdRef.current += 1; // 다음 게시물을 위해 id 값을 1 증가시킴
     navigate('/contest');
