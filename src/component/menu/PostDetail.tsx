@@ -196,6 +196,10 @@ const PostItem = styled.li`
     order: -1;
   }
 
+  &:nth-child(1)::before {
+    display: none;
+  }
+
   &:nth-child(2)::before {
     padding-left: 5px;
     display: none;
