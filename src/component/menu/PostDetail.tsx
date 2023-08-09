@@ -6,9 +6,11 @@ import { styled } from 'styled-components';
 import Reply from './Reply';
 
 interface PostData {
+  id: number;
   title: string;
   userId: string;
   body: string;
+  postId: number; // postId 필드 추가
 }
 
 export default function PostDetail() {
@@ -18,13 +20,26 @@ export default function PostDetail() {
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(collection(dbService, 'Contest'));
+      const matchingData: PostData[] = []; // 타입을 명시적으로 지정합니다.
+
       querySnapshot.forEach(doc => {
-        console.log(doc.id, ' => ', doc.data());
+        const postData = doc.data() as PostData;
+        console.log(postData.id);
+        if (postData.id === Number(postId)) {
+          // doc.id와 postData.postId를 비교
+          matchingData.push(postData);
+        }
       });
+
+      if (matchingData.length > 0) {
+        console.log('Matching data:', matchingData);
+      } else {
+        console.log('No matching data found');
+      }
     };
 
     fetchData();
-  }, []);
+  }, [postId]);
 
   const handleLike = () => {
     setLike(like + 1);
