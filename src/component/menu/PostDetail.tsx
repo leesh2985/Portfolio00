@@ -1,5 +1,5 @@
 import { auth, dbService } from '../body/right/loginfolder/FireBase';
-import { getDocs, collection, query } from 'firebase/firestore';
+import { getDocs, collection, query, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -22,6 +22,12 @@ export default function PostDetail() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
 
+  // 수정 상태와 수정한 제목 및 내용을 관리하는 상태
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState('');
+  const [editedBody, setEditedBody] = useState('');
+  const [isAuthor, setIsAuthor] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(query(collection(dbService, 'Contest')));
@@ -36,11 +42,14 @@ export default function PostDetail() {
 
       if (data.length > 0) {
         setMatchingData(data); // matchingData 상태 업데이트
+        if (userObj && data[0].userId === userObj.uid) {
+          setIsAuthor(true);
+        }
       }
     };
 
     fetchData();
-  }, [postId]);
+  }, [postId, userObj]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
@@ -60,6 +69,27 @@ export default function PostDetail() {
     setLike(like + 1);
   };
 
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setEditedTitle(matchingData[0].title);
+    setEditedBody(matchingData[0].body);
+  };
+
+  const handleUpdate = async () => {
+    const postRef = doc(dbService, 'Contest', matchingData[0].postId.toString());
+    await updateDoc(postRef, {
+      title: editedTitle,
+      body: editedBody,
+    });
+    setIsEditing(false);
+  };
+
+  const handleDelete = async () => {
+    const postRef = doc(dbService, 'Contest', matchingData[0].postId.toString());
+    await deleteDoc(postRef);
+    // 게시물 삭제 후, 리다이렉트 또는 원하는 동작 수행
+  };
+
   return (
     <Container>
       <Title>대회</Title>
@@ -69,11 +99,31 @@ export default function PostDetail() {
             <PostTitle>{matchingData[0].title}</PostTitle>
             <PostInfo>
               <PostItem>추천 {like}</PostItem>
-              <PostItem>{matchingData[0].userId}</PostItem>
               <PostItem>{matchingData[0].createdAt}</PostItem>
+              <PostItem>{matchingData[0].userId}</PostItem>
             </PostInfo>
             <PostContents>
-              <PostText>{matchingData[0].body}</PostText>
+              {isAuthor && !isEditing && (
+                <BtnDiv>
+                  {/* 삭제 버튼 */}
+                  <DeleteButton onClick={handleDelete}>삭제</DeleteButton>
+                  {/* 수정 버튼 */}
+                  <EditButton onClick={handleEditClick}>수정</EditButton>
+                </BtnDiv>
+              )}
+              {isEditing ? (
+                <div>
+                  {/* 수정할 내용 입력 폼 */}
+                  <input type="text" value={editedTitle} onChange={e => setEditedTitle(e.target.value)} />
+                  <textarea value={editedBody} onChange={e => setEditedBody(e.target.value)} />
+                  {/* 저장 버튼 */}
+                  <SaveButton onClick={handleUpdate}>저장</SaveButton>
+                  {/* 취소 버튼 */}
+                  <CancelButton onClick={() => setIsEditing(false)}>취소</CancelButton>
+                </div>
+              ) : (
+                <PostText>{matchingData[0].body}</PostText>
+              )}
               <PostLike onClick={handleLike}>
                 <PostIcon>👍 </PostIcon>
                 {like}
@@ -203,4 +253,23 @@ const ListBtn = styled(Link)`
   &:active {
     color: #242424;
   }
+`;
+
+const BtnDiv = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 7px;
+`;
+const EditButton = styled.button`
+  border: 1px solid #cdcdcd;
+  margin-right: 10px;
+`;
+const DeleteButton = styled.button`
+  border: 1px solid #cdcdcd;
+`;
+const SaveButton = styled.button`
+  border: 1px solid #cdcdcd;
+`;
+const CancelButton = styled.button`
+  border: 1px solid #cdcdcd;
 `;
