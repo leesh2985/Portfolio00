@@ -51,10 +51,9 @@ export default function PostDetail() {
           <>
             <PostTitle>{matchingData[0].title}</PostTitle>
             <PostInfo>
-              <PostItem>조회</PostItem>
-              <PostItem>추천</PostItem>
-              <PostItem>{matchingData[0].userId}</PostItem>
+              <PostItem>추천 {like}</PostItem>
               <PostItem>{matchingData[0].createdAt}</PostItem>
+              <PostItem>{matchingData[0].userId}</PostItem>
             </PostInfo>
             <PostContents>
               <PostText>{matchingData[0].body}</PostText>
@@ -133,6 +132,10 @@ const PostItem = styled.li`
   &:nth-child(3)::before {
     padding-left: 5px;
     display: none;
+  }
+
+  &:nth-child(2) {
+    padding-right: 7px;
   }
 `;
 
