@@ -11,6 +11,7 @@ interface PostData {
   userId: string;
   body: string;
   postId: number; // postId 필드 추가
+  createdAt: string;
 }
 
 export default function PostDetail() {
@@ -53,7 +54,7 @@ export default function PostDetail() {
               <PostItem>조회</PostItem>
               <PostItem>추천</PostItem>
               <PostItem>{matchingData[0].userId}</PostItem>
-              <PostItem>날짜</PostItem>
+              <PostItem>{matchingData[0].createdAt}</PostItem>
             </PostInfo>
             <PostContents>
               <PostText>{matchingData[0].body}</PostText>
@@ -178,4 +179,8 @@ const ListBtn = styled(Link)`
   position: absolute;
   right: 0;
   text-decoration: none;
+
+  &:active {
+    color: #242424;
+  }
 `;
