@@ -1,9 +1,9 @@
-import { auth, dbService } from '../body/right/loginfolder/FireBase';
+import { auth, dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { getDocs, collection, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
-import Reply from './Reply';
+import Reply from '../Reply';
 import { User } from 'firebase/auth';
 
 interface PostData {
@@ -15,7 +15,7 @@ interface PostData {
   createdAt: string;
 }
 
-export default function PostDetail() {
+export default function DailyPostDetail() {
   const { postId } = useParams();
   const [like, setLike] = useState(0);
   const [matchingData, setMatchingData] = useState<PostData[]>([]);
@@ -38,7 +38,7 @@ export default function PostDetail() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(query(collection(dbService, 'Contest')));
+      const querySnapshot = await getDocs(query(collection(dbService, 'Daily')));
       const data: PostData[] = [];
 
       querySnapshot.forEach(doc => {
@@ -65,7 +65,7 @@ export default function PostDetail() {
 
   return (
     <Container>
-      <Title>대회</Title>
+      <Title>일상</Title>
       <PostContainer>
         {matchingData.length > 0 ? (
           <>
@@ -97,7 +97,7 @@ export default function PostDetail() {
       </PostContainer>
       <MoveBtn>
         <WriteBtn to="/writing">글쓰기</WriteBtn>
-        <ListBtn to="/contest">목록</ListBtn>
+        <ListBtn to="/daily">목록</ListBtn>
       </MoveBtn>
     </Container>
   );

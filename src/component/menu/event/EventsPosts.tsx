@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { dbService } from '../body/right/loginfolder/FireBase';
+import { dbService } from '../../body/right/loginfolder/FireBase';
 import { Link } from 'react-router-dom';
 
 interface PostProps {
@@ -10,12 +10,12 @@ interface PostProps {
   endIndex: number;
 }
 
-export default function Posts({ loading, startIndex, endIndex }: PostProps) {
+export default function EventsPosts({ loading, startIndex, endIndex }: PostProps) {
   const [posts, setPosts] = useState<{ id: number; title: string; userId: string }[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(query(collection(dbService, 'Contest'), orderBy('id', 'desc')));
+      const querySnapshot = await getDocs(query(collection(dbService, 'Event'), orderBy('id', 'desc')));
       const data = querySnapshot.docs.map(doc => ({
         id: doc.data().id,
         title: doc.data().title,
@@ -48,7 +48,7 @@ export default function Posts({ loading, startIndex, endIndex }: PostProps) {
                 {post.id} {/* id 표시 */}
               </LiCol>
               <LiCol>
-                <DetailLink to={`/postdetail/${post.id}`}>{post.title}</DetailLink>
+                <DetailLink to={`/eventspostdetail/${post.id}`}>{post.title}</DetailLink>
               </LiCol>
               <LiCol>
                 {post.userId} {/* userId 표시 */}

@@ -55,22 +55,22 @@ export default function Header({ theme }: HeaderProps) {
             </NavItemLink>
           </NavItem>
           <NavItem>
-            <NavItemLink to="/" onClick={() => handleTabClick('daily')} $isActive={activeTab === 'daily'}>
+            <NavItemLink to="/daily" onClick={() => handleTabClick('daily')} $isActive={activeTab === 'daily'}>
               일상
             </NavItemLink>
           </NavItem>
           <NavItem>
-            <NavItemLink to="/" onClick={() => handleTabClick('record')} $isActive={activeTab === 'record'}>
+            <NavItemLink to="/record" onClick={() => handleTabClick('record')} $isActive={activeTab === 'record'}>
               기록공유
             </NavItemLink>
           </NavItem>
           <NavItem>
-            <NavItemLink to="/" onClick={() => handleTabClick('tools')} $isActive={activeTab === 'tools'}>
+            <NavItemLink to="/tools" onClick={() => handleTabClick('tools')} $isActive={activeTab === 'tools'}>
               공구
             </NavItemLink>
           </NavItem>
           <NavItem>
-            <NavItemLink to="/" onClick={() => handleTabClick('event')} $isActive={activeTab === 'event'}>
+            <NavItemLink to="/events" onClick={() => handleTabClick('event')} $isActive={activeTab === 'event'}>
               이벤트
             </NavItemLink>
           </NavItem>
