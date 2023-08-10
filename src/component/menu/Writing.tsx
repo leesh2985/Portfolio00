@@ -3,7 +3,6 @@ import JoditEditor, { Jodit } from 'jodit-react'; // Import Jodit type
 import { styled } from 'styled-components';
 import { User } from 'firebase/auth';
 import { auth, dbService } from '../body/right/loginfolder/FireBase';
-import LoginPage from '../body/right/loginfolder/LoginPage';
 import { collection, addDoc, getDocs, limit, orderBy, query } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
@@ -46,7 +45,8 @@ export default function Writing() {
 
   // 로그인하지 않은 경우, 로그인 페이지를 보여줍니다.
   if (!isLoggedIn) {
-    return <LoginPage />;
+    window.alert('로그인이 필요합니다.'); // 로그인 안된 경우 알림 창 표시
+    navigate('/');
   }
 
   const handleCheckBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
