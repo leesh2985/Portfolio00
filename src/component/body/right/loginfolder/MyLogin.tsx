@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, User, signInWithPopup, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, User, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { auth } from './FireBase';
@@ -6,6 +6,12 @@ import { Link } from 'react-router-dom';
 
 export default function MyLogin() {
   const [value, setValue] = useState<User | null>(null);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+  });
 
   const handleLogout = () => {
     signOut(auth)
@@ -46,11 +52,50 @@ export default function MyLogin() {
       });
   };
 
+  const handleSubmission = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!values.email || !values.password) {
+      setErrorMsg('모든 항목을 입력해주세요.');
+      return;
+    }
+    setErrorMsg('');
+
+    setSubmitButtonDisabled(true);
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then(async res => {
+        setSubmitButtonDisabled(false);
+
+        console.log('가입 성공:', res.user);
+      })
+
+      .catch(err => {
+        setSubmitButtonDisabled(false);
+        setErrorMsg('오류가 발생했습니다: ' + err.message);
+      });
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setValues(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleRegularLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+      setValue(userCredential.user);
+      localStorage.setItem('email', JSON.stringify(userCredential.user));
+      console.log('일반 로그인 성공:', userCredential.user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <NameArea>
       {value ? (
         <>
           {/* <Photo to="my-page"></Photo> */}
+          {/* 로그인된 사용자 정보를 표시 */}
           <TextArea>
             <DisplayName>{value.displayName}님</DisplayName>
             <Logout onClick={handleLogout}>Logout</Logout>
@@ -66,7 +111,21 @@ export default function MyLogin() {
         </>
       ) : (
         <>
-          <LoginLink to="/login-page">로그인</LoginLink>
+          <LoginArea>
+            <LoginForm onSubmit={handleSubmission}>
+              <InputDiv>
+                <LoginInput type="email" name="email" placeholder="아이디" onChange={handleChange} />
+                <LoginInput type="password" name="password" placeholder="비밀번호" onChange={handleChange} />{' '}
+              </InputDiv>
+              <LoginButtonArea>
+                <LoginButton type="button" onClick={handleRegularLogin} disabled={submitButtonDisabled}>
+                  로그인
+                </LoginButton>
+              </LoginButtonArea>
+              <Error>{errorMsg}</Error>
+            </LoginForm>
+          </LoginArea>
+          {/* <LoginLink to="/login-page">로그인</LoginLink> */}
           <SocialLink onClick={handleClick}>Google로 시작하기</SocialLink>
         </>
       )}{' '}
@@ -85,10 +144,7 @@ const NameArea = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  gap: 8px;
-  row-gap: 15px;
   flex-direction: column;
-  row-gap: 15px;
 `;
 
 const TextArea = styled.div`
@@ -217,5 +273,74 @@ const JoinLink = styled(Link)`
     height: 12px;
     background-color: #a9a9a9;
     margin: 4px 12px 0;
+  }
+`;
+/** 로그인 부분*/
+const LoginArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+`;
+
+const LoginForm = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const InputDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const LoginInput = styled.input`
+  background-color: #fff;
+  padding: 5px 15px;
+  font-size: 18px;
+  border-radius: 4px;
+  border: 1px solid #d3d3d3;
+  outline: none;
+  width: 80%;
+  height: 20px;
+
+  &:focus {
+    border-color: #808080;
+  }
+`;
+
+const LoginButtonArea = styled.div`
+  /* display: flex;
+  align-items: center; */
+`;
+
+const Error = styled.b`
+  font-size: 12px;
+  color: red;
+  text-align: left;
+`;
+
+const LoginButton = styled.button`
+  cursor: pointer;
+  outline: none;
+  background-color: #1e8ec7;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px 15px;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #1e8ec7;
+  transition: 100ms;
+
+  &:hover {
+    background-color: #41b6e6;
+    border: 1px solid #41b6e6;
+  }
+  &:disabled {
+    background-color: gray !important;
+    border: 1px solid gray !important;
   }
 `;
