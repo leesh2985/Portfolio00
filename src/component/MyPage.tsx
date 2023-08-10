@@ -3,7 +3,6 @@ import styled from 'styled-components';
 // import ImageUpload from './ImageUpload';
 import { useEffect, useState } from 'react';
 import { User, signOut } from 'firebase/auth';
-import LoginPage from './body/right/loginfolder/LoginPage';
 import { useNavigate } from 'react-router-dom';
 
 export default function MyPage() {
@@ -26,9 +25,10 @@ export default function MyPage() {
     return () => unsubscribe();
   }, []);
 
-  // 로그인하지 않은 경우, 로그인 페이지를 보여줍니다.
+  // 로그인하지 않은 경우, 로그인 페이지로 이동
   if (!isLoggedIn) {
-    return <LoginPage />;
+    navigate('/');
+    return null;
   }
 
   // 사용자 정보가 로드되지 않았을 경우, 로딩 화면을 표시하거나 다른 처리를 할 수 있습니다.
