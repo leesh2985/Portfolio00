@@ -80,9 +80,9 @@ export default function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
       setValue(userCredential.user);
       localStorage.setItem('email', JSON.stringify(userCredential.user));
-      console.log('일반 로그인 성공:', userCredential.user);
+      console.log('로그인 성공:', userCredential.user);
     } catch (err) {
-      setErrorMsg('오류가 발생했습니다: ' + err.message);
+      console.log(err);
     }
   };
 
