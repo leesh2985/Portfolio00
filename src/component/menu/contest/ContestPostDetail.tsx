@@ -96,8 +96,8 @@ export default function ContestPostDetail() {
         )}
       </PostContainer>
       <MoveBtn>
-        <WriteBtn to="/writing">글쓰기</WriteBtn>
-        <ListBtn to="/contest">목록</ListBtn>
+        <ListLink to="/contest">목록</ListLink>
+        <WriteLink to="/writing">글쓰기</WriteLink>
       </MoveBtn>
     </Container>
   );
@@ -192,12 +192,14 @@ const PostLike = styled.h3`
 
 const PostIcon = styled.span``;
 const MoveBtn = styled.div`
+  justify-content: center;
   display: flex;
   margin-top: 15px;
   margin-bottom: 20px;
+  position: relative;
 `;
 
-const WriteBtn = styled(Link)`
+const WriteLink = styled(Link)`
   background-color: #1e8ec7;
   border: 1px solid #1e8ec7;
   font-size: 15px;
@@ -205,20 +207,19 @@ const WriteBtn = styled(Link)`
   color: #fff;
   height: auto;
   padding: 10px 15px;
+  text-decoration: none;
   position: absolute;
   right: 0;
-  text-decoration: none;
 `;
 
-const ListBtn = styled(Link)`
+const ListLink = styled(Link)`
   background-color: #fff;
   border: 1px solid #242424;
+  color: #242424;
   font-size: 15px;
   border-radius: 15px;
   height: auto;
   padding: 10px 15px;
-  position: absolute;
-  right: 0;
   text-decoration: none;
 
   &:active {
