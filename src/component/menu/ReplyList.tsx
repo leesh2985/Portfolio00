@@ -69,31 +69,34 @@ export default function ReplyList(props: ReplyListProps) {
   };
 
   const renderList = () =>
-    props.list.map((v, k) => {
-      const isUpdating = update === k;
-      const isCurrentUser = v.userid === props.user;
+    props.list
+      .slice() // 원본 배열을 수정하지 않기 위해 복사본을 생성
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // 날짜를 기준으로 내림차순 정렬
+      .map((v, k) => {
+        const isUpdating = update === k;
+        const isCurrentUser = v.userid === props.user;
 
-      return (
-        <CommentRow key={k}>
-          <ConnentId>{v.userid}</ConnentId>
-          <ConnentContent>
-            {isUpdating && v.userid === props.user ? (
-              <>
-                <input type="text" value={value} onChange={handleChange} className="comment-update-input" />
-                <UpdateButton onClick={handleUpdateClick(k)}>확인</UpdateButton>
-              </>
-            ) : (
-              <>
-                <span>{v.content}</span>
-                {v.userid === props.user && <EditButton onClick={handleEditClick(k)}>수정</EditButton>}
-                {isCurrentUser && <CommentDeleteBtn onClick={() => deleteList(k)}>삭제</CommentDeleteBtn>}
-              </>
-            )}
-          </ConnentContent>
-          <ConnentDate>{v.date}</ConnentDate>
-        </CommentRow>
-      );
-    });
+        return (
+          <CommentRow key={k}>
+            <ConnentId>{v.userid}</ConnentId>
+            <ConnentContent>
+              {isUpdating && v.userid === props.user ? (
+                <>
+                  <input type="text" value={value} onChange={handleChange} className="comment-update-input" />
+                  <UpdateButton onClick={handleUpdateClick(k)}>확인</UpdateButton>
+                </>
+              ) : (
+                <>
+                  <span>{v.content}</span>
+                  {v.userid === props.user && <EditButton onClick={handleEditClick(k)}>수정</EditButton>}
+                  {isCurrentUser && <CommentDeleteBtn onClick={() => deleteList(k)}>삭제</CommentDeleteBtn>}
+                </>
+              )}
+            </ConnentContent>
+            <ConnentDate>{v.date}</ConnentDate>
+          </CommentRow>
+        );
+      });
 
   return <ReplyLi>{renderList()}</ReplyLi>;
 }
