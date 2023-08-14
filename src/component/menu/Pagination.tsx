@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../body/right/loginfolder/FireBase';
+import { User } from 'firebase/auth';
 
 interface PaginationProps {
   postsPerPage: number;
   totalPosts: number;
   paginate: (pageNumber: number) => void;
+  isLoggedIn: boolean; // 추가: 로그인 여부를 전달받음
 }
 
 interface PageSpanProps {
@@ -43,6 +46,29 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
     paginate(number);
   };
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleWriteBtnClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (!isLoggedIn) {
+      e.preventDefault(); // 링크 이동을 막음
+      window.alert('로그인이 필요합니다. 로그인을 부탁드립니다.');
+      return;
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
+      if (user) {
+        setIsLoggedIn(true);
+        // setUserObj(user);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <PaginationContainer>
       <nav>
@@ -66,7 +92,9 @@ export default function Pagination({ postsPerPage, totalPosts, paginate }: Pagin
           </PageLi>
         </PageUl>
       </nav>
-      <WriteBtn to="/writing">글쓰기</WriteBtn>
+      <WriteBtn to={isLoggedIn ? '/writing' : '#'} onClick={handleWriteBtnClick}>
+        글쓰기
+      </WriteBtn>
     </PaginationContainer>
   );
 }
