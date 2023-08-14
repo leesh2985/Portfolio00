@@ -44,10 +44,10 @@ export default function Writing() {
   }, []);
 
   // 로그인하지 않은 경우, 로그인 페이지를 보여줍니다.
-  if (!isLoggedIn) {
-    window.alert('로그인이 필요합니다.'); // 로그인 안된 경우 알림 창 표시
-    navigate('/');
-  }
+  // if (!isLoggedIn) {
+  //   window.alert('로그인이 필요합니다.'); // 로그인 안된 경우 알림 창 표시
+  //   navigate('/');
+  // }
 
   const handleCheckBtnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
