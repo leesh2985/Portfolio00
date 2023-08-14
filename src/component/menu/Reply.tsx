@@ -6,6 +6,7 @@ import { User } from 'firebase/auth';
 import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 
 interface Comment {
+  id: string; // id 속성 추가
   userid: string;
   content: string;
   date: string;
@@ -52,7 +53,12 @@ export default function Reply() {
   }, []);
 
   const addList = async (content: string) => {
-    const newItem: Comment = { userid: userObj?.displayName || 'Guest', content, date: getCurrentDate() };
+    const newItem: Comment = {
+      userid: userObj?.displayName || 'Guest',
+      content,
+      date: getCurrentDate(),
+      id: '',
+    };
     const commentsCollection = collection(dbService, 'comments');
     await addDoc(commentsCollection, newItem);
   };
