@@ -25,11 +25,22 @@ export default function MyPage() {
     return () => unsubscribe();
   }, []);
 
-  // 로그인하지 않은 경우, 로그인 페이지로 이동
-  if (!isLoggedIn) {
-    navigate('/');
-    return null;
-  }
+  // 로그인하지 않은 경우, 홈화면으로 이동
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+        // 로그인되지 않았을 때 처리
+        alert('로그인이 필요합니다. 홈으로 돌아갑니다.');
+        navigate('/');
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
 
   // 사용자 정보가 로드되지 않았을 경우, 로딩 화면을 표시하거나 다른 처리를 할 수 있습니다.
   if (!userObj) {
