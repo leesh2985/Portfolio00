@@ -264,7 +264,7 @@ const JoinLink = styled(Link)`
   cursor: pointer;
   font-size: 13px;
   color: #242424;
-  text-decoration: none;
+  font-weight: 700;
 
   &::before {
     content: '';
