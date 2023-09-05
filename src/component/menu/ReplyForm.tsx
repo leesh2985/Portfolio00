@@ -10,7 +10,7 @@ interface ReplyFormProps {
 export default function ReplyForm(props: ReplyFormProps) {
   const [value, setValue] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
+  const [, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -26,12 +26,6 @@ export default function ReplyForm(props: ReplyFormProps) {
       window.alert('댓글을 등록하려면 로그인이 필요합니다.');
     }
   };
-
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   // value 상태를 사용하여 댓글을 등록하는 로직을 구현할 수 있습니다.
-  //   console.log('댓글 등록:', value);
-  // };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {

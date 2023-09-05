@@ -6,9 +6,9 @@ import { dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { getDocs, collection } from 'firebase/firestore';
 
 export default function Tools() {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(15);
+  const [postsPerPage] = useState(15);
   const [totalPosts, setTotalPosts] = useState(1);
 
   const startIndex = (currentPage - 1) * postsPerPage;
@@ -31,7 +31,11 @@ export default function Tools() {
     <Container>
       <Title>공구</Title>
       <Posts loading={loading} startIndex={startIndex} endIndex={endIndex}></Posts>
-      <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={setCurrentPage}></Pagination>
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={totalPosts}
+        paginate={setCurrentPage}
+        isLoggedIn={false}></Pagination>
     </Container>
   );
 }

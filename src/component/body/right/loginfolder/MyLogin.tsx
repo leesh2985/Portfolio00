@@ -202,25 +202,25 @@ const MarathonImg = styled.img`
     margin-right: 0px;
   }
 `;
-const LoginLink = styled(Link)`
-  cursor: pointer;
-  margin: 0 auto;
-  width: 80%;
-  margin-top: 13px;
-  padding: 17px 0;
-  border: 1px solid;
-  display: block;
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 4px;
-  background-color: #41b6e6;
-  text-decoration: none;
+// const LoginLink = styled(Link)`
+//   cursor: pointer;
+//   margin: 0 auto;
+//   width: 80%;
+//   margin-top: 13px;
+//   padding: 17px 0;
+//   border: 1px solid;
+//   display: block;
+//   color: #fff;
+//   font-size: 18px;
+//   font-weight: bold;
+//   border-radius: 4px;
+//   background-color: #41b6e6;
+//   text-decoration: none;
 
-  &:hover {
-    text-decoration: none;
-  }
-`;
+//   &:hover {
+//     text-decoration: none;
+//   }
+// `;
 const SocialLink = styled.button`
   cursor: pointer;
   margin: 0 auto;

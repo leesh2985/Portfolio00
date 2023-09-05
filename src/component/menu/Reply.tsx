@@ -25,7 +25,7 @@ export default function Reply() {
   //   // ... 더 많은 댓글 데이터 추가
   // ]);
   const [list, setList] = useState<Comment[]>([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState<User | null>(null);
 
   useEffect(() => {

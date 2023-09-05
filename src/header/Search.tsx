@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FiSearch } from 'react-icons/fi';
-import { useEffect, useState, useRef } from 'react'; // useRef 추가
+import { useEffect, useState, useRef, useCallback } from 'react'; // useRef 추가
 import { BsArrowUpLeft } from 'react-icons/bs';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { dbService } from '../component/body/right/loginfolder/FireBase';
@@ -34,13 +34,13 @@ export default function Search({ theme }: SearchProps) {
         title: doc.data().title,
         body: doc.data().body,
       }));
-      setPosts(data);
+      setPosts(data); // "posts" 변수에 데이터 설정
     };
 
     fetchData();
   }, []);
 
-  const updateData = async () => {
+  const updateData = useCallback(async () => {
     const querySnapshot = await getDocs(query(collection(dbService, 'Contest'), orderBy('id', 'desc')));
     const data: autoDatas[] = querySnapshot.docs.map(doc => ({
       userId: doc.data().userId,
@@ -50,7 +50,7 @@ export default function Search({ theme }: SearchProps) {
     }));
     const filteredData = data.filter((item: autoDatas) => item.title.includes(keyword)).slice(0, 10);
     setKeyItems(filteredData);
-  };
+  }, [keyword]); // keyword를 의존성 배열에 추가
 
   useEffect(() => {
     const debounce = setTimeout(() => {
@@ -59,7 +59,7 @@ export default function Search({ theme }: SearchProps) {
     return () => {
       clearTimeout(debounce);
     };
-  }, [keyword]);
+  }, [keyword, updateData]);
 
   // 검색창 클릭 시 자동완성 결과 보여주기
   const handleSearchClick = () => {
@@ -107,9 +107,9 @@ export default function Search({ theme }: SearchProps) {
       {showAutoSearch && ( // showAutoSearch가 true일 때만 AutoSearchWrap 표시
         <AutoSearchContainer>
           <AutoSearchWrap>
-            {keyItems.map(post => (
+            {posts.map(post => (
               <AutoSearchData key={post.id}>
-                <AutoSearchLink to="/post">{post.title}</AutoSearchLink>
+                <AutoSearchLink to={`/contest/${post.id}`}>{post.title}</AutoSearchLink>
                 <BsArrowUpLeft />
               </AutoSearchData>
             ))}

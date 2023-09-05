@@ -32,7 +32,8 @@ export default function ReplyList(props: ReplyListProps) {
     fetchData();
   }, []);
 
-  const handleEditClick = (index: number) => (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleEditClick = (index: number) => () => {
+    // () => 빈 함수로 수정
     if (props.list[index].userid === props.user) {
       setValue(props.list[index].content);
       setUpdate(index);
@@ -43,7 +44,7 @@ export default function ReplyList(props: ReplyListProps) {
     setValue(e.target.value);
   };
 
-  const handleUpdateClick = (k: number) => async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleUpdateClick = (k: number) => async () => {
     const newList = [...props.list];
     newList[k].content = value;
 
@@ -59,7 +60,7 @@ export default function ReplyList(props: ReplyListProps) {
   };
 
   const deleteList = async (k: number) => {
-    const newList = props.list.filter((v, i) => i !== k);
+    const newList = props.list.filter((_v, i) => i !== k);
     props.updateList(newList);
 
     // 댓글 삭제 후 Firestore에서도 삭제

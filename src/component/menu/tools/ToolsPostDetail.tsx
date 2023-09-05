@@ -1,4 +1,4 @@
-import { auth, dbService } from '../../../component/body/right/loginfolder/FireBase';
+import { auth, dbService } from '../../body/right/loginfolder/FireBase';
 import { getDocs, collection, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';

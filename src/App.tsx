@@ -14,7 +14,7 @@ import Events from './component/menu/event/Events';
 import ContestPostDetail from './component/menu/contest/ContestPostDetail';
 import DailyPostDetail from './component/menu/daily/DailyPostDetail';
 import RecordPostDetail from './component/menu/record/RecordPostDetail';
-import ToolsPostDetail from './component/menu/tools/ContestPostDetail';
+import ToolsPostDetail from './component/menu/tools/ToolsPostDetail';
 import EventsPostDetail from './component/menu/event/EventsPostDetail';
 
 export default function App() {

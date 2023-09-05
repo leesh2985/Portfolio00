@@ -7,7 +7,7 @@ interface CarouselItemProps {
 }
 
 export default function CarouselItem({ SliderItems }: CarouselItemProps) {
-  const timerRef = useRef<number | undefined>(undefined);
+  const timerRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const [slider, setSlider] = useState(0);
 
   const goToPrevious = () => {
@@ -52,7 +52,7 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
       </RightArrow>
       <CarouselImg src={SliderItems[slider].src} />
       <DotsContainer>
-        {SliderItems.map((SliderItem, SliderItemIndex) => (
+        {SliderItems.map((_SliderItem, SliderItemIndex) => (
           <Dot key={SliderItemIndex} onClick={() => goToSlide(SliderItemIndex)}>
             {SliderItemIndex === slider ? '●' : '○'}
           </Dot>

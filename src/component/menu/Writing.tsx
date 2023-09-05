@@ -68,25 +68,31 @@ export default function Writing() {
 
   return (
     <WritingContainer>
-      <InputDiv>
-        <SelectInput>
-          <option value="대회">대회</option>
-          <option value="일상">일상</option>
-          <option value="기록공유">기록공유</option>
-          <option value="공구">공구</option>
-          <option value="이벤트">이벤트</option>
-        </SelectInput>
-        <TitleInput
-          type="text"
-          placeholder="제목을 입력하세요"
-          value={title}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-        />
-      </InputDiv>
-      <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />;
-      <CheckBtn type="submit" onClick={handleCheckBtnClick}>
-        확인
-      </CheckBtn>
+      {isLoggedIn ? (
+        <>
+          <InputDiv>
+            <SelectInput>
+              <option value="대회">대회</option>
+              <option value="일상">일상</option>
+              <option value="기록공유">기록공유</option>
+              <option value="공구">공구</option>
+              <option value="이벤트">이벤트</option>
+            </SelectInput>
+            <TitleInput
+              type="text"
+              placeholder="제목을 입력하세요"
+              value={title}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+            />
+          </InputDiv>
+          <JoditEditor ref={editor} value={content} onChange={newContent => setContent(newContent)} />
+          <CheckBtn type="submit" onClick={handleCheckBtnClick}>
+            확인
+          </CheckBtn>
+        </>
+      ) : (
+        <div>로그인이 필요합니다.</div>
+      )}
     </WritingContainer>
   );
 }

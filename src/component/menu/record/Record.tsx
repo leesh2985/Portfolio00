@@ -6,9 +6,9 @@ import { dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { getDocs, collection } from 'firebase/firestore';
 
 export default function Record() {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(15);
+  const [postsPerPage] = useState(15);
   const [totalPosts, setTotalPosts] = useState(1);
 
   const startIndex = (currentPage - 1) * postsPerPage;
@@ -17,7 +17,7 @@ export default function Record() {
   useEffect(() => {
     const fetchTotalPosts = async () => {
       try {
-        const querySnapshot = await getDocs(collection(dbService, 'Contest'));
+        const querySnapshot = await getDocs(collection(dbService, 'Record'));
         setTotalPosts(querySnapshot.docs.length); // 파이어스토어의 데이터 개수로 설정
       } catch (error) {
         console.error('Error fetching totalPosts:', error);
@@ -31,7 +31,11 @@ export default function Record() {
     <Container>
       <Title>기록공유</Title>
       <Posts loading={loading} startIndex={startIndex} endIndex={endIndex}></Posts>
-      <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={setCurrentPage}></Pagination>
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={totalPosts}
+        paginate={setCurrentPage}
+        isLoggedIn={false}></Pagination>
     </Container>
   );
 }

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
-  const [value, setValue] = useState<User | null>(null);
+  // const [value, setValue] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function MyPage() {
       } else {
         setIsLoggedIn(false);
         // 로그인되지 않았을 때 처리
-        alert('로그인이 필요합니다. 홈으로 돌아갑니다.');
+        alert('로그인이 필요합니다.');
         navigate('/');
       }
     });
@@ -50,7 +50,7 @@ export default function MyPage() {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        setValue(null); // 사용자 정보 초기화
+        // setValue(null); // 사용자 정보 초기화
         localStorage.clear();
         navigate('/');
       })
@@ -62,22 +62,33 @@ export default function MyPage() {
 
   return (
     <MyContainer>
-      <ProFile>
-        {/* <ImageUpload /> */}
-        <TextArea>
-          <DisplayName>{userObj.displayName}님</DisplayName>
-          <RunningRecord>평균기록 07.35</RunningRecord>
-        </TextArea>
-      </ProFile>
-      <Marathon>
-        <MarathonText>마라톤 참여</MarathonText>
-        <ImgBox>
-          <MarathonImg src="/post/post1.jpg" alt="기록"></MarathonImg>
-          <MarathonImg src="/post/post2.jpg" alt="기록"></MarathonImg>
-        </ImgBox>
-        <SubBtn>개인정보수정</SubBtn>
-        <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
-      </Marathon>
+      {isLoggedIn ? (
+        // 사용자가 로그인한 경우
+        <div>
+          <ProFile>
+            {/* <ImageUpload /> */}
+            <TextArea>
+              <DisplayName>{userObj.displayName}님</DisplayName>
+              <RunningRecord>평균기록 07.35</RunningRecord>
+            </TextArea>
+          </ProFile>
+          <Marathon>
+            <MarathonText>마라톤 참여</MarathonText>
+            <ImgBox>
+              <MarathonImg src="/post/post1.jpg" alt="기록"></MarathonImg>
+              <MarathonImg src="/post/post2.jpg" alt="기록"></MarathonImg>
+            </ImgBox>
+            <SubBtn>개인정보수정</SubBtn>
+            <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn>
+          </Marathon>
+        </div>
+      ) : (
+        // 사용자가 로그인하지 않은 경우
+        <div>
+          {/* 홈 화면으로 이동 또는 다른 처리를 할 수 있습니다. */}
+          로그인이 필요합니다.
+        </div>
+      )}
     </MyContainer>
   );
 }
