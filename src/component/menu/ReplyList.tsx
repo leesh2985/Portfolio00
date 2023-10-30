@@ -65,7 +65,7 @@ export default function ReplyList(props: ReplyListProps) {
 
     // 댓글 삭제 후 Firestore에서도 삭제
     const db = getFirestore();
-    const commentRef = doc(db, 'comments', comments[k].id);
+    const commentRef = doc(db, 'comments', comments[k].userid);
     await deleteDoc(commentRef);
   };
 
@@ -140,11 +140,13 @@ const UpdateButton = styled.button`
 const EditButton = styled.button`
   margin-left: 10px;
   border: 1px solid #cdcdcd;
+  cursor: pointer;
 `;
 
 const CommentDeleteBtn = styled.button`
   margin-left: 10px;
   border: 1px solid #cdcdcd;
+  cursor: pointer;
 `;
 
 const ConnentDate = styled.li`
