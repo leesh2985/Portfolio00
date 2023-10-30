@@ -7,16 +7,16 @@ import { useNavigate } from 'react-router-dom';
 
 export default function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가합니다.
+  const [userObj, setUserObj] = useState<User | null>(null); // User 타입의 상태를 추가
   // const [value, setValue] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
-      // User 타입을 명시적으로 지정합니다.
+      // User 타입을 명시적으로 지정
       if (user) {
         setIsLoggedIn(true);
-        setUserObj(user); // 사용자 정보를 저장합니다.
+        setUserObj(user); // 사용자 정보를 저장
       } else {
         setIsLoggedIn(false);
       }

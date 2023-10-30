@@ -83,7 +83,7 @@ export default function RecordPostDetail() {
                   <EditButton>수정</EditButton>
                 </BtnDiv>
               )}
-              <PostText>{matchingData[0].body}</PostText>
+              <PostText dangerouslySetInnerHTML={{ __html: matchingData[0].body }} />
               <PostLike onClick={handleLike}>
                 <PostIcon>👍 </PostIcon>
                 {like}
