@@ -36,6 +36,7 @@ export default function ContestPostDetail() {
     return () => unsubscribe();
   }, []);
 
+
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(query(collection(dbService, 'Contest')));
@@ -51,7 +52,7 @@ export default function ContestPostDetail() {
       if (data.length > 0) {
         setMatchingData(data);
         if (isLoggedIn) {
-          setIsAuthor(userObj?.uid === data[0]?.userId);
+          setIsAuthor(userObj?.displayName === data[0]?.userId);
         }
       }
     };
@@ -62,6 +63,8 @@ export default function ContestPostDetail() {
   const handleLike = () => {
     setLike(like + 1);
   };
+
+  // console.log(matchingData[0].userId);
 
   return (
     <Container>

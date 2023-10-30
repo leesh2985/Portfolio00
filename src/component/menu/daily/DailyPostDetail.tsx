@@ -51,7 +51,7 @@ export default function DailyPostDetail() {
       if (data.length > 0) {
         setMatchingData(data);
         if (isLoggedIn) {
-          setIsAuthor(userObj?.uid === data[0]?.userId);
+          setIsAuthor(userObj?.displayName === data[0]?.userId);
         }
       }
     };
