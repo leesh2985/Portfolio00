@@ -1,12 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Search from './Search';
-// import ModeBtn from './ModeBtn';
 import { BsPerson } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 interface HeaderProps {
-  // toggleTheme: () => void;
   theme: string;
 }
 
@@ -19,7 +17,6 @@ export default function Header({ theme }: HeaderProps) {
   const tabsRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    // 클릭 이벤트 핸들러를 추가하여 탭 외부를 클릭하면 activeTab 상태를 초기화합니다.
     const handleOutsideClick = (event: MouseEvent) => {
       if (tabsRef.current && !tabsRef.current.contains(event.target as Node)) {
         setActiveTab('');
@@ -44,11 +41,6 @@ export default function Header({ theme }: HeaderProps) {
           <LogoImg src="/img/logo.png" alt="로고" />
         </Logo>
         <Nav ref={tabsRef}>
-          <NavItem>
-            <NavItemLink to="/" onClick={() => handleTabClick('home')} $isActive={activeTab === 'home'}>
-              홈
-            </NavItemLink>
-          </NavItem>
           <NavItem>
             <NavItemLink to="/contest" onClick={() => handleTabClick('contest')} $isActive={activeTab === 'contest'}>
               대회
@@ -79,7 +71,6 @@ export default function Header({ theme }: HeaderProps) {
         <MyPageLink to="home/my-page">
           <BsPerson />
         </MyPageLink>
-        {/* <ModeBtn toggleTheme={toggleTheme} /> */}
       </Gnb>
     </GnbContainer>
   );
@@ -95,7 +86,7 @@ const Gnb = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1380px;
+  width: 80rem;
   margin: 0 auto;
 `;
 
@@ -167,4 +158,5 @@ const MyPageLink = styled(Link)`
   cursor: pointer;
   margin-right: 20px;
   color: #242424;
+  margin: 0;
 `;
