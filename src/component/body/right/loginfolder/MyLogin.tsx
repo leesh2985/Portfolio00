@@ -114,7 +114,7 @@ export default function MyLogin() {
           <LoginArea>
             <LoginForm onSubmit={handleSubmission}>
               <InputDiv>
-                <LoginInput type="email" name="email" placeholder="아이디" onChange={handleChange} />
+                <LoginInput type="email" name="email" placeholder="leesh2985@naver.com" onChange={handleChange} />
                 <LoginInput type="password" name="password" placeholder="비밀번호" onChange={handleChange} />{' '}
               </InputDiv>
               <LoginButtonArea>

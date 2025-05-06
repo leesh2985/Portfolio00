@@ -44,7 +44,15 @@ export default function JoinLonin() {
       })
       .catch(err => {
         setSubmitButtonDisabled(false);
-        setErrorMsg('오류가 발생했습니다: ' + err.message);
+        if (err.code === 'auth/email-already-in-use') {
+          setErrorMsg('이미 사용 중인 이메일입니다.');
+        } else if (err.code === 'auth/invalid-email') {
+          setErrorMsg('유효하지 않은 이메일 형식입니다.');
+        } else if (err.code === 'auth/weak-password') {
+          setErrorMsg('비밀번호는 6자 이상이어야 합니다.');
+        } else {
+          setErrorMsg('오류가 발생했습니다: ' + err.message);
+        }
       });
   };
 

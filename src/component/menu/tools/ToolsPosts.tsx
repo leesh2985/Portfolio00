@@ -80,7 +80,7 @@ export default function RecordPosts({ loading, startIndex, endIndex }: PostProps
                 {post.id} {/* id 표시 */}
               </LiCol>
               <LiCol>
-                <DetailLink to={`/recordpostdetail/${post.id}`}>{post.title}</DetailLink>
+                <DetailLink to={`/toolspostdetail/${post.id}`}>{post.title}</DetailLink>
               </LiCol>
               <LiCol>
                 {post.userId} {/* userId 표시 */}

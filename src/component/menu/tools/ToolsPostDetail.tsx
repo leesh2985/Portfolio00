@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Reply from '../Reply';
 import { User } from 'firebase/auth';
+import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
 
 interface PostData {
   id: number;
@@ -65,7 +66,9 @@ export default function ToolsPostDetail() {
 
   return (
     <Container>
-      <Title>공구</Title>
+      <Heading as="h2" fontSize="1.5rem" color="#1e8ec7" mt="30px" mb="1.125rem" fontWeight="bold" textAlign="left">
+        공구
+      </Heading>
       <PostContainer>
         {matchingData.length > 0 ? (
           <>

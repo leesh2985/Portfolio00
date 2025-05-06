@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Reply from '../Reply';
 import { User } from 'firebase/auth';
+import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
 
 interface PostData {
   id: number;
@@ -65,7 +66,9 @@ export default function RecordPostDetail() {
 
   return (
     <Container>
-      <Title>기록공유</Title>
+      <Heading as="h2" fontSize="1.5rem" color="#1e8ec7" mt="30px" mb="1.125rem" fontWeight="bold" textAlign="left">
+        기록공유
+      </Heading>
       <PostContainer>
         {matchingData.length > 0 ? (
           <>
@@ -107,15 +110,6 @@ const Container = styled.div`
   max-width: 1380px;
   height: auto;
   margin: 0 auto;
-`;
-
-const Title = styled.p`
-  max-width: 1380px;
-  text-align: left;
-  font-weight: bold;
-  font-size: 40px;
-  color: #1e8ec7;
-  margin-top: 50px;
 `;
 
 const PostContainer = styled.div``;
