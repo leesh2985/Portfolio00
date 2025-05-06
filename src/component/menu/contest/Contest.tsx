@@ -6,7 +6,7 @@ import { dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
 
 export default function Contest() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(15);
   const [totalPosts, setTotalPosts] = useState(1);
 
