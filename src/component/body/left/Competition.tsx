@@ -1,7 +1,10 @@
 import { Box, Flex, Heading, Icon, Image, SimpleGrid, Card, CardBody } from '@chakra-ui/react';
 import { CiCirclePlus } from 'react-icons/ci';
+import { useNavigate } from 'react-router-dom';
 
 export default function News() {
+  const navigate = useNavigate();
+
   return (
     <Box width="100%">
       <Flex justifyContent="space-between" alignItems="center" mb={4}>
@@ -33,6 +36,7 @@ export default function News() {
                 width="100%"
                 height="8.75rem"
                 cursor="pointer"
+                onClick={() => navigate('/contest')}
               />
             </CardBody>
           </Card>

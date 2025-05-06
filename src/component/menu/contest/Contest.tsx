@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import Posts from './ContestPosts';
 import Pagination from '../Pagination';
-import { styled } from 'styled-components';
 import { dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { getDocs, collection } from 'firebase/firestore';
+import { Container as ChakraContainer, Box, Heading, Image, SimpleGrid, Card, CardBody } from '@chakra-ui/react';
 
 export default function Contest() {
   const [loading] = useState(false);
@@ -18,7 +17,7 @@ export default function Contest() {
     const fetchTotalPosts = async () => {
       try {
         const querySnapshot = await getDocs(collection(dbService, 'Contest'));
-        setTotalPosts(querySnapshot.docs.length); // 파이어스토어의 데이터 개수로 설정
+        setTotalPosts(querySnapshot.docs.length);
       } catch (error) {
         console.error('Error fetching totalPosts:', error);
       }
@@ -28,29 +27,40 @@ export default function Contest() {
   }, []);
 
   return (
-    <Container>
-      <Title>대회</Title>
-      <Posts loading={loading} startIndex={startIndex} endIndex={endIndex}></Posts>
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={totalPosts}
-        paginate={setCurrentPage}
-        isLoggedIn={false}></Pagination>
-    </Container>
+    <ChakraContainer maxW="container.xl" px={4} py={6} bg="gray.50">
+      <Heading as="h2" fontSize="1.5rem" color="#1e8ec7" mt="30px" mb="1.125rem" fontWeight="bold" textAlign="left">
+        대회
+      </Heading>
+
+      <SimpleGrid columns={5} spacing={14}>
+        {[
+          '/img/대회1.png',
+          '/img/대회2.jpg',
+          '/img/대회3.jpg',
+          '/img/대회4.jpg',
+          '/img/대회5.jpg',
+          '/img/대회6.jpg',
+          '/img/대회7.png',
+          '/img/대회8.jpg',
+          '/img/대회9.jpg',
+          '/img/대회10.jpg',
+        ].map((src, idx) => (
+          <Card key={idx} overflow="hidden">
+            <CardBody p={0}>
+              <Image
+                src={src}
+                alt={`마라톤 이미지 ${idx + 1}`}
+                objectFit="cover"
+                width="100%"
+                height="300px"
+                cursor="pointer"
+              />
+            </CardBody>
+          </Card>
+        ))}
+      </SimpleGrid>
+
+      <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={setCurrentPage} isLoggedIn={false} />
+    </ChakraContainer>
   );
 }
-
-const Container = styled.div`
-  max-width: 1380px;
-  height: auto;
-  margin: 0 auto;
-`;
-
-const Title = styled.p`
-  max-width: 1380px;
-  text-align: left;
-  font-weight: bold;
-  font-size: 40px;
-  color: #1e8ec7;
-  margin-top: 50px;
-`;

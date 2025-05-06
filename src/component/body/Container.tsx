@@ -7,7 +7,7 @@ import PopularPosts from './right/PopularPosts';
 
 export default function MainSection() {
   return (
-    <ChakraContainer maxW="container.xl" pt="50px" pb="60px">
+    <ChakraContainer maxW="container.xl" pt="30px" pb="60px">
       <Grid templateColumns="repeat(12, 1fr)" gap={6}>
         <GridItem colSpan={{ base: 12, md: 8 }}>
           <Grid gap={4}>
