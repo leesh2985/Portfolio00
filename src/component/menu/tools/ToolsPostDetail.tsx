@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Reply from '../Reply';
 import { User } from 'firebase/auth';
-import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 interface PostData {
   id: number;

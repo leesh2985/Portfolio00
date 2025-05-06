@@ -4,7 +4,7 @@ import Pagination from '../Pagination';
 import { styled } from 'styled-components';
 import { dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { getDocs, collection } from 'firebase/firestore';
-import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 export default function Tools() {
   const [loading] = useState(false);
