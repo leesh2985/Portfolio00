@@ -26,7 +26,14 @@ export default function News() {
         ].map((src, idx) => (
           <Card key={idx} overflow="hidden">
             <CardBody p={0}>
-              <Image src={src} alt={`마라톤 이미지 ${idx + 1}`} objectFit="cover" width="100%" height="120px" />
+              <Image
+                src={src}
+                alt={`마라톤 이미지 ${idx + 1}`}
+                objectFit="cover"
+                width="100%"
+                height="8.75rem"
+                cursor="pointer"
+              />
             </CardBody>
           </Card>
         ))}

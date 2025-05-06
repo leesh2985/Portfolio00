@@ -1,9 +1,9 @@
-import { Box, Button, Flex, FormControl, Input, Stack, Text, Link as ChakraLink, FormLabel } from '@chakra-ui/react';
+import { Box, Button, Flex, FormControl, Input, Stack, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
   return (
-    <Box w="435px" p="20px" border="1px solid #d3d3d3" borderRadius="10px" bg="white" textAlign="center">
+    <Box p="20px" border="1px solid #d3d3d3" borderRadius="10px" bg="white" textAlign="center">
       <FormControl>
         <Flex justify="space-between" align="center" gap={4}>
           <Stack spacing={3} flex={1}>

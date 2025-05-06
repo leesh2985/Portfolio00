@@ -9,7 +9,7 @@ export default function Carousel() {
   ];
 
   return (
-    <Box w="100%" h="560px" mx="auto">
+    <Box w="100%" h="24rem" mx="auto">
       <CarouselItem SliderItems={SliderItems} />
     </Box>
   );
