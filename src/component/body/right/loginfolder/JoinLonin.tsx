@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { auth } from './FireBase';
+import { Button, Input } from '@chakra-ui/react';
 
 export default function JoinLonin() {
   const navigate = useNavigate();
@@ -56,16 +57,95 @@ export default function JoinLonin() {
       </LogoArea>
       <form onSubmit={handleSubmission}>
         <JoinLoninArea>
-          <JoinLoninInput type="name" name="name" placeholder="이름(실명)" onChange={handleChange} />
-          {/* <JoinLoninInput type="date" name="date" placeholder="생년월일 8자리" /> */}
-          <JoinLoninInput type="email" name="email" placeholder="아이디" onChange={handleChange} />
-          <JoinLoninInput type="password" name="password" placeholder="비밀번호" onChange={handleChange} />
-          <JoinLoninInput type="password" name="passwordConfirm" placeholder="비밀번호확인" onChange={handleChange} />
+          <Input
+            type="text"
+            name="name"
+            placeholder="이름(실명)"
+            onChange={handleChange}
+            fontSize="18px"
+            px="15px"
+            py="20px"
+            minW="480px"
+            borderRadius="4px"
+            border="1px solid #d3d3d3"
+            _focus={{ borderColor: '#808080' }}
+            mx="auto"
+            bg="white"
+          />
+
+          <Input
+            type="email"
+            name="email"
+            placeholder="아이디"
+            onChange={handleChange}
+            fontSize="18px"
+            px="15px"
+            py="20px"
+            minW="480px"
+            borderRadius="4px"
+            border="1px solid #d3d3d3"
+            _focus={{ borderColor: '#808080' }}
+            mx="auto"
+            bg="white"
+          />
+
+          <Input
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+            onChange={handleChange}
+            fontSize="18px"
+            px="15px"
+            py="20px"
+            minW="480px"
+            borderRadius="4px"
+            border="1px solid #d3d3d3"
+            _focus={{ borderColor: '#808080' }}
+            mx="auto"
+            bg="white"
+          />
+
+          <Input
+            type="password"
+            name="passwordConfirm"
+            placeholder="비밀번호확인"
+            onChange={handleChange}
+            fontSize="18px"
+            px="15px"
+            py="20px"
+            minW="480px"
+            borderRadius="4px"
+            border="1px solid #d3d3d3"
+            _focus={{ borderColor: '#808080' }}
+            mx="auto"
+            bg="white"
+          />
           <LoginButtonArea>
             <Error>{erroerMsg}</Error>
-            <LoginButton type="submit" disabled={submitButtonDisabled}>
+            <Button
+              type="submit"
+              isDisabled={submitButtonDisabled}
+              fontWeight="bold"
+              fontSize="18px"
+              padding="20px 15px"
+              minW="512px"
+              borderRadius="4px"
+              bg="#1e8ec7"
+              color="#fff"
+              border="1px solid #1e8ec7"
+              cursor="pointer"
+              _hover={{ bg: '#41b6e6', borderColor: '#41b6e6' }}
+              _disabled={{
+                bg: 'gray',
+                borderColor: 'gray',
+                cursor: 'not-allowed',
+                _hover: {
+                  bg: 'gray',
+                  borderColor: 'gray',
+                },
+              }}>
               가입하기
-            </LoginButton>
+            </Button>
           </LoginButtonArea>
         </JoinLoninArea>
       </form>
@@ -117,23 +197,6 @@ const JoinLoninArea = styled.div`
   }
 `;
 
-const JoinLoninInput = styled.input`
-  min-width: 480px;
-  height: fit-content;
-  width: fit-content;
-  background-color: #fff;
-  margin: 0 auto;
-  padding: 20px 15px;
-  font-size: 18px;
-  border-radius: 4px;
-  border: 1px solid #d3d3d3;
-  outline: none;
-
-  &:focus {
-    border-color: #808080;
-  }
-`;
-
 const LoginButtonArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -147,28 +210,4 @@ const Error = styled.b`
   font-size: 14px;
   color: red;
   margin-bottom: 30px;
-`;
-
-const LoginButton = styled.button`
-  cursor: pointer;
-  outline: none;
-  background-color: #1e8ec7;
-  color: #fff;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 20px 15px;
-  min-width: 512px;
-  border-radius: 4px;
-  border: 1px solid #1e8ec7;
-  transition: 100ms;
-
-  &:hover {
-    background-color: #41b6e6;
-    border: 1px solid #41b6e6;
-  }
-
-  &:disabled {
-    background-color: gray !important;
-    border: 1px solid gray !important;
-  }
 `;

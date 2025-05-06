@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Pagination, Box, Button } from '@mui/material';
 import { auth } from '../body/right/loginfolder/FireBase';
 import { User } from 'firebase/auth';
@@ -14,6 +14,7 @@ interface PaginationProps {
 export default function CustomPagination({ postsPerPage, totalPosts, paginate }: PaginationProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation(); // 현재 URL 경로 확인
   const totalPages = Math.ceil(totalPosts / postsPerPage);
 
   const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
@@ -35,32 +36,30 @@ export default function CustomPagination({ postsPerPage, totalPosts, paginate }:
     return () => unsubscribe();
   }, []);
 
+  const hiddenPaths = ['/contest', '/events'];
+  const isHiddenPage = hiddenPaths.includes(location.pathname);
+
   return (
     <Box
       maxWidth="1380px"
       mx="auto"
-      mt={6}
+      my={4}
       display="flex"
       justifyContent="center"
       alignItems="center"
       position="relative">
-      <Pagination
-        count={totalPages}
-        page={currentPage}
-        onChange={handleChange}
-        color="primary"
-        shape="rounded"
-        size="large"
-      />
-      <Button
-        component={Link}
-        to={isLoggedIn ? '/writing' : '#'}
-        onClick={handleWriteClick}
-        variant="contained"
-        color="primary"
-        sx={{ position: 'absolute', right: 0 }}>
-        글쓰기
-      </Button>
+      <Pagination count={totalPages} page={currentPage} onChange={handleChange} />
+      {!isHiddenPage && (
+        <Button
+          component={Link}
+          to={isLoggedIn ? '/writing' : '#'}
+          onClick={handleWriteClick}
+          variant="contained"
+          color="primary"
+          sx={{ position: 'absolute', right: 0 }}>
+          글쓰기
+        </Button>
+      )}
     </Box>
   );
 }

@@ -12,7 +12,7 @@ export default function News() {
           <Heading fontSize="2xl" fontWeight="bold">
             이번달 마라톤 경기
           </Heading>
-          <Icon as={CiCirclePlus} boxSize={7} color="gray.500" cursor="pointer" />
+          <Icon as={CiCirclePlus} boxSize={7} color="gray.500" cursor="pointer" onClick={() => navigate('/contest')} />
         </Flex>
       </Flex>
 
@@ -36,7 +36,6 @@ export default function News() {
                 width="100%"
                 height="8.75rem"
                 cursor="pointer"
-                onClick={() => navigate('/contest')}
               />
             </CardBody>
           </Card>

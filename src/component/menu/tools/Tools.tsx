@@ -4,6 +4,7 @@ import Pagination from '../Pagination';
 import { styled } from 'styled-components';
 import { dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { getDocs, collection } from 'firebase/firestore';
+import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
 
 export default function Tools() {
   const [loading] = useState(false);
@@ -29,7 +30,9 @@ export default function Tools() {
 
   return (
     <Container>
-      <Title>공구</Title>
+      <Heading as="h2" fontSize="1.5rem" color="#1e8ec7" mt="30px" mb="1.125rem" fontWeight="bold" textAlign="left">
+        공구
+      </Heading>
       <Posts loading={loading} startIndex={startIndex} endIndex={endIndex}></Posts>
       <Pagination
         postsPerPage={postsPerPage}

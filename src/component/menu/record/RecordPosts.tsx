@@ -10,16 +10,45 @@ interface PostProps {
   endIndex: number;
 }
 
+interface PostItem {
+  id: number;
+  title: string;
+  userId: string;
+  date: string;
+  views: number;
+  likes: number;
+}
+
 export default function RecordPosts({ loading, startIndex, endIndex }: PostProps) {
-  const [posts, setPosts] = useState<{ id: number; title: string; userId: string }[]>([]);
+  const [posts, setPosts] = useState<PostItem[]>([
+    {
+      id: 999,
+      title: '예시 게시글 제목입니다.',
+      userId: '관리자',
+      date: '2024-05-01',
+      views: 123,
+      likes: 5,
+    },
+    {
+      id: 998,
+      title: '사용자가 등록하지 않아 예시 글이 보입니다.',
+      userId: 'guest',
+      date: '2024-04-30',
+      views: 78,
+      likes: 2,
+    },
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
       const querySnapshot = await getDocs(query(collection(dbService, 'Record'), orderBy('id', 'desc')));
-      const data = querySnapshot.docs.map(doc => ({
+      const data: PostItem[] = querySnapshot.docs.map(doc => ({
         id: doc.data().id,
         title: doc.data().title,
         userId: doc.data().userId,
+        date: doc.data().date ?? '정보 없음',
+        views: doc.data().views ?? 0,
+        likes: doc.data().likes ?? 0,
       }));
 
       setPosts(data);
@@ -35,6 +64,9 @@ export default function RecordPosts({ loading, startIndex, endIndex }: PostProps
           <Topli>NO.</Topli>
           <Topli>제목</Topli>
           <Topli>글쓴이</Topli>
+          <Topli>날짜</Topli>
+          <Topli>조회</Topli>
+          <Topli>추천</Topli>
         </TopUl>
       </TopLine>{' '}
       {/* 상단 줄 */}
@@ -53,6 +85,9 @@ export default function RecordPosts({ loading, startIndex, endIndex }: PostProps
               <LiCol>
                 {post.userId} {/* userId 표시 */}
               </LiCol>
+              <LiCol>{post.date}</LiCol>
+              <LiCol>{post.views}</LiCol>
+              <LiCol>{post.likes}</LiCol>
             </PostLi>
           ))}
       </PostsUl>
@@ -76,7 +111,7 @@ const TopUl = styled.ul`
 const Topli = styled.li`
   font-weight: bold;
   color: #808080;
-  font-size: 23px;
+  font-size: 16px;
   flex: 1; /* 변경된 부분: 모든 Topli의 크기를 같게 설정 */
 
   &:nth-child(2) {

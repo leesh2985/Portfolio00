@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import Pagination from '../Pagination';
+import { styled } from 'styled-components';
 import { getDocs, collection } from 'firebase/firestore';
 import { dbService } from '../../../component/body/right/loginfolder/FireBase';
-import { Container as ChakraContainer, Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
+import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
 
 export default function Contest() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +24,7 @@ export default function Contest() {
   }, []);
 
   return (
-    <ChakraContainer maxW="container.xl" px={4} py={6} bg="gray.50">
+    <Container>
       <Heading as="h2" fontSize="1.5rem" color="#1e8ec7" mt="30px" mb="1.125rem" fontWeight="bold" textAlign="left">
         대회
       </Heading>
@@ -41,7 +42,7 @@ export default function Contest() {
           '/img/대회9.jpg',
           '/img/대회10.jpg',
         ].map((src, idx) => (
-          <Card key={idx} overflow="hidden">
+          <Card key={idx} overflow="hidden" border="1px solid #e2e8f0">
             <CardBody p={0}>
               <Image
                 src={src}
@@ -57,6 +58,12 @@ export default function Contest() {
       </SimpleGrid>
 
       <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={setCurrentPage} isLoggedIn={false} />
-    </ChakraContainer>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  max-width: 1380px;
+  height: auto;
+  margin: 0 auto;
+`;
