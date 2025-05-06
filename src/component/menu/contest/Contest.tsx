@@ -1,17 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Pagination from '../Pagination';
-import { dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { getDocs, collection } from 'firebase/firestore';
-import { Container as ChakraContainer, Box, Heading, Image, SimpleGrid, Card, CardBody } from '@chakra-ui/react';
+import { dbService } from '../../../component/body/right/loginfolder/FireBase';
+import { Container as ChakraContainer, Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
 
 export default function Contest() {
-  const [loading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(15);
   const [totalPosts, setTotalPosts] = useState(1);
-
-  const startIndex = (currentPage - 1) * postsPerPage;
-  const endIndex = startIndex + postsPerPage;
 
   useEffect(() => {
     const fetchTotalPosts = async () => {
