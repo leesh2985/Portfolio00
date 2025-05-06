@@ -28,7 +28,7 @@ export default function Writing() {
 
     // Firebase Firestore로부터 최대 id 값 가져오기
     const getMaxId = async () => {
-      const q = query(collection(dbService, 'Contest'), orderBy('id', 'desc'), limit(1));
+      const q = query(collection(dbService, 'Record'), orderBy('id', 'desc'), limit(1));
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
         const maxId = querySnapshot.docs[0].data().id;
@@ -55,15 +55,22 @@ export default function Writing() {
     const currentDate = new Date(); // 현재 날짜와 시간 생성
     const formattedDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
 
-    await addDoc(collection(dbService, 'Contest'), {
-      id: nextIdRef.current,
-      title: title,
-      userId: userObj?.displayName,
-      body: content,
-      createdAt: formattedDate, // "년-월-일" 형식으로 저장
-    });
-    nextIdRef.current += 1; // 다음 게시물을 위해 id 값을 1 증가시킴
-    navigate('/contest');
+    try {
+      await addDoc(collection(dbService, 'Record'), {
+        id: nextIdRef.current,
+        title,
+        userId: userObj?.displayName,
+        body: content,
+        createdAt: formattedDate, // "년-월-일" 형식으로 저장
+      });
+
+      console.log('게시물 업로드 성공');
+      nextIdRef.current += 1; // 다음 게시물을 위해 id 값을 1 증가시킴
+      navigate('/record');
+    } catch (error) {
+      console.error('🔥 게시물 업로드 실패:', error);
+      alert('게시물 업로드 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -72,11 +79,8 @@ export default function Writing() {
         <>
           <InputDiv>
             <SelectInput>
-              <option value="대회">대회</option>
-              <option value="일상">일상</option>
               <option value="기록공유">기록공유</option>
               <option value="공구">공구</option>
-              <option value="이벤트">이벤트</option>
             </SelectInput>
             <TitleInput
               type="text"

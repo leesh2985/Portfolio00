@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Reply from '../Reply';
 import { User } from 'firebase/auth';
-import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 interface PostData {
   id: number;
@@ -187,6 +187,8 @@ const PostLike = styled.h3`
 const PostIcon = styled.span``;
 const MoveBtn = styled.div`
   display: flex;
+  justify-content: center;
+  gap: 10px;
   margin-top: 15px;
   margin-bottom: 20px;
 `;
@@ -197,10 +199,7 @@ const WriteBtn = styled(Link)`
   font-size: 15px;
   border-radius: 15px;
   color: #fff;
-  height: auto;
   padding: 10px 15px;
-  position: absolute;
-  right: 0;
   text-decoration: none;
 `;
 
@@ -209,11 +208,9 @@ const ListBtn = styled(Link)`
   border: 1px solid #242424;
   font-size: 15px;
   border-radius: 15px;
-  height: auto;
   padding: 10px 15px;
-  position: absolute;
-  right: 0;
   text-decoration: none;
+  color: #242424;
 
   &:active {
     color: #242424;

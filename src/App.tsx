@@ -24,7 +24,7 @@ export default function App() {
           <Route path="/record" element={<Record />} />
           <Route path="/tools" element={<Tools />} />
           <Route path="/events" element={<Events />} />
-          <Route path="home/my-page" element={<MyPage />} />
+          <Route path="home/my-page" element={<MyPage user={null} />} />
           <Route path="/writing" element={<Writing />} />
           <Route path="/recordpostdetail/:postId" element={<RecordPostDetail />} />
           <Route path="/toolspostdetail/:postId" element={<ToolsPostDetail />} />

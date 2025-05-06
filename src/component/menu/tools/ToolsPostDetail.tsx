@@ -112,15 +112,6 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-const Title = styled.p`
-  max-width: 1380px;
-  text-align: left;
-  font-weight: bold;
-  font-size: 40px;
-  color: #1e8ec7;
-  margin-top: 50px;
-`;
-
 const PostContainer = styled.div``;
 
 const PostTitle = styled.h2`
@@ -196,6 +187,8 @@ const PostLike = styled.h3`
 const PostIcon = styled.span``;
 const MoveBtn = styled.div`
   display: flex;
+  justify-content: center;
+  gap: 10px;
   margin-top: 15px;
   margin-bottom: 20px;
 `;
@@ -206,10 +199,7 @@ const WriteBtn = styled(Link)`
   font-size: 15px;
   border-radius: 15px;
   color: #fff;
-  height: auto;
   padding: 10px 15px;
-  position: absolute;
-  right: 0;
   text-decoration: none;
 `;
 
@@ -218,11 +208,9 @@ const ListBtn = styled(Link)`
   border: 1px solid #242424;
   font-size: 15px;
   border-radius: 15px;
-  height: auto;
   padding: 10px 15px;
-  position: absolute;
-  right: 0;
   text-decoration: none;
+  color: #242424;
 
   &:active {
     color: #242424;

@@ -4,7 +4,7 @@ import Pagination from '../Pagination';
 import { styled } from 'styled-components';
 import { dbService } from '../../../component/body/right/loginfolder/FireBase';
 import { getDocs, collection } from 'firebase/firestore';
-import { Heading, SimpleGrid, Card, CardBody, Image } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 export default function Record() {
   const [loading] = useState(false);
@@ -47,13 +47,4 @@ const Container = styled.div`
   max-width: 1380px;
   height: auto;
   margin: 0 auto;
-`;
-
-const Title = styled.p`
-  max-width: 1380px;
-  text-align: left;
-  font-weight: bold;
-  font-size: 40px;
-  color: #1e8ec7;
-  margin-top: 50px;
 `;

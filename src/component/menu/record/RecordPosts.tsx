@@ -14,9 +14,6 @@ interface PostItem {
   id: number;
   title: string;
   userId: string;
-  date: string;
-  views: number;
-  likes: number;
 }
 
 export default function RecordPosts({ loading, startIndex, endIndex }: PostProps) {
@@ -25,17 +22,11 @@ export default function RecordPosts({ loading, startIndex, endIndex }: PostProps
       id: 999,
       title: '예시 게시글 제목입니다.',
       userId: '관리자',
-      date: '2024-05-01',
-      views: 123,
-      likes: 5,
     },
     {
       id: 998,
       title: '사용자가 등록하지 않아 예시 글이 보입니다.',
       userId: 'guest',
-      date: '2024-04-30',
-      views: 78,
-      likes: 2,
     },
   ]);
 
@@ -46,9 +37,6 @@ export default function RecordPosts({ loading, startIndex, endIndex }: PostProps
         id: doc.data().id,
         title: doc.data().title,
         userId: doc.data().userId,
-        date: doc.data().date ?? '정보 없음',
-        views: doc.data().views ?? 0,
-        likes: doc.data().likes ?? 0,
       }));
 
       setPosts(data);
@@ -64,9 +52,6 @@ export default function RecordPosts({ loading, startIndex, endIndex }: PostProps
           <Topli>NO.</Topli>
           <Topli>제목</Topli>
           <Topli>글쓴이</Topli>
-          <Topli>날짜</Topli>
-          <Topli>조회</Topli>
-          <Topli>추천</Topli>
         </TopUl>
       </TopLine>{' '}
       {/* 상단 줄 */}
@@ -85,9 +70,6 @@ export default function RecordPosts({ loading, startIndex, endIndex }: PostProps
               <LiCol>
                 {post.userId} {/* userId 표시 */}
               </LiCol>
-              <LiCol>{post.date}</LiCol>
-              <LiCol>{post.views}</LiCol>
-              <LiCol>{post.likes}</LiCol>
             </PostLi>
           ))}
       </PostsUl>
