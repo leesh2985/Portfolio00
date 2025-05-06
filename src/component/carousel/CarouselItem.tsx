@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { Box, Flex, Icon, Image, Text } from '@chakra-ui/react';
 import { MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from 'react-icons/md';
 
 interface CarouselItemProps {
@@ -17,99 +17,73 @@ export default function CarouselItem({ SliderItems }: CarouselItemProps) {
   };
 
   const goToNext = useCallback(() => {
-    const isFirstSlide = slider === SliderItems.length - 1;
-    const newIndex = isFirstSlide ? 0 : slider + 1;
+    const isLastSlide = slider === SliderItems.length - 1;
+    const newIndex = isLastSlide ? 0 : slider + 1;
     setSlider(newIndex);
   }, [slider, SliderItems]);
 
-  const goToSlide = (SliderItemIndex: number) => {
-    setSlider(SliderItemIndex);
-  };
+  const goToSlide = (index: number) => setSlider(index);
 
   useEffect(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
+    if (timerRef.current) clearInterval(timerRef.current);
 
     timerRef.current = setInterval(() => {
       goToNext();
     }, 3000);
 
     return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
+      if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [goToNext]);
 
   return (
-    <CarouselItemContainer>
-      <LeftArrow onClick={goToPrevious}>
-        <MdOutlineArrowBackIosNew />
-      </LeftArrow>
-      <RightArrow onClick={goToNext}>
-        <MdOutlineArrowForwardIos />
-      </RightArrow>
-      <CarouselImg src={SliderItems[slider].src} />
-      <DotsContainer>
-        {SliderItems.map((_SliderItem, SliderItemIndex) => (
-          <Dot key={SliderItemIndex} onClick={() => goToSlide(SliderItemIndex)}>
-            {SliderItemIndex === slider ? '●' : '○'}
-          </Dot>
+    <Box position="relative" w="100%" h="100%" overflow="hidden">
+      {/* 좌측 화살표 */}
+      <Box
+        position="absolute"
+        top="50%"
+        left="32px"
+        transform="translateY(-50%)"
+        zIndex={1}
+        cursor="pointer"
+        color="white"
+        fontSize="lg"
+        onClick={goToPrevious}>
+        <Icon as={MdOutlineArrowBackIosNew} />
+      </Box>
+
+      {/* 우측 화살표 */}
+      <Box
+        position="absolute"
+        top="50%"
+        right="32px"
+        transform="translateY(-50%)"
+        zIndex={1}
+        cursor="pointer"
+        color="white"
+        fontSize="lg"
+        onClick={goToNext}>
+        <Icon as={MdOutlineArrowForwardIos} />
+      </Box>
+
+      {/* 이미지 */}
+      <Image
+        src={SliderItems[slider].src}
+        alt={SliderItems[slider].title}
+        w="100%"
+        h="100%"
+        objectFit="cover"
+        borderRadius="md"
+      />
+
+      {/* 도트 */}
+      <Flex position="absolute" bottom="10px" left="0" right="0" justify="center" zIndex={1}>
+        {SliderItems.map((_item, index) => (
+          <Text key={index} cursor="pointer" mx="1" fontSize="lg" color="white" onClick={() => goToSlide(index)}>
+            {index === slider ? '●' : '○'}
+          </Text>
         ))}
-      </DotsContainer>
-    </CarouselItemContainer>
+      </Flex>
+    </Box>
   );
 }
-
-const CarouselItemContainer = styled.div`
-  height: 100%;
-  position: relative;
-`;
-
-const CarouselImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-// 화살표
-const LeftArrow = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  left: 32px;
-  font-size: 15px;
-  color: #fff;
-  z-index: 1;
-  cursor: pointer;
-`;
-
-const RightArrow = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  right: 32px;
-  font-size: 15px;
-  color: #fff;
-  z-index: 1;
-  cursor: pointer;
-`;
-
-// 점
-const DotsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  /* 캐러셀안에 dot넣기 */
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-`;
-
-const Dot = styled.div`
-  margin: 0 3px;
-  cursor: pointer;
-  font-size: 15px;
-  color: rgba(136, 136, 136, 0.8);
-`;

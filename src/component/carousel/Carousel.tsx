@@ -1,5 +1,5 @@
+import { Box } from '@chakra-ui/react';
 import CarouselItem from './CarouselItem';
-import styled from 'styled-components';
 
 export default function Carousel() {
   const SliderItems = [
@@ -7,15 +7,10 @@ export default function Carousel() {
     { src: '/carouselImg/img2.jpg', title: 'post2' },
     { src: '/carouselImg/img3.jpg', title: 'post3' },
   ];
+
   return (
-    <CarouselContainer>
+    <Box w="100%" h="560px" mx="auto">
       <CarouselItem SliderItems={SliderItems} />
-    </CarouselContainer>
+    </Box>
   );
 }
-
-const CarouselContainer = styled.div`
-  max-width: 1920px;
-  height: 560px;
-  margin: 0 auto;
-`;

@@ -172,11 +172,3 @@ const LoginButton = styled.button`
     border: 1px solid gray !important;
   }
 `;
-
-// const JoinLink = styled(Link)`
-//   cursor: pointer;
-//   font-size: 13px;
-//   color: #242424;
-//   font-weight: 700;
-//   margin-top: 15px;
-// `;
